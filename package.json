@@ -1,0 +1,24 @@
+{
+  "name": "plugins",
+  "version": "1.0.0",
+  "description": "Static bilingual plugin directory and tutorial site for DeepSeek Harness",
+  "main": "index.js",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "serve": "node scripts/serve.js",
+    "dev": "node scripts/build.js && node scripts/serve.js",
+    "new:plugin": "node scripts/new-plugin.js",
+    "new:post": "node scripts/new-post.js",
+    "sync": "node scripts/sync.js",
+    "brand": "node scripts/make-brand-assets.js"
+  },
+  "private": true,
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^5.5.0",
+    "marked": "^18.2.0"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
+  }
+}

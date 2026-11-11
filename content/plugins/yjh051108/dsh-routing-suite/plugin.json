@@ -1,0 +1,32 @@
+{
+  "owner": "yjh051108",
+  "repo": "dsh-routing-suite",
+  "name": "dsh-routing-suite",
+  "category": "model",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-12",
+  "updatedAt": "2026-11-12",
+  "github": {
+    "description": "dsh-routing-suite — injector + router-standard kit: install the runtime injector first, then the task-aware reasoning-mode router preset (measured P1-P23).",
+    "stars": 7017,
+    "forks": 196,
+    "watchers": 15,
+    "openIssues": 181,
+    "language": "JavaScript",
+    "license": "MIT",
+    "version": "0.0.1-rc1",
+    "homepage": "",
+    "topics": [
+      "ai-agents",
+      "cordis",
+      "deepseek-harness",
+      "dsh",
+      "dsh-plugin"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-14",
+    "pushedAt": "2026-09-18",
+    "archived": false
+  }
+}

@@ -1,0 +1,186 @@
+/* 首页：查找面板和上手步骤 */
+.hero {
+  padding: 56px 0 8px;
+}
+.hero .wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  gap: 20px 48px;
+}
+.hero h1 {
+  font-size: clamp(34px, 3.5vw, 48px);
+}
+.hero .lede {
+  grid-column: 1;
+}
+.hero .lede a {
+  color: var(--ink);
+}
+.finder {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: start;
+  border: 1px solid var(--ink);
+  border-radius: var(--r-box);
+  background: var(--face);
+  overflow: hidden;
+}
+.finder-ask {
+  display: block;
+  padding: 18px 20px 10px;
+  font-size: 15px;
+  font-weight: 650;
+}
+.finder-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 20px;
+  padding: 0 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-ctl);
+  background: var(--panel);
+}
+.finder-field:focus-within {
+  border-color: var(--ink);
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+}
+.finder-field input {
+  flex: 1;
+  min-width: 0;
+  height: 52px;
+  border: 0;
+  background: none;
+  font-size: 19px;
+  outline: 0;
+}
+.finder-label {
+  padding: 16px 20px 8px;
+}
+.finder .plist {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  border-radius: 0;
+  container-type: normal; /* Finder 的行有自己的排法，不跟随通用的窄列表规则 */
+}
+.finder .prow a {
+  grid-template-columns: 14px minmax(0, 170px) minmax(0, 1fr) 56px;
+  padding: 11px 20px;
+}
+.finder .prow-cat,
+.finder .prow-date {
+  display: none;
+}
+.finder .prow-sum {
+  -webkit-line-clamp: 1;
+}
+.finder-none {
+  padding: 20px;
+  border-top: 1px solid var(--rule);
+  color: var(--dim);
+}
+.finder-more {
+  border-top: 1px solid var(--rule);
+}
+.finder-more a {
+  display: block;
+  padding: 11px 20px;
+  font-size: 15px;
+  font-weight: 650;
+}
+.finder-out {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 60px;
+  padding: 10px 12px 10px 20px;
+  background: var(--out);
+  color: var(--out-ink);
+}
+/* 窄容器里的命令整条可见比单行更重要 */
+.finder-out .cmd-line,
+.steps .cmd-line {
+  overflow-x: visible;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 1000px) {
+  .hero {
+    padding-top: 36px;
+  }
+  .hero .wrap {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .finder {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 12px;
+  }
+}
+@media (max-width: 560px) {
+  .finder .prow a {
+    grid-template-columns: 14px minmax(0, 1fr) auto;
+  }
+  .finder .prow-sum {
+    grid-column: 2 / -1;
+  }
+  .finder-out .btn span {
+    display: none;
+  }
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  counter-reset: step;
+}
+.steps li {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-box);
+  background: var(--face);
+  counter-increment: step;
+}
+.steps h3::before {
+  content: counter(step);
+  display: block;
+  margin-bottom: 14px;
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.steps p {
+  font-size: 15px;
+  color: var(--dim);
+}
+.steps .cmd {
+  margin-top: auto;
+  align-items: flex-start;
+  padding-left: 14px;
+}
+.steps .cmd .btn {
+  padding: 0 10px;
+}
+.steps .cmd .btn span {
+  display: none;
+}
+@media (max-width: 900px) {
+  .steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* 404 */
+.nf {
+  padding: 96px 0 40px;
+}
+.nf .lede {
+  margin-top: 16px;
+}

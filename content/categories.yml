@@ -1,0 +1,398 @@
+# 插件分类。slug 决定 URL（/interface、/zh/interface），不要随意改。
+# color 是该分类的"线缆色"，用于列表和详情页的插孔标记。
+- slug: interface
+  color: "#E5533D"
+  en:
+    name: Interface
+    tagline: "Change how the harness looks and how you move through it."
+    intro: "Interface plugins change what you see and how you get around: colour themes, layout tweaks, desktop wrappers, and different ways of rendering the agent's output. They do not make the agent any smarter. They make long sessions easier on the eyes and common actions quicker to reach."
+    pick: "Check which profile a plugin targets first, because a theme built for the web UI has nothing to draw on in a headless or SDK setup. Screenshots in the readme tell you more than the description does. Interface code tends to break when the host UI changes, so look at how recently the plugin was updated before relying on it."
+    terms:
+      - name: "Theme"
+        desc: "A set of colours, fonts and spacing applied over the existing UI without changing its behaviour."
+      - name: "Renderer"
+        desc: "The piece that turns a message, tool result or diff into what you see on screen."
+      - name: "Desktop shell"
+        desc: "A native window that wraps the web UI so it runs like an ordinary desktop app."
+    faq:
+      - q: "Can I install more than one interface plugin at a time?"
+        a: "Usually yes, as long as they touch different parts of the UI. Two themes, or two plugins that replace the same panel, will tend to override each other, so add them one at a time and check the result."
+      - q: "Do interface plugins work outside the web UI?"
+        a: "Mostly no. Anything that draws to the browser needs the web profile. Plugins that only change how output is formatted as text may work elsewhere, and their readme should say so."
+  zh:
+    name: 界面
+    tagline: "改变 Harness 的外观和操作方式。"
+    intro: "界面类插件改的是你看到的东西和操作的路径：配色主题、布局调整、桌面端外壳，以及智能体输出的不同呈现方式。它们不会让智能体变聪明，只是让长时间使用时眼睛舒服一点、常用操作离手近一点。"
+    pick: "先看插件面向哪个 profile：为 Web UI 写的主题，在 headless 或 SDK 环境里没有界面可改。README 里的截图比文字描述更可信。界面代码很容易随宿主 UI 的改动而失效，装之前看一眼最近的更新时间。"
+    terms:
+      - name: "主题"
+        desc: "覆盖在现有界面上的一套颜色、字体和间距，不改变功能本身。"
+      - name: "渲染器"
+        desc: "把消息、工具结果或代码差异变成屏幕上实际内容的那部分代码。"
+      - name: "桌面外壳"
+        desc: "把 Web UI 包进一个原生窗口，让它像普通桌面应用一样运行。"
+    faq:
+      - q: "可以同时装多个界面插件吗？"
+        a: "一般可以，只要它们改的不是同一块界面。两个主题，或者两个都要替换同一面板的插件，往往会互相覆盖，建议一个一个装，装完看效果。"
+      - q: "界面插件在 Web UI 之外能用吗？"
+        a: "大多不能。凡是往浏览器里画东西的，都需要 web profile。只调整文本输出格式的插件有可能在别处生效，具体以插件自己的说明为准。"
+- slug: session
+  color: "#F08C2E"
+  en:
+    name: Sessions
+    tagline: "Manage, search, export and clean up conversations."
+    intro: "Session plugins deal with the conversations you have already had. They help you find an old thread, rename or group sessions, export one to a file, or clear out the ones you no longer need. They matter most once the session list is too long to scroll."
+    pick: "Look closely at anything that deletes or rewrites history: it should ask for confirmation, and ideally offer a dry run or an undo. For export, check that the format is one you can open later without the plugin, such as Markdown or JSON. Search plugins differ in whether they index tool output as well as messages, which changes both what you can find and how much disk space the index takes."
+    terms:
+      - name: "Session"
+        desc: "One continuous conversation with the agent, including its messages and tool calls."
+      - name: "Export"
+        desc: "Writing a session out to a standalone file that can be read or archived outside the harness."
+      - name: "Pruning"
+        desc: "Removing old or unwanted sessions, usually by age, size or a manual selection."
+    faq:
+      - q: "Will a cleanup plugin delete sessions I still want?"
+        a: "It will delete whatever its rules match, so read those rules before the first run. If the plugin has a preview mode, use it, and keep an export of anything you would be sorry to lose."
+      - q: "Can exported sessions be imported again later?"
+        a: "Only if the plugin, or another one, supports import for that format. Many exports are meant for reading and sharing, not for restoring, so check before you treat an export as a backup."
+  zh:
+    name: 会话
+    tagline: "管理、搜索、导出和清理对话。"
+    intro: "会话类插件处理的是已经发生过的对话：找回某次旧讨论，给会话改名、分组，把某一次导出成文件，或者清掉不再需要的记录。会话列表长到翻不动的时候，这类插件才真正派上用场。"
+    pick: "凡是会删除或改写历史的插件都要多看两眼：操作前应当有确认，最好还能预览或撤销。导出类看格式，选一种离开插件也能打开的，比如 Markdown 或 JSON。搜索类的差别在于是否连工具输出一起索引，这既影响能搜到什么，也影响索引占多少磁盘。"
+    terms:
+      - name: "会话"
+        desc: "与智能体的一次连续对话，包含其中的消息和工具调用。"
+      - name: "导出"
+        desc: "把会话写成独立文件，可以脱离 Harness 阅读或归档。"
+      - name: "清理"
+        desc: "按时间、大小或手动选择，删除旧的或不需要的会话。"
+    faq:
+      - q: "清理插件会不会误删我还想留的会话？"
+        a: "它会删掉所有符合规则的会话，所以第一次运行前先把规则读清楚。有预览模式就先用预览，舍不得丢的会话先导出一份。"
+      - q: "导出的会话以后还能导回来吗？"
+        a: "要看有没有插件支持导入这种格式。很多导出只是为了阅读和分享，并不能用来恢复，别直接把导出文件当备份。"
+- slug: memory
+  color: "#D9A514"
+  en:
+    name: Memory
+    tagline: "Carry context across sessions so the agent stops forgetting."
+    intro: "Memory plugins keep information around after a session ends, so the next one does not start from nothing. Some store short notes about you and your project, some summarise past conversations, and some save everything and retrieve the relevant parts on demand. The shared goal is to stop you repeating the same background every time."
+    pick: "Find out where the memory is stored and whether you can read and edit it; plain files on your own disk are the easiest to inspect and correct. Check how much gets injected into each request, since a plugin that recalls too much costs tokens and can crowd out the task at hand. Running two memory plugins together often produces duplicate or conflicting recall, so start with one."
+    terms:
+      - name: "Context window"
+        desc: "The amount of text a model can take in for one request; memory has to fit inside it alongside everything else."
+      - name: "Recall"
+        desc: "The step where stored memories are selected and added to the current conversation."
+      - name: "Compaction"
+        desc: "Shortening older conversation into a summary so the important parts survive within the context limit."
+    faq:
+      - q: "Where do memory plugins keep my data?"
+        a: "It depends on the plugin: local files, a local database, or a remote service. The readme should state this plainly, and if it does not, treat that as a reason to look at the source before installing."
+      - q: "What if the agent remembers something wrong?"
+        a: "A wrong memory keeps coming back until it is removed. Prefer plugins that let you view, edit and delete individual entries, and review what has been stored from time to time."
+  zh:
+    name: 记忆
+    tagline: "让上下文跨会话保留，智能体不再健忘。"
+    intro: "记忆类插件让信息在会话结束后留下来，下一次不必从零开始。有的只记几条关于你和项目的要点，有的给过往对话做摘要，也有的把内容全部存下、用到时再检索相关部分。目的都一样：同样的背景不用每次重讲。"
+    pick: "先弄清记忆存在哪里、你能不能直接查看和修改；存在本地磁盘上的纯文本最容易检查和纠正。再看每次请求会注入多少内容，回忆得太多既费 token，也会挤占当前任务的空间。两个记忆插件同时开，常常出现重复或互相矛盾的回忆，建议先只用一个。"
+    terms:
+      - name: "上下文窗口"
+        desc: "模型单次请求能读入的文本量，记忆要和其他内容一起挤在这个范围内。"
+      - name: "回忆"
+        desc: "从已存的记忆里挑出相关内容、加入当前对话的那一步。"
+      - name: "压缩"
+        desc: "把较早的对话缩成摘要，让要点在上下文限制内保留下来。"
+    faq:
+      - q: "记忆插件把我的数据存在哪里？"
+        a: "因插件而异：本地文件、本地数据库，或者远程服务。README 应该写明这一点；没写的话，装之前最好看一下源码。"
+      - q: "智能体记错了怎么办？"
+        a: "错误的记忆不删就会反复出现。优先选能逐条查看、修改、删除的插件，并且隔一段时间检查一下里面都存了什么。"
+- slug: tools
+  color: "#3FA34D"
+  en:
+    name: Tools
+    tagline: "Give the agent new things it can do."
+    intro: "Tool plugins add actions the agent can call on its own: reading and writing files, running commands, fetching web pages, querying a database, driving a browser. Each one widens what the agent can do without you copying results back and forth. Each one also widens what can go wrong, so this is the category to install with the most care."
+    pick: "Read what the tool can reach before anything else: which directories, which network hosts, which credentials. A narrow tool that does one job is easier to trust than a broad one that can run anything. Check whether calls need your approval or run automatically, and keep in mind that every extra tool description takes up context and gives the model more ways to choose wrongly."
+    terms:
+      - name: "Tool call"
+        desc: "A structured request from the model to run a named function with specific arguments."
+      - name: "Permission scope"
+        desc: "The set of files, commands or network targets a tool is allowed to touch."
+      - name: "Sandbox"
+        desc: "An isolated environment that limits what a tool can affect on the host machine."
+    faq:
+      - q: "Is it safe to let the agent run shell commands or edit files?"
+        a: "It is as safe as the limits around it. Use approval prompts or a sandbox where the plugin offers them, work in a directory under version control, and avoid granting access to anything you could not afford to lose."
+      - q: "Does installing more tools make the agent more capable?"
+        a: "Up to a point. Past that, the model spends context reading tool descriptions and picks the wrong tool more often. Install what the current work needs and remove what you have stopped using."
+  zh:
+    name: 工具
+    tagline: "给智能体增加新的动手能力。"
+    intro: "工具类插件给智能体增加可以自行调用的动作：读写文件、执行命令、抓取网页、查询数据库、操作浏览器。每多一个工具，智能体能独立完成的事就多一些，你也少做一些来回复制粘贴。相应地，可能出错的地方也多一些，所以这是最需要谨慎安装的分类。"
+    pick: "首先看这个工具够得着什么：哪些目录、哪些网络地址、哪些凭据。只做一件事的窄工具，比什么都能执行的宽工具更容易放心。再看调用是需要你确认还是自动执行。另外，每个工具的描述都要占上下文，工具越多，模型选错的机会也越多。"
+    terms:
+      - name: "工具调用"
+        desc: "模型发出的结构化请求，要求用指定参数执行某个具名函数。"
+      - name: "权限范围"
+        desc: "一个工具被允许访问的文件、命令或网络目标的集合。"
+      - name: "沙箱"
+        desc: "一个隔离环境，用来限制工具对宿主机器能造成的影响。"
+    faq:
+      - q: "让智能体执行命令、修改文件，安全吗？"
+        a: "安全程度取决于给它设的边界。插件提供确认提示或沙箱就用上，在有版本控制的目录里工作，不要把丢不起的东西交给它访问。"
+      - q: "工具装得越多，智能体就越能干吗？"
+        a: "到一定数量为止。再多的话，模型要花上下文去读工具描述，选错工具的情况也会变多。按手头的工作装，不用的及时卸掉。"
+- slug: agent
+  color: "#159A8C"
+  en:
+    name: Agents
+    tagline: "Skills, personas and sub-agents for specific jobs."
+    intro: "Agent plugins shape how the agent behaves on a particular kind of work. A skill packages instructions for one task, a persona sets tone and priorities, and a sub-agent takes a piece of the job and handles it separately. Most of what these plugins ship is prompt text, sometimes with a few tools attached."
+    pick: "Because the substance is the prompt, read it. A good one is specific about when it applies and what it should produce; a vague one will change the agent's behaviour in ways you cannot predict. Check which model it was written and tested against, since instructions tuned for one model can work poorly on another. For sub-agents, look at how many extra model calls a run makes, because that is where cost and waiting time come from."
+    terms:
+      - name: "Skill"
+        desc: "A reusable set of instructions, sometimes with scripts or files, that the agent loads for a specific task."
+      - name: "Persona"
+        desc: "A system prompt that fixes the agent's role, tone and priorities for a session."
+      - name: "Sub-agent"
+        desc: "A separate agent run, with its own context, that the main agent hands part of a task to."
+    faq:
+      - q: "What is the difference between a skill and a persona?"
+        a: "A skill is loaded when a matching task comes up and covers how to do that task. A persona applies to the whole session and covers how the agent should act in general. They can be used together."
+      - q: "Do sub-agents use more tokens?"
+        a: "Yes. Each sub-agent runs its own conversation with the model, so a task split three ways costs roughly three sets of requests. The trade is a cleaner main context and, sometimes, parallel work."
+  zh:
+    name: 智能体
+    tagline: "面向特定任务的技能、人设与子智能体。"
+    intro: "智能体类插件决定智能体在某类工作上怎么表现。技能是针对一项任务打包好的指令，人设规定语气和侧重点，子智能体则把任务的一部分拆出去单独处理。这类插件交付的主要是提示词，有时附带几个工具。"
+    pick: "既然核心是提示词，就把它读一遍。写得好的会说清楚什么时候适用、应该产出什么；写得含糊的，会让智能体的行为往你预料不到的方向变。还要看它是针对哪个模型写的、测过的，为某个模型调好的指令换一个模型可能效果很差。子智能体要留意一次运行多出多少次模型调用，费用和等待时间都来自这里。"
+    terms:
+      - name: "技能"
+        desc: "一组可复用的指令，有时带脚本或文件，智能体在遇到对应任务时加载。"
+      - name: "人设"
+        desc: "一段系统提示词，在整个会话中固定智能体的角色、语气和侧重点。"
+      - name: "子智能体"
+        desc: "一次独立的智能体运行，有自己的上下文，由主智能体把部分任务交给它。"
+    faq:
+      - q: "技能和人设有什么区别？"
+        a: "技能在遇到匹配的任务时才加载，讲的是这件事怎么做；人设作用于整个会话，讲的是智能体总体上该怎么表现。两者可以同时使用。"
+      - q: "子智能体会多消耗 token 吗？"
+        a: "会。每个子智能体都和模型单独进行一轮对话，任务拆成三份，大致就是三份请求。换来的是主上下文更干净，有时还能并行处理。"
+- slug: workflow
+  color: "#2D9CDB"
+  en:
+    name: Workflows
+    tagline: "Chain steps, schedule runs and automate repeat work."
+    intro: "Workflow plugins run the agent through several steps without you prompting each one. Typical forms are a fixed pipeline, a scheduled job that runs at set times, and a trigger that starts work when a file changes or a message arrives. They suit tasks you already do the same way every time."
+    pick: "The question to ask is what happens when a step fails at 3 a.m. with nobody watching. Look for run logs, a retry or stop policy, and some limit on how long or how much a single run can spend. Scheduled work needs a process that stays running, so check that the plugin fits a headless setup if that is where you plan to host it. Workflows you can read and edit as plain files are easier to review than ones built only through a UI."
+    terms:
+      - name: "Trigger"
+        desc: "The event that starts a workflow, such as a schedule, a file change or an incoming message."
+      - name: "Step"
+        desc: "One unit of work in a workflow, usually a single prompt or tool action whose output feeds the next."
+      - name: "Unattended run"
+        desc: "A run that proceeds without a person approving each action along the way."
+    faq:
+      - q: "Do scheduled workflows run when my computer is off?"
+        a: "No. Something has to be running to fire the schedule. For jobs that must run on time, host the harness on a machine that stays on, and check how the plugin handles runs it missed."
+      - q: "How do I stop an automated run from spending too much?"
+        a: "Set limits where the plugin allows them: a maximum number of steps, a time limit, or a spending cap at your model provider. Test a new workflow by hand a few times before putting it on a schedule."
+  zh:
+    name: 工作流
+    tagline: "串联步骤、定时运行，把重复劳动自动化。"
+    intro: "工作流类插件让智能体连续跑完多个步骤，不用你每一步都去提示。常见形态有固定流水线、按时间执行的定时任务，以及文件变动或收到消息时自动启动的触发器。适合那些你每次做法都一样的事。"
+    pick: "要问的是：凌晨三点某一步失败了，没人盯着，会怎样。看有没有运行日志，有没有重试或中止策略，单次运行的时长或花费有没有上限。定时任务需要一个常驻进程，如果打算放在 headless 环境里跑，先确认插件支持。能以纯文本文件阅读和修改的工作流，比只能在界面里拼出来的更容易审查。"
+    terms:
+      - name: "触发器"
+        desc: "启动工作流的事件，比如到达预定时间、文件变动或收到消息。"
+      - name: "步骤"
+        desc: "工作流里的一个工作单元，通常是一次提示或一次工具操作，输出交给下一步。"
+      - name: "无人值守运行"
+        desc: "运行过程中没有人逐项确认每个操作。"
+    faq:
+      - q: "电脑关机时定时工作流还会跑吗？"
+        a: "不会。总得有进程在运行才能触发定时。必须准点执行的任务，应该把 Harness 放在一台常开的机器上，并了解插件怎么处理错过的那几次运行。"
+      - q: "怎么防止自动运行花掉太多钱？"
+        a: "插件能设上限的地方都设上：最大步数、时间限制，或者在模型供应商那边设置消费上限。新工作流先手动跑几遍，再交给定时。"
+- slug: integration
+  color: "#3A5BD9"
+  en:
+    name: Integrations
+    tagline: "Connect the harness to chat apps, devices and other services."
+    intro: "Integration plugins connect the harness to things outside it. Some let you talk to the agent from a chat app, some expose a session so you can reach it from a phone or another machine, and some link to services such as issue trackers or calendars. They are how the agent stops being tied to one browser tab on one computer."
+    pick: "Every integration opens a door, so check who can walk through it. A chat bot should restrict which users or channels may give it instructions, and a remote access plugin should require authentication and say how the connection is protected. Look at where tokens are stored and what the plugin asks for on the other service; request the narrowest access that works. Third-party APIs change, so an integration that has not been updated in a long time may no longer connect."
+    terms:
+      - name: "Adapter"
+        desc: "The code that translates between the harness and one external platform's messages and events."
+      - name: "Webhook"
+        desc: "A URL that an outside service calls to notify the harness that something happened."
+      - name: "Access token"
+        desc: "A secret string that lets the plugin act on your behalf on another service."
+    faq:
+      - q: "If I connect the agent to a group chat, can anyone there control it?"
+        a: "Unless the plugin limits it, yes. Look for an allowlist of users or channels and set it before adding the bot anywhere shared, especially if the agent has tools that can change files or run commands."
+      - q: "Do I need a public server for remote access?"
+        a: "Not always. Some plugins make an outbound connection through a relay or tunnel, others expect you to expose a port yourself. Each approach has different trust and setup costs, so read which one the plugin uses."
+  zh:
+    name: 集成
+    tagline: "把 Harness 接到聊天应用、设备和其他服务上。"
+    intro: "集成类插件把 Harness 和外部的东西连起来。有的让你在聊天应用里直接和智能体对话，有的把会话开放出来、方便从手机或另一台机器访问，还有的对接工单系统、日历这类服务。有了它们，智能体才不必守在某台电脑的某个浏览器标签页里。"
+    pick: "每个集成都是开了一扇门，要看清谁能进来。聊天机器人应该能限定哪些用户或频道可以下指令；远程访问插件应该要求身份验证，并说明连接是怎么保护的。留意令牌存在哪里、插件在对方服务上申请了哪些权限，够用就行，不要多给。第三方接口经常变动，很久没更新的集成可能已经连不上了。"
+    terms:
+      - name: "适配器"
+        desc: "在 Harness 与某个外部平台之间转换消息和事件的那段代码。"
+      - name: "Webhook"
+        desc: "一个供外部服务调用的地址，用来通知 Harness 有事情发生。"
+      - name: "访问令牌"
+        desc: "一串密钥，插件凭它在另一个服务上代表你进行操作。"
+    faq:
+      - q: "把智能体接进群聊后，群里任何人都能指挥它吗？"
+        a: "插件不做限制的话，是的。先找到用户或频道白名单并设置好，再把机器人拉进多人场合；智能体带有能改文件、能执行命令的工具时尤其要这样做。"
+      - q: "远程访问一定需要公网服务器吗？"
+        a: "不一定。有的插件通过中继或隧道主动向外连接，有的需要你自己开放端口。几种方式要信任的对象和配置成本都不同，装之前看清插件用的是哪一种。"
+- slug: model
+  color: "#7A4FD6"
+  en:
+    name: Models
+    tagline: "Add providers, route requests and keep an eye on usage."
+    intro: "Model plugins sit between the harness and the models it calls. Some add a provider, including locally hosted models, some decide which model handles which request, and some record token counts and cost. They are worth a look when you want a model the harness does not offer by default, or when the bill has started to matter."
+    pick: "These plugins see your API keys and every prompt, so prefer ones with readable source and no unexplained network calls. For a provider plugin, check that it supports the features you rely on, such as streaming and tool calls, since not every model or endpoint handles them the same way. Usage figures from a plugin are estimates based on what it observed; the provider's own billing page is the number that counts."
+    terms:
+      - name: "Provider"
+        desc: "A service or local runtime that hosts models and answers requests for them."
+      - name: "Routing"
+        desc: "Rules that choose which model receives a request, for example by task type, cost or availability."
+      - name: "Token usage"
+        desc: "The count of input and output tokens for a request, which is what most providers bill on."
+    faq:
+      - q: "Can I use models other than DeepSeek's?"
+        a: "That is what provider plugins are for, and which models are covered depends on the plugin. How well another model performs is a separate matter, particularly with tool calls, so test it on your own tasks."
+      - q: "Why does the usage shown by a plugin differ from my provider's bill?"
+        a: "The plugin counts what passes through it and applies a price table that may be out of date. Cached tokens, retries and requests made outside the harness also cause gaps. Use the plugin for trends and the provider for exact amounts."
+  zh:
+    name: 模型
+    tagline: "接入模型供应商、路由请求、查看用量。"
+    intro: "模型类插件位于 Harness 和它调用的模型之间。有的用来接入新的供应商，包括本地部署的模型；有的决定哪个请求交给哪个模型；有的记录 token 数量和费用。想用默认没有提供的模型，或者开始在意账单的时候，可以来这里看看。"
+    pick: "这类插件能看到你的 API 密钥和每一条提示词，优先选源码可读、没有来历不明的网络请求的。供应商插件要确认它支持你依赖的功能，比如流式输出和工具调用，不同模型和接口在这些地方的表现并不一致。插件显示的用量是根据它观察到的请求估算的，真正算数的是供应商自己的账单页面。"
+    terms:
+      - name: "供应商"
+        desc: "托管模型并响应请求的服务或本地运行环境。"
+      - name: "路由"
+        desc: "决定请求发给哪个模型的规则，可以按任务类型、成本或可用性来分。"
+      - name: "Token 用量"
+        desc: "一次请求的输入与输出 token 数，多数供应商据此计费。"
+    faq:
+      - q: "可以使用 DeepSeek 以外的模型吗？"
+        a: "供应商插件就是做这件事的，具体支持哪些模型取决于插件。换一个模型后效果如何是另一回事，工具调用方面的差别尤其明显，最好拿自己的任务试一试。"
+      - q: "插件显示的用量为什么和供应商账单对不上？"
+        a: "插件只统计经过它的请求，用的价格表也可能已经过时。缓存 token、重试，以及在 Harness 之外发出的请求都会造成差额。看趋势用插件，看准确金额以供应商为准。"
+- slug: dev
+  color: "#C13C9A"
+  en:
+    name: Development
+    tagline: "Build, debug and operate the harness and its plugins."
+    intro: "Development plugins are for people who build on the harness or keep an instance of it running. They include scaffolding for new plugins, inspectors that show what is loaded and what events are passing through, log and trace viewers, and helpers for deployment and health checks. Most users will never need them; plugin authors and operators will use them constantly."
+    pick: "Match the plugin to the harness version you run, because tooling that reaches into internals is the first thing to break during a developer preview. Debugging tools often expose prompts, keys and internal state, so keep them out of any instance that other people can reach. For scaffolding, generate a project and read the result: it should be small enough that you understand every file."
+    terms:
+      - name: "Hot reload"
+        desc: "Applying a code change to a running plugin without restarting the whole harness."
+      - name: "Trace"
+        desc: "A recorded sequence of events, model calls and tool calls for one run, used to work out what happened."
+      - name: "Scaffold"
+        desc: "A generated starting project with the minimum files and settings a new plugin needs."
+    faq:
+      - q: "Should I leave debugging plugins enabled in everyday use?"
+        a: "Better not. They add overhead, and some of them reveal data you would not want exposed. Turn them on when you are investigating something and off again afterwards."
+      - q: "Do I need these plugins to write my own plugin?"
+        a: "No. A plugin is ordinary code and can be written with the tools you already have. Development plugins shorten the edit and test loop and make problems easier to see, which starts to matter as your plugin grows."
+  zh:
+    name: 开发
+    tagline: "构建、调试、运维 Harness 及其插件。"
+    intro: "开发类插件面向在 Harness 上做开发、或者负责维持一个实例运行的人。其中有新插件的脚手架，有查看已加载内容和事件流转的检查器，有日志与追踪查看工具，也有部署和健康检查方面的辅助。普通用户大概用不到，插件作者和运维人员则会天天用。"
+    pick: "先核对插件适配的 Harness 版本：项目还在 developer preview 阶段，深入内部实现的工具最先失效。调试工具往往会暴露提示词、密钥和内部状态，别装在其他人能访问到的实例上。脚手架可以先生成一个项目读一读，产物应该小到每个文件你都看得懂。"
+    terms:
+      - name: "热重载"
+        desc: "不重启整个 Harness，就让运行中的插件应用代码改动。"
+      - name: "追踪"
+        desc: "一次运行中事件、模型调用和工具调用的完整记录，用来还原发生了什么。"
+      - name: "脚手架"
+        desc: "自动生成的起步项目，包含新插件所需的最少文件和配置。"
+    faq:
+      - q: "调试插件平时要一直开着吗？"
+        a: "最好不要。它们有额外开销，有些还会暴露你不想公开的数据。排查问题时打开，查完就关。"
+      - q: "自己写插件，必须先装这些吗？"
+        a: "不必。插件就是普通代码，用你手头已有的工具就能写。开发类插件的作用是缩短修改和测试的来回，让问题更容易被看见，插件规模变大以后才显出价值。"
+- slug: knowledge
+  color: "#8A6F3C"
+  en:
+    name: Knowledge
+    tagline: "Bring documents, notes and search results into the conversation."
+    intro: "Knowledge plugins let the agent answer from material it was never trained on: your documents, a notes vault, a wiki, or live search results. Most work by indexing the content in advance and pulling the relevant passages into the conversation when a question comes up. The difference from memory plugins is the source: this is reference material you supply, not things the agent picked up along the way."
+    pick: "Start with the formats and sources you actually have, since a plugin that reads Markdown well may do badly with scanned PDFs or tables. Find out where indexing happens: if documents or their embeddings are sent to an outside service, that matters for anything confidential. Prefer plugins that show which passages an answer drew on, so you can check it, and look at how the index is updated when files change."
+    terms:
+      - name: "RAG"
+        desc: "Retrieval-augmented generation: fetching relevant passages first and giving them to the model along with the question."
+      - name: "Embedding"
+        desc: "A numeric representation of a piece of text that lets similar passages be found by meaning, not exact wording."
+      - name: "Chunk"
+        desc: "A section of a document, split to a size suitable for indexing and retrieval."
+    faq:
+      - q: "Are my documents uploaded anywhere?"
+        a: "It depends on the plugin. Some index entirely on your machine; others send text to an embedding API or a hosted vector store. Retrieved passages are also sent to whichever model you use, as part of the prompt."
+      - q: "Why does the agent still get answers wrong with my documents connected?"
+        a: "Retrieval can miss the right passage, or return one that looks related but is not. The model can also misread what it was given. Check the cited passages, and if the right one keeps being missed, adjust how the content is split or how many results are returned."
+  zh:
+    name: 知识库
+    tagline: "把文档、笔记和检索结果带进对话。"
+    intro: "知识库类插件让智能体依据它没有训练过的材料作答：你的文档、笔记库、内部 wiki，或者实时搜索结果。多数做法是预先给内容建索引，遇到问题时把相关段落取出来放进对话。它和记忆类插件的区别在于来源：这里是你主动提供的参考资料，不是智能体在使用过程中顺手记下的东西。"
+    pick: "先从你手上实际有的格式和来源出发，Markdown 读得好的插件，面对扫描版 PDF 或表格未必行。弄清索引是在哪里做的：如果文档或其向量要发到外部服务，涉及保密内容时就得慎重。优先选能标出答案引用了哪些段落的插件，方便核对；再看文件变动后索引怎么更新。"
+    terms:
+      - name: "RAG"
+        desc: "检索增强生成：先取出相关段落，再连同问题一起交给模型。"
+      - name: "向量嵌入"
+        desc: "一段文本的数值表示，可以按语义而不是字面找到相近的内容。"
+      - name: "分块"
+        desc: "把文档切成适合索引和检索的小段，每一段就是一个块。"
+    faq:
+      - q: "我的文档会被上传到别处吗？"
+        a: "取决于插件。有的完全在本机建索引，有的会把文本发给嵌入接口或托管的向量库。另外，检索出的段落会作为提示词的一部分发给你所用的模型。"
+      - q: "接上文档以后，智能体为什么还是会答错？"
+        a: "检索可能漏掉正确的段落，也可能取回看似相关、其实无关的内容，模型还可能误读拿到的材料。先核对它引用的段落；如果正确的内容总是取不到，就调整分块方式或返回结果的数量。"
+- slug: fun
+  color: "#F06BA8"
+  en:
+    name: Fun
+    tagline: "Wallpapers, pets, games and other things nobody needs but everybody installs."
+    intro: "Fun plugins do nothing for your productivity and do not pretend to. This is where you find background wallpapers, small animated pets that sit in a corner of the UI, mini games for the wait while a long task runs, and assorted jokes. They are also a common first project for people learning to write plugins, so quality varies a lot."
+    pick: "A decorative plugin should need very little: no file access, no network beyond loading its own assets, no API keys. If one asks for more than that, skip it. Watch for animations that keep the CPU or battery busy while idle, and check that the plugin can be switched off quickly when you need to concentrate or share your screen."
+    terms:
+      - name: "Wallpaper"
+        desc: "A background image or animation shown behind the interface."
+      - name: "Desktop pet"
+        desc: "A small animated character that lives in the UI and reacts to what is going on."
+      - name: "Easter egg"
+        desc: "A hidden joke or feature that appears only when you do something specific."
+    faq:
+      - q: "Do fun plugins slow the harness down?"
+        a: "Most have no noticeable effect. Ones with constant animation or large images can make the UI feel heavier, particularly on older machines. If things turn sluggish after an install, disable it and compare."
+      - q: "Do they affect how the agent behaves?"
+        a: "Purely visual ones do not. A few add text to the prompt, for example to make the agent speak in character, and that does change responses and uses some context. The plugin description should say which kind it is."
+  zh:
+    name: 趣味
+    tagline: "壁纸、宠物、小游戏，以及其他没人需要却人人都装的东西。"
+    intro: "趣味类插件对工作效率没有任何帮助，也不打算假装有。这里有背景壁纸，有蹲在界面角落里的小宠物，有等长任务时打发时间的小游戏，还有各种玩笑。很多人学写插件的第一个作品也放在这里，所以质量参差不齐。"
+    pick: "装饰性的插件需要的东西应该很少：不读文件，除了加载自身素材不联网，不要 API 密钥。要得比这多的，直接跳过。留意那些空闲时也占着 CPU、耗着电的动画，并确认需要专心或者共享屏幕的时候能很快关掉。"
+    terms:
+      - name: "壁纸"
+        desc: "显示在界面背后的背景图片或动画。"
+      - name: "桌面宠物"
+        desc: "住在界面里的小动画角色，会对当前发生的事情做出反应。"
+      - name: "彩蛋"
+        desc: "隐藏的玩笑或功能，只有做了特定操作才会出现。"
+    faq:
+      - q: "趣味插件会拖慢 Harness 吗？"
+        a: "大多数没有明显影响。持续播放动画或加载大图的插件会让界面变重，旧机器上更明显。装完觉得卡，就先禁用它对比一下。"
+      - q: "它们会影响智能体的行为吗？"
+        a: "纯视觉的不会。少数插件会往提示词里加内容，比如让智能体用某个角色的口吻说话，这确实会改变回答，也占一点上下文。插件说明里应该写清楚属于哪一种。"

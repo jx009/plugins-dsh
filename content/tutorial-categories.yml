@@ -1,0 +1,64 @@
+# 教程分类。slug 决定 URL（/tutorials/install），不要随意改。
+- slug: concept
+  en:
+    name: Concepts
+    tagline: "What plugins, profiles and bundles are, and how they fit together."
+    intro: "Start here if the vocabulary is new. These guides explain how DeepSeek Harness is put together, so the install and configuration steps in the other sections make sense."
+  zh:
+    name: 概念
+    tagline: "插件、profile、bundle 分别是什么，彼此怎么配合。"
+    intro: "对这些名词还不熟的话，先读这一类。这里讲清 DeepSeek Harness 的组成方式，之后再看安装和配置步骤就不会一头雾水。"
+- slug: install
+  en:
+    name: Install
+    tagline: "Get the harness running and add your first plugin."
+    intro: "Step-by-step installs: starting the harness, adding a plugin from the command line, and checking that it actually loaded."
+  zh:
+    name: 安装
+    tagline: "把 Harness 跑起来，装上第一个插件。"
+    intro: "按步骤来：启动 Harness、用命令行添加插件、确认插件真的加载了。"
+- slug: configure
+  en:
+    name: Configure
+    tagline: "Profiles, patch files and per-plugin settings."
+    intro: "How to change what the harness loads and how each plugin behaves, without editing files you will have to redo after the next update."
+  zh:
+    name: 配置
+    tagline: "profile、patch 文件和各插件自己的设置。"
+    intro: "怎么调整 Harness 加载的内容和每个插件的行为，同时避免下次更新后又要重改一遍。"
+- slug: update
+  en:
+    name: Update
+    tagline: "Move to a new version without losing your setup."
+    intro: "The harness is still in developer preview, so releases can break things. These guides cover updating the harness and its plugins, and what to check afterwards."
+  zh:
+    name: 更新
+    tagline: "升级到新版本，同时保住现有配置。"
+    intro: "Harness 还处在 developer preview 阶段，新版本可能带来破坏性变更。这一类讲怎么更新本体和插件，以及更新后该检查什么。"
+- slug: uninstall
+  en:
+    name: Uninstall
+    tagline: "Remove a plugin, or the whole harness, and leave nothing behind."
+    intro: "Removing a plugin cleanly, rolling back a change that went wrong, and clearing out leftover files and settings."
+  zh:
+    name: 卸载
+    tagline: "移除某个插件或整个 Harness，不留残余。"
+    intro: "干净地移除插件、回滚出了问题的改动、清理残留的文件和设置。"
+- slug: troubleshooting
+  en:
+    name: Troubleshooting
+    tagline: "When a plugin will not load or the harness will not start."
+    intro: "Common failures and how to narrow them down: wrong profile, port conflicts, network and proxy problems, and plugins that stopped working after an update."
+  zh:
+    name: 排错
+    tagline: "插件不加载、Harness 起不来时怎么办。"
+    intro: "常见故障和定位思路：profile 用错、端口冲突、网络与代理问题，以及更新后失效的插件。"
+- slug: develop
+  en:
+    name: Develop
+    tagline: "Write, test and publish a plugin of your own."
+    intro: "For plugin authors: the structure of a plugin, how to run it locally, and how to publish it so other people can find and install it."
+  zh:
+    name: 开发
+    tagline: "编写、测试并发布自己的插件。"
+    intro: "写给插件作者：插件的基本结构、本地怎么运行，以及怎么发布才能让别人找到并安装。"

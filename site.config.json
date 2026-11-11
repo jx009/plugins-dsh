@@ -1,0 +1,20 @@
+{
+  "siteUrl": "https://example.com",
+  "brand": "Plugin DSH",
+  "contactEmail": "3618850359@qq.com",
+  "submitUrl": "",
+  "defaultLang": "en",
+  "langs": {
+    "en": { "prefix": "", "hreflang": "en-US", "htmlLang": "en", "ogLocale": "en_US", "label": "English" },
+    "zh": { "prefix": "/zh", "hreflang": "zh-CN", "htmlLang": "zh-CN", "ogLocale": "zh_CN", "label": "简体中文" }
+  },
+  "installCommand": "dsh plugin --profile web add {package}",
+  "perPage": { "plugins": 30, "tutorials": 12 },
+  "sitemapShardSize": 2000,
+  "analytics": { "ga4": "", "baidu": "" },
+  "verification": { "google": "", "bing": "", "baidu": "" },
+  "official": {
+    "repo": "https://github.com/deepseek-ai/deepseek-harness",
+    "docs": "https://deepseek-harness.github.io/deepseek-harness/"
+  }
+}

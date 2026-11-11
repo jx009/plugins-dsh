@@ -1,0 +1,36 @@
+{
+  "owner": "elysia395",
+  "repo": "dsh-wallpaper-engine",
+  "name": "dsh-wallpaper-engine",
+  "category": "fun",
+  "package": "dsh-plugin-wallpaper-engine",
+  "verified": false,
+  "listedAt": "2026-11-12",
+  "updatedAt": "2026-11-12",
+  "github": {
+    "description": "把本机 Wallpaper Engine 的壁纸搬进 DSH 网页界面：场景壁纸由内置 MIT 开源引擎 WebWallGL 实时 WebGL 渲染（粒子 / puppet 骨骼 / SceneScript / 音频反应 / 鼠标交互），失败自动降级内嵌 MP4 与场景静态帧；Web 壁纸严格沙箱 + WE API；iOS 风格液态玻璃 UI 高度自定义，遮挡暂停省电、ffmpeg 帧率上限转码、系统音频频谱与 Now Playing、自定义上传与自动轮播；设置存宿主端，对 agent 零 token 开销。Windows / macOS / Linux 三平台原生（同一个包、同一条命令）。",
+    "stars": 6479,
+    "forks": 109,
+    "watchers": 0,
+    "openIssues": 24,
+    "language": "JavaScript",
+    "license": "MIT",
+    "version": "v1.4.2",
+    "homepage": "",
+    "topics": [
+      "deepseek-harness",
+      "dsh-plugin",
+      "dsh-plugin-market",
+      "dsh-plugins",
+      "liquid-glass",
+      "theme",
+      "wallpaper",
+      "wallpaper-engine",
+      "webgl"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-16",
+    "pushedAt": "2026-11-10",
+    "archived": false
+  }
+}

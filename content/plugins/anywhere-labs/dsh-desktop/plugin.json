@@ -1,0 +1,35 @@
+{
+  "owner": "anywhere-labs",
+  "repo": "dsh-desktop",
+  "name": "dsh-desktop",
+  "category": "interface",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-12",
+  "updatedAt": "2026-11-12",
+  "github": {
+    "description": "为 DeepSeek Harness (DSH) 插件生态打造的现代化桌面端解决方案。万物皆「插件」，桌面本身也是「插件」。",
+    "stars": 35744,
+    "forks": 1622,
+    "watchers": 79,
+    "openIssues": 409,
+    "language": "TypeScript",
+    "license": "MIT",
+    "version": "v2.0.22-next",
+    "homepage": "https://dshdesktop.cn",
+    "topics": [
+      "cordis",
+      "cordis-plugin",
+      "deepseek",
+      "deepseek-harness",
+      "desktop",
+      "dsh",
+      "dsh-plugin",
+      "dsh-plugin-desktop"
+    ],
+    "defaultBranch": "master",
+    "createdAt": "2026-08-13",
+    "pushedAt": "2026-11-06",
+    "archived": false
+  }
+}

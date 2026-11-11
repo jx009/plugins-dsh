@@ -1,0 +1,39 @@
+{
+  "owner": "wenbin-wb",
+  "repo": "dsh-bridge",
+  "name": "dsh-bridge",
+  "category": "integration",
+  "package": "@wenbin_wb/dsh-bridge",
+  "verified": false,
+  "listedAt": "2026-11-12",
+  "updatedAt": "2026-11-12",
+  "github": {
+    "description": "🚀 DeepSeek Harness 多通道远程访问与安全守护插件 | 局域网扫码直连、Cloudflare / 自建公网隧道、微信 / QQ / 飞书 / Telegram 机器人全生命周期对话 | 内置全协议访问安全认证、后台防篡改与容灾保命体系",
+    "stars": 257,
+    "forks": 14,
+    "watchers": 0,
+    "openIssues": 5,
+    "language": "JavaScript",
+    "license": "MIT",
+    "version": "v2.17.9",
+    "homepage": "https://github.com/wenbin-wb/dsh-bridge#readme",
+    "topics": [
+      "cloudflare-tunnel",
+      "deepseek-harness",
+      "dsh",
+      "dsh-plugin",
+      "feishu",
+      "mobile",
+      "pwa",
+      "qq-bot",
+      "remote-access",
+      "remote-control",
+      "telegram-bot",
+      "wechat-bot"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-18",
+    "pushedAt": "2026-11-10",
+    "archived": false
+  }
+}

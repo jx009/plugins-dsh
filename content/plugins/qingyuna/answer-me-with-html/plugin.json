@@ -1,0 +1,41 @@
+{
+  "owner": "QingYunA",
+  "repo": "answer-me-with-html",
+  "name": "answer-me-with-html",
+  "category": "interface",
+  "package": "",
+  "install": "dsh plugin --profile web add github:QingYunA/answer-me-with-html",
+  "verified": false,
+  "listedAt": "2026-11-12",
+  "updatedAt": "2026-11-12",
+  "github": {
+    "description": "Answer me with HTML — an agent skill that answers hard questions with a one-page HTML you can actually read. 让 AI Agent 用一页 HTML 回答复杂问题。",
+    "stars": 6235,
+    "forks": 415,
+    "watchers": 11,
+    "openIssues": 10,
+    "language": "JavaScript",
+    "license": "MIT",
+    "version": "v0.5.11",
+    "homepage": "https://answer-me-with-html.com/",
+    "topics": [
+      "agent-skill",
+      "ai-agent",
+      "claude-code",
+      "claude-code-skill",
+      "claude-skill",
+      "claude-skills",
+      "cli",
+      "diagram",
+      "dsh-plugin",
+      "explainer",
+      "html",
+      "llm",
+      "ste100"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-10-02",
+    "pushedAt": "2026-11-10",
+    "archived": false
+  }
+}

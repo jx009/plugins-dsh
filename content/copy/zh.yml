@@ -1,0 +1,232 @@
+# 中文界面文案。结构必须与 en.yml 完全一致。
+ui:
+  plugins: 插件
+  tutorials: 教程
+  submit: 提交插件
+  search: 搜索
+  searchPlaceholder: "搜索插件和教程"
+  searchHint: "方向键选择，回车打开，Esc 关闭"
+  toggleTheme: 切换浅色或深色
+  menu: 菜单
+  mainNav: 主导航
+  skip: 跳到正文
+  breadcrumb: 面包屑导航
+  pagination: 分页
+  prev: 上一页
+  next: 下一页
+  page: "第 {n} 页"
+  home: 首页
+  categories: 插件分类
+  allPlugins: 全部插件
+  pluginCategories: 按分类找插件
+  site: 本站
+  sitemap: 站点地图
+  officialRepo: 官方仓库
+  officialDocs: 官方文档
+  disclaimer: "{brand} 是独立的社区目录，与 DeepSeek 没有隶属或合作关系。插件都是第三方代码，安装前请先看源码。"
+  stars: GitHub 星标数
+  lastPush: 最近一次代码推送
+  copy: 复制
+  faq: 常见问题
+  terms: 本页用到的术语
+  pageNames:
+    about: 关于本站
+    submit: 提交插件
+    contact: 联系
+    privacy: 隐私
+    terms: 使用条款
+
+js:
+  copy: 复制
+  copied: 已复制
+  noResults: "没有找到与“{q}”相关的内容。换个更宽泛的词，或者按分类浏览。"
+  groupPlugins: 插件
+  groupTutorials: 教程
+  noPackage: "这个插件不能一行命令安装，步骤见它的详情页。"
+  count: "{n} 个插件"
+  viewAll: "查看全部 {n} 个匹配的插件"
+  loadFailed: "搜索数据加载失败，请检查网络后重试。"
+
+home:
+  title: "DeepSeek Harness 插件大全 | {brand}"
+  description: "按用途查找 DeepSeek Harness（DSH）插件，对比星标数和最近更新时间，一键复制安装命令。每日更新，附安装、配置与排错教程。"
+  h1: "找到合适的 DeepSeek Harness 插件，装上就用"
+  lede: "收录 {count} 个 DSH 社区插件，按它们改变的东西分类。选一个，复制一条命令，就能在你的 Harness 里跑起来。"
+  finderLabel: "想让你的 Harness 做什么？"
+  finderPlaceholder: "试试“记忆”“远程”或“主题”"
+  finderPopular: 星标最多
+  finderResults: 匹配结果
+  finderAll: 查看全部插件
+  bayHeading: 按插件改变的东西浏览
+  latestHeading: 最近收录
+  latestAll: 全部插件，按收录时间排序
+  stepsHeading: 从零到跑起第一个插件
+  steps:
+    - title: 启动 Harness
+      body: "需要先装好 Node.js。这条命令会在本机 127.0.0.1:3080 启动 Web UI。"
+      cmd: "npx @deepseek-ai/dsh web"
+    - title: 添加插件
+      body: "本站每个插件页都会给出这条命令，并填好包名。"
+      cmd: "dsh plugin --profile web add <package>"
+    - title: 确认已加载
+      body: "打印这个 profile 的最终配置，看插件是否在其中。"
+      cmd: "dsh --profile web --dump-config"
+  tutorialsHeading: 教程
+  tutorialsLede: "DSH 插件的安装、配置、更新和排错，一页只讲一件事。"
+  tutorialsAll: 全部教程
+  faqHeading: 关于 DSH 插件的常见问题
+  faq:
+    - q: "DeepSeek Harness 插件是什么？"
+      a: "DeepSeek Harness（`dsh`）是一个开源的智能体运行框架，它的一切组成部分都是插件：模型适配、工具、Web UI、存储。社区插件就是往里添加或替换其中某一块，比如聊天软件桥接、记忆存储或界面主题。"
+    - q: "DSH 插件怎么安装？"
+      a: "发布到 npm 的插件大多用 `dsh plugin --profile web add <包名>` 安装，{brand} 的每个插件页都写了完整命令。有些插件不在 npm 上，需要从源码安装，这种情况页面会指向它 README 里的步骤。"
+    - q: "安装命令里的 profile 是什么意思？"
+      a: "profile 是 Harness 的一套具名配置，自带的有 `web`、`headless`、`sdk`、`sdk-minimal` 和 `acp`。插件是装进某一个 profile 的，如果你用 headless 方式运行，就把命令里的 `web` 换成 `headless`。"
+    - q: "这里收录的插件安全吗？"
+      a: "它们都是第三方代码，{brand} 不做安全审计。插件拥有和 Harness 本身相同的权限，安装前请看一下仓库、近期活跃度和未解决的 issue。本站的“已验证安装”标记只表示我们装过一次并且能加载。"
+    - q: "DeepSeek Harness 够稳定吗，能长期依赖插件吗？"
+      a: "Harness 目前处于 developer preview 阶段，维护者明确说过会有不兼容的改动。某次更新后插件失效是正常情况，依赖某个插件之前先看它最近一次推送的时间。"
+    - q: "怎么让我的插件被收录？"
+      a: "先给 GitHub 仓库加上 `dsh-plugin` 这个 topic 方便被发现，再通过[提交页面](/submit)发给我们。收录免费。"
+
+plugins:
+  title: "DeepSeek Harness 全部 DSH 插件列表"
+  description: "本站收录的全部 DeepSeek Harness 插件，附 GitHub 星标数、最近推送时间和安装命令。可按名称筛选、按活跃度排序，快速找到合适的一个。"
+  h1: "DeepSeek Harness 全部 DSH 插件"
+  lede: "共 {count} 个插件。每一行都通向详情页，里面有安装命令、功能说明和维护状态。"
+  filterLabel: 筛选列表
+  filterPlaceholder: "名称、作者或关键词"
+  sortLabel: 排序
+  sort:
+    stars: 星标最多
+    updated: 最近更新
+    listed: 最近收录
+    name: 名称
+  count: "{n} 个插件"
+  empty: "这个分类下还没有插件。如果你知道合适的，欢迎通过提交页面告诉我们。"
+  faq:
+    - q: "这一页的插件按什么排序？"
+      a: "默认按 GitHub 星标数从高到低。星标只说明有多少人关注过这个项目，不代表它现在还能用，所以要结合旁边的最近推送时间一起看。"
+    - q: "列表多久更新一次？"
+      a: "基本每天都有新插件加入。星标数、版本号和推送时间会定期从 GitHub 刷新，每个插件页都标明了数据的日期。"
+    - q: "为什么有的插件没有安装命令？"
+      a: "一行安装命令需要插件发布到 npm。没有发布到 npm 的插件，或者以桌面应用、脚本形式分发的，要按它 README 里的方式安装。"
+  terms:
+    - name: 插件
+      desc: "Harness 加载的一个包，用来增加或替换某项能力。在 DeepSeek Harness 里，连内置部分也是插件。"
+    - name: Profile
+      desc: "Harness 的一套具名组合，例如 `web` 或 `headless`，决定加载哪些 bundle 和插件。"
+    - name: Bundle
+      desc: "打包好的一组配置及其挂载的代码。一个 profile 由一个或多个 bundle 叠加而成。"
+
+category:
+  title: "DeepSeek Harness {catTitle}推荐"
+  description: "{tagline}对比 DeepSeek Harness {catTitle}的星标数和最近更新时间，复制安装命令即可使用。"
+  h1: "DeepSeek Harness {catTitle}"
+  pickHeading: "怎么选"
+  catTitles:
+    interface: 界面插件
+    session: 会话插件
+    memory: 记忆插件
+    tools: 工具插件
+    agent: 智能体插件
+    workflow: 工作流插件
+    integration: 集成插件
+    model: 模型插件
+    dev: 开发插件
+    knowledge: 知识库插件
+    fun: 趣味插件
+
+tutorials:
+  title: "DeepSeek Harness 插件教程：安装、配置与排错"
+  description: "DeepSeek Harness 分步教程：安装 Harness、添加和配置插件、安全更新、彻底卸载，以及最常见报错的解决办法。命令全部写明，可直接复制。"
+  h1: "DeepSeek Harness 插件教程"
+  lede: "一页只讲一件事，命令全部写出来。如果 profile 和 bundle 这些词还陌生，先从概念类读起。"
+  all: 全部教程
+  catTitle: "DSH 插件{name}教程"
+  catDescription: "{tagline}DeepSeek Harness 插件{name}相关的分步教程，每条命令都完整写出。"
+  empty: "这个栏目下还没有教程。"
+  faq:
+    - q: "从没用过 DeepSeek Harness，应该从哪里开始？"
+      a: "先读一篇概念类教程，弄清 profile、bundle、patch 这几个词，再跟着安装教程做一遍。之后配置和排错类的页面就可以当手册随用随查。"
+    - q: "这些教程能代替官方文档吗？"
+      a: "不能。官方文档讲的是 Harness 本身，这里讲的是社区插件这一侧：怎么选、怎么装、出了问题怎么修。每篇教程末尾都列出了参考来源。"
+    - q: "Harness 更新之后，教程里的命令还能用吗？"
+      a: "Harness 处于 developer preview 阶段，部分命令会变。每篇教程都标了最后更新日期，命令失败时先对照一下这个日期和你正在用的版本。"
+  terms:
+    - name: Developer preview
+      desc: "DeepSeek Harness 当前所处的发布阶段，接口可能在版本之间变化，不保证兼容。"
+    - name: Patch 文件
+      desc: "即 `cordis.patch.yml`，保存在 profile 里，记录你在 bundle 默认内容之上做的改动。"
+    - name: Harness 主目录
+      desc: "Harness 存放 profile、已安装插件和设置的目录。"
+
+plugin:
+  install: 安装
+  noInstall: "这个插件不能用一行命令安装。"
+  readInstall: "按 README 里的步骤安装"
+  installNote: "`--profile` 后面是插件要装进的 profile，如果你用的是别的 profile，改成对应的名字。"
+  highlights: 要点速览
+  onThisPage: 本页内容
+  spec:
+    heading: 详细信息
+    category: 分类
+    author: 作者
+    stars: 星标
+    forks: Fork
+    issues: 未解决 issue
+    language: 语言
+    license: 许可证
+    noLicense: 未注明
+    version: 最新版本
+    noVersion: 没有发布版本
+    pushed: 最近推送
+    created: 创建时间
+    listed: 收录时间
+    checked: 数据刷新
+    repo: 源代码
+    homepage: 主页
+    package: npm 包
+  verified: 已验证安装
+  verifiedNote: "我们安装过一次，插件可以加载。这不是安全审查。"
+  unverified: 未验证安装
+  unverifiedNote: "根据公开仓库收录，我们没有亲自安装过。"
+  archived: "作者已归档这个仓库。它现在是只读状态，不会再有修复。"
+  related: "更多{cat}插件"
+  relatedTutorials: 相关教程
+  articles: "{name} 相关文章"
+  articlesAll: "{name} 的全部文章"
+  articlesTitle: "{name} 使用指南与问题解决"
+  articlesDescription: "DeepSeek Harness 插件 {name} 的使用指南、问题修复和经验记录，集中在这一页，并随插件更新持续补充。"
+  backToPlugin: "返回 {name}"
+  faqHeading: "关于 {name} 的常见问题"
+  autoFaq:
+    installQ: "{name} 怎么安装？"
+    installA: "在终端里运行 `{install}`。`--profile` 后面是插件要装进的 profile，如果你用的是别的 profile，改成对应的名字。"
+    installNoneA: "{name} 没有可以一行安装的 npm 包，请按[它的 README]({repo}#readme) 里的步骤操作。"
+    licenseQ: "{name} 是免费的吗？"
+    licenseA: "源码公开在 [{slug}]({repo})，采用 {license} 许可证。如果要商用，请先看清该许可证的条款。"
+    licenseNoneA: "源码公开在 [{slug}]({repo})，但仓库没有注明许可证。没有许可证就没有明确的复用授权，二次开发前最好先问作者。"
+    activeQ: "{name} 还在维护吗？"
+    activeA: "最近一次代码推送是在 {pushed}{versionPart}。本站数据最后刷新于 {checked}。DeepSeek Harness 迭代很快，几个月没动过的插件可能已经无法加载。"
+    versionPart: "，最新发布版本是 {version}"
+    verifiedQ: "{brand} 测试过 {name} 吗？"
+    verifiedYesA: "我们安装过一次，确认可以加载。这只是基本检查，不是安全审计，仍然建议你看一下源码。"
+    verifiedNoA: "没有。它是根据公开仓库收录的，我们没有安装过。运行之前请看一下源码和近期的 issue。"
+
+tutorial:
+  published: 发布于
+  updated: 更新于
+  onThisPage: 本页内容
+  plugins: 本文涉及的插件
+  sources: 参考来源
+  newer: 下一篇
+  older: 上一篇
+  more: "更多{name}教程"
+  faqHeading: 常见问题
+
+notFound:
+  title: "页面不存在"
+  description: "{brand} 上没有这个页面。可以去 DeepSeek Harness 插件目录或教程里找找看。"
+  h1: "这里什么都没接上"
+  body: "页面可能已经移走，或者地址输错了。下面这些入口还能用："

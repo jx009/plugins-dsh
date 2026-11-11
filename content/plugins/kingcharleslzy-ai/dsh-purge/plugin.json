@@ -1,0 +1,38 @@
+{
+  "owner": "kingcharleslzy-ai",
+  "repo": "dsh-purge",
+  "name": "dsh-purge",
+  "category": "dev",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-12",
+  "updatedAt": "2026-11-12",
+  "github": {
+    "description": "dsh-purge Community · DeepSeek Harness 社区维护版：宿主兼容、状态诊断、提示词管理、更新与本机备份回滚。基于小杨 / YuJunZhiXue 的 dsh-purge。",
+    "stars": 6959,
+    "forks": 3136,
+    "watchers": 13,
+    "openIssues": 21,
+    "language": "JavaScript",
+    "license": "MIT",
+    "version": "v1.6.93",
+    "homepage": "https://github.com/kingcharleslzy-ai/dsh-purge/releases",
+    "topics": [
+      "agent-tools",
+      "backup",
+      "deepseek",
+      "deepseek-harness",
+      "dsh",
+      "dsh-plugin",
+      "jailbreak",
+      "prompt-injection",
+      "prompt-management",
+      "purge-community",
+      "rollback"
+    ],
+    "defaultBranch": "master",
+    "createdAt": "2026-10-16",
+    "pushedAt": "2026-11-11",
+    "archived": false
+  }
+}

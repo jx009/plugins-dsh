@@ -1,0 +1,240 @@
+/* 区块、FAQ、术语表、列表页工具条 */
+.sec {
+  padding-top: 72px;
+}
+.sec h2,
+.more h2 {
+  margin-bottom: 20px;
+}
+.sec-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-bottom: 20px;
+}
+.sec-head h2 {
+  margin: 0;
+}
+.sec-head a {
+  font-size: 15px;
+  font-weight: 600;
+}
+.sec-lede {
+  max-width: 62ch;
+  margin: -8px 0 20px;
+  color: var(--dim);
+}
+.more {
+  margin-top: 64px;
+}
+
+.faq h2,
+.terms h2,
+.pick h2,
+.sources h2 {
+  margin-bottom: 12px;
+}
+.faq details {
+  border-top: 1px solid var(--rule);
+}
+.faq details:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+.faq summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  font-weight: 650;
+  line-height: 1.35;
+  list-style: none;
+  cursor: pointer;
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq summary::after {
+  content: "+";
+  flex: none;
+  font: 400 22px/1 var(--sans);
+  color: var(--dim);
+}
+.faq details[open] summary::after {
+  content: "\2212";
+}
+.faq details p {
+  max-width: 68ch;
+  padding: 0 32px 20px 0;
+  color: var(--dim);
+}
+.faq details p a,
+.terms dd a {
+  color: var(--ink);
+}
+
+.terms dl > div {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 4px 24px;
+  padding: 14px 0;
+  border-top: 1px solid var(--rule);
+}
+.terms dl > div:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+.terms dt {
+  font-weight: 650;
+}
+.terms dd {
+  color: var(--dim);
+}
+@media (max-width: 640px) {
+  .terms dl > div {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 列表页 */
+.phead {
+  padding: 28px 0 32px;
+}
+.phead h1 + * {
+  margin-top: 16px;
+}
+.phead .lede + .meta {
+  margin-top: 16px;
+}
+.phead-page {
+  font-size: 0.5em;
+  font-stretch: 100%;
+  font-weight: 500;
+  color: var(--dim);
+  white-space: nowrap;
+}
+.phead-intro {
+  max-width: 68ch;
+  margin-top: 12px;
+}
+/* 列表页的骨架：分类栏占左边一整列，从页眉接到页脚；标题、搜索、列表和说明文字都在右列 */
+.browse {
+  display: grid;
+  grid-template-columns: 216px minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  column-gap: 40px;
+}
+.browse > .bay-rail {
+  grid-area: 1 / 1 / 3 / 2;
+}
+.browse-head,
+.browse-main {
+  grid-column: 2;
+  min-width: 0;
+}
+.browse-main {
+  padding-bottom: 96px;
+}
+.browse h1 {
+  font-size: clamp(28px, 3.4vw, 42px);
+}
+/* 分栏线一直接到页脚的横线上 */
+main:has(> .browse) + .ft {
+  margin-top: 0;
+}
+.list-count {
+  margin: 14px 2px 10px;
+  font-size: 15px;
+}
+.tools {
+  display: flex;
+  gap: 12px;
+}
+.tools-filter {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-ctl);
+  background: var(--face);
+  color: var(--dim);
+}
+.tools-filter:hover {
+  border-color: var(--ink);
+}
+.tools-filter:focus-within {
+  border-color: var(--ink);
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+}
+.tools-filter input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  background: none;
+  font-size: 16px;
+  color: var(--ink);
+  outline: 0;
+}
+.tools-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: var(--dim);
+}
+.tools-sort select {
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-ctl);
+  background: var(--face);
+  font-size: 15px;
+  color: var(--ink);
+}
+.tools-sort select:hover {
+  border-color: var(--ink);
+}
+.empty {
+  padding: 40px 24px;
+  border: 1px dashed var(--rule);
+  border-radius: var(--r-box);
+  color: var(--dim);
+}
+/* 搜索没有结果时，提示出现在列表框里面 */
+.plist > .empty {
+  border: 0;
+}
+.empty a {
+  color: var(--ink);
+  font-weight: 600;
+}
+.list-extra {
+  margin-top: 64px;
+}
+.list-extra > section + section {
+  margin-top: 48px;
+}
+.pick p {
+  max-width: 68ch;
+}
+@media (max-width: 1000px) {
+  .browse {
+    display: block;
+  }
+  .browse .phead {
+    padding-bottom: 24px;
+  }
+}
+@media (max-width: 560px) {
+  /* 手机上搜索框和排序并排，排序的文字标签让位 */
+  .tools-sort span {
+    display: none;
+  }
+}

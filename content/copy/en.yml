@@ -1,0 +1,234 @@
+# 英文界面文案。{brand} 会替换成 site.config.json 里的站名，其余 {占位符} 由模板传入。
+# 形如 "1 plugin|{n} plugins" 的是单复数两种写法。
+ui:
+  plugins: Plugins
+  tutorials: Tutorials
+  submit: Submit a plugin
+  search: Search
+  searchPlaceholder: "Search plugins and tutorials"
+  searchHint: "Arrow keys to move, Enter to open, Esc to close"
+  toggleTheme: Switch between light and dark
+  menu: Menu
+  mainNav: Main
+  skip: Skip to content
+  breadcrumb: Breadcrumb
+  pagination: Pages
+  prev: Previous
+  next: Next
+  page: "Page {n}"
+  home: Home
+  categories: Plugin categories
+  allPlugins: All plugins
+  pluginCategories: Plugins by category
+  site: This site
+  sitemap: Sitemap
+  officialRepo: Official repository
+  officialDocs: Official documentation
+  disclaimer: "{brand} is an independent community directory. It is not run by or affiliated with DeepSeek. Plugins are third-party code, so read the source before you install one."
+  stars: GitHub stars
+  lastPush: Last code push
+  copy: Copy
+  faq: Questions and answers
+  terms: Terms used on this page
+  pageNames:
+    about: About
+    submit: Submit a plugin
+    contact: Contact
+    privacy: Privacy
+    terms: Terms
+
+# 前端脚本用到的文案
+js:
+  copy: Copy
+  copied: Copied
+  noResults: "Nothing matches “{q}”. Try a broader word, or browse by category."
+  groupPlugins: Plugins
+  groupTutorials: Tutorials
+  noPackage: "This plugin has no one-line install. Open its page for the steps."
+  count: "1 plugin|{n} plugins"
+  viewAll: "See all {n} matching plugins"
+  loadFailed: "Search could not load. Check your connection and try again."
+
+home:
+  title: "DeepSeek Harness Plugins Directory | {brand}"
+  description: "Find DeepSeek Harness (DSH) plugins by what they do, compare stars and recent activity, and copy the install command. Updated daily, with setup tutorials."
+  h1: "Find a DeepSeek Harness plugin and install it"
+  lede: "{count} community plugins for DSH, sorted by what they change. Pick one, copy one command, and it is running in your harness."
+  finderLabel: "What should your harness do?"
+  finderPlaceholder: "Try “memory”, “remote” or “theme”"
+  finderPopular: Most starred
+  finderResults: Matches
+  finderAll: See all plugins
+  bayHeading: Browse by what the plugin changes
+  latestHeading: Recently added
+  latestAll: All plugins, newest first
+  stepsHeading: From zero to a running plugin
+  steps:
+    - title: Start the harness
+      body: "You need Node.js. This starts the web UI on your own machine at 127.0.0.1:3080."
+      cmd: "npx @deepseek-ai/dsh web"
+    - title: Add a plugin
+      body: "Each plugin page here gives you this line with the package name filled in."
+      cmd: "dsh plugin --profile web add <package>"
+    - title: Check what loaded
+      body: "Prints the final configuration for the profile, so you can see whether the plugin is in it."
+      cmd: "dsh --profile web --dump-config"
+  tutorialsHeading: Tutorials
+  tutorialsLede: "Install, configure, update and fix DSH plugins, one task per page."
+  tutorialsAll: All tutorials
+  faqHeading: Common questions about DSH plugins
+  faq:
+    - q: "What is a DeepSeek Harness plugin?"
+      a: "DeepSeek Harness (`dsh`) is an open-source agent harness built so that everything in it is a plugin: model adapters, tools, the web UI, storage. A community plugin adds to or replaces one of those parts, for example a chat bridge, a memory store or a theme."
+    - q: "How do I install a DSH plugin?"
+      a: "Most plugins published to npm install with `dsh plugin --profile web add <package>`. Each plugin page on {brand} shows the exact line. Some plugins are not on npm and install from source instead, in which case the page points you to the steps in their readme."
+    - q: "What does the profile in the install command mean?"
+      a: "A profile is a named setup of the harness. The shipped ones are `web`, `headless`, `sdk`, `sdk-minimal` and `acp`. A plugin is added to one profile, so if you run the harness headless, swap `web` for `headless` in the command."
+    - q: "Are the plugins listed here safe to install?"
+      a: "They are third-party code and {brand} does not audit them. A plugin runs with the same access as the harness itself, so check the repository, its recent activity and its open issues first. A “verified” mark here only means we installed it once and it loaded."
+    - q: "Is DeepSeek Harness stable enough to rely on plugins?"
+      a: "The harness is in developer preview and its maintainers say plainly that breaking changes will come. Expect plugins to stop working after some updates, and check a plugin's last push date before you depend on it."
+    - q: "How do I get my plugin listed?"
+      a: "Add the `dsh-plugin` topic to your GitHub repository so it can be found, then send it through the [submit page](/submit). Listing is free."
+
+plugins:
+  title: "All DSH Plugins for DeepSeek Harness"
+  description: "Every DeepSeek Harness plugin in the directory, with GitHub stars, last push date and install command. Filter by name or sort by activity to find one that fits."
+  h1: "All DSH plugins for DeepSeek Harness"
+  lede: "{count} plugins. Each row links to a page with the install command, what the plugin does and how current it is."
+  filterLabel: Filter this list
+  filterPlaceholder: "Name, author or keyword"
+  sortLabel: Sort by
+  sort:
+    stars: Most stars
+    updated: Recently updated
+    listed: Recently added
+    name: Name
+  count: "1 plugin|{n} plugins"
+  empty: "No plugins in this category yet. If you know one, send it through the submit page."
+  faq:
+    - q: "How are the plugins on this page ordered?"
+      a: "By GitHub stars, highest first. Stars show how many people noticed a project, not whether it still works, so read the last push date next to them."
+    - q: "How often is the list updated?"
+      a: "New plugins are added most days. Stars, versions and push dates are refreshed from GitHub on a regular schedule, and each plugin page shows the dates it is working from."
+    - q: "Why does a plugin show no install command?"
+      a: "The one-line command needs an npm package. Plugins that are not published to npm, or that ship as a desktop app or a script, are installed the way their readme describes."
+  terms:
+    - name: Plugin
+      desc: "A package the harness loads to add or replace a capability. In DeepSeek Harness even the built-in parts are plugins."
+    - name: Profile
+      desc: "A named composition of the harness, such as `web` or `headless`, that decides which bundles and plugins are loaded."
+    - name: Bundle
+      desc: "A packaged set of configuration and the code it mounts. A profile stacks one or more bundles."
+
+category:
+  title: "{catTitle} for DeepSeek Harness"
+  description: "{tagline} Compare DSH {catTitle} by stars and last update, then copy the install command."
+  h1: "{catTitle} for DeepSeek Harness"
+  pickHeading: "How to choose"
+  catTitles:
+    interface: Interface plugins
+    session: Session plugins
+    memory: Memory plugins
+    tools: Tool plugins
+    agent: Agent plugins
+    workflow: Workflow plugins
+    integration: Integration plugins
+    model: Model plugins
+    dev: Developer plugins
+    knowledge: Knowledge plugins
+    fun: Fun plugins
+
+tutorials:
+  title: "DSH Plugin Tutorials for DeepSeek Harness"
+  description: "Step-by-step DeepSeek Harness tutorials: install the harness, add and configure plugins, update safely, remove cleanly and fix the errors people hit most."
+  h1: "DSH plugin tutorials for DeepSeek Harness"
+  lede: "One task per page, with the commands written out. Start with the concepts if profiles and bundles are new to you."
+  all: All tutorials
+  catTitle: "{name} tutorials for DSH plugins"
+  catDescription: "{tagline} Step-by-step {name} guides for DeepSeek Harness plugins, with every command written out."
+  empty: "No tutorials in this section yet."
+  faq:
+    - q: "Where should I start if I have never used DeepSeek Harness?"
+      a: "Read a concepts guide first so the words profile, bundle and patch make sense, then follow an install guide. After that the configuration and troubleshooting pages are easier to use as reference."
+    - q: "Do these tutorials replace the official documentation?"
+      a: "No. The official docs describe the harness itself. These pages cover the community plugin side: choosing, installing and fixing third-party plugins. Each tutorial lists its sources."
+    - q: "Will the commands still work after the harness updates?"
+      a: "The harness is in developer preview, so some will change. Every tutorial shows when it was last updated; if a command fails, compare that date with the release you are running."
+  terms:
+    - name: Developer preview
+      desc: "The current release stage of DeepSeek Harness. Interfaces can change between versions without a compatibility promise."
+    - name: Patch file
+      desc: "`cordis.patch.yml`, kept inside a profile. It records your own changes on top of what the profile's bundles provide."
+    - name: Harness home
+      desc: "The directory where the harness keeps its profiles, installed plugins and settings."
+
+plugin:
+  install: Install
+  noInstall: "This plugin is not installed with a one-line command."
+  readInstall: "Follow the install steps in its readme"
+  installNote: "The `--profile` value names the profile the plugin is added to. Change it if you run a different one."
+  highlights: At a glance
+  onThisPage: On this page
+  spec:
+    heading: Details
+    category: Category
+    author: Author
+    stars: Stars
+    forks: Forks
+    issues: Open issues
+    language: Language
+    license: License
+    noLicense: Not stated
+    version: Latest release
+    noVersion: No tagged release
+    pushed: Last push
+    created: Created
+    listed: Listed here
+    checked: Data refreshed
+    repo: Source code
+    homepage: Homepage
+    package: npm package
+  verified: Install checked
+  verifiedNote: "We installed this plugin once and it loaded. That is not a security review."
+  unverified: Not install-checked
+  unverifiedNote: "Listed from its public repository. We have not installed it ourselves."
+  archived: "The author has archived this repository. It is read-only and will not get fixes."
+  related: "More {cat} plugins"
+  relatedTutorials: Related tutorials
+  articles: "Guides for {name}"
+  articlesAll: "All guides for {name}"
+  articlesTitle: "{name} Guides and How-Tos"
+  articlesDescription: "Guides, fixes and usage notes for the {name} plugin for DeepSeek Harness, collected in one place and updated as the plugin changes."
+  backToPlugin: "Back to {name}"
+  faqHeading: "Questions about {name}"
+  autoFaq:
+    installQ: "How do I install {name}?"
+    installA: "Run `{install}` in a terminal. The `--profile` value names the profile the plugin is added to, so change it if you run a different one."
+    installNoneA: "{name} has no one-line install on npm. Follow the steps in [its readme]({repo}#readme)."
+    licenseQ: "Is {name} free to use?"
+    licenseA: "The source is public at [{slug}]({repo}) under the {license} license. Check that license if you plan to use it commercially."
+    licenseNoneA: "The source is public at [{slug}]({repo}), but the repository does not state a license. Without one you have no explicit right to reuse the code, so ask the author before building on it."
+    activeQ: "Is {name} still maintained?"
+    activeA: "The last code push was on {pushed}{versionPart}. We last refreshed this data on {checked}. DeepSeek Harness changes quickly, so a plugin untouched for months may no longer load."
+    versionPart: ", and the latest release is {version}"
+    verifiedQ: "Has {brand} tested {name}?"
+    verifiedYesA: "We installed it once and confirmed it loaded. That is a basic check, not a security audit, so still read the source."
+    verifiedNoA: "No. It is listed from its public repository and we have not installed it. Read the source and recent issues before you run it."
+
+tutorial:
+  published: Published
+  updated: Updated
+  onThisPage: On this page
+  plugins: Plugins in this guide
+  sources: Sources
+  newer: Newer
+  older: Older
+  more: "More {name} tutorials"
+  faqHeading: Questions and answers
+
+notFound:
+  title: "Page not found"
+  description: "This page does not exist on {brand}. Browse the DeepSeek Harness plugin directory or the tutorials instead."
+  h1: "Nothing is plugged in here"
+  body: "The page may have moved, or the address has a typo. These still work:"
