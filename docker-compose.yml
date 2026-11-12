@@ -1,0 +1,16 @@
+# 采集审批台。用法见 docs/GUIDE.md 第四部分的「用 Docker 部署」。
+services:
+  admin:
+    image: ${ADMIN_IMAGE:-jxthdy/plugin-dsh-admin:latest}
+    container_name: plugin-dsh-admin
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      # 只映射到服务器本机，不对公网开放；从自己电脑用 SSH 隧道访问
+      - "127.0.0.1:4500:4500"
+    volumes:
+      - admin-data:/data
+
+volumes:
+  admin-data:

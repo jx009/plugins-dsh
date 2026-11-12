@@ -1,3 +1,5 @@
 node_modules/
 dist/
 *.log
+# 采集审批台的本地配置、候选队列和日志：含令牌，绝不提交
+.admin/

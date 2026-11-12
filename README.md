@@ -30,6 +30,20 @@ npm run dev          # 构建并在 http://localhost:4173 预览
 npm run build -- --drafts   # 连同 draft: true 的稿件一起构建，只用于本地预览
 ```
 
+## 采集审批台
+
+```bash
+npm run admin        # 打开 http://127.0.0.1:4500
+```
+
+本机运行的管理页面：定时去 GitHub 搜新的 DSH 插件、去重、用模型改写中英文文案，放进待审批列表；
+逐条审批后一次性推送到站点仓库（私有仓库靠 GitHub 令牌访问），Cloudflare 随即自动重建。
+扫描结果不会自动上线，令牌和队列都存在不入库的 `.admin/` 里。
+服务器上用 Docker 跑：`docker compose up -d`，镜像由 `.github/workflows/docker-build-push.yml` 构建推到 Docker Hub。
+令牌怎么生成、Docker 怎么部署、定时怎么设、审批和推送的细节见 [docs/GUIDE.md](docs/GUIDE.md) 第四部分。
+
+下面是不用审批台、手动收录的做法。
+
 ## 每天收录插件
 
 ```bash
@@ -122,7 +136,8 @@ npm run sync -- owner/repo   # 只刷新一个
 
 ```
 content/            所有内容：copy 文案、分类、插件、教程、固定页
-scripts/            构建、预览和内容脚手架脚本
+scripts/            构建、预览和内容脚手架脚本；admin.js 与 admin/ 是采集审批台
+.admin/             采集审批台的配置、队列和日志，不入库
 src/templates/      页面模板（纯 JS 模板字符串）
 src/assets/         css、js、字体、图片；css 和 js 按文件名顺序合并
 src/static/         原样复制到站点根目录的文件

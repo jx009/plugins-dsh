@@ -10,6 +10,7 @@
     "new:plugin": "node scripts/new-plugin.js",
     "new:post": "node scripts/new-post.js",
     "sync": "node scripts/sync.js",
+    "admin": "node scripts/admin.js",
     "brand": "node scripts/make-brand-assets.js"
   },
   "private": true,

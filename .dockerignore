@@ -1,0 +1,14 @@
+node_modules
+dist
+.admin
+.git
+.github
+.idea
+.claude
+docs
+src
+content/tutorials
+content/copy
+content/pages
+content/plugins/**/*.md
+content/plugins/**/articles
