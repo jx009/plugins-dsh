@@ -1,0 +1,43 @@
+{
+  "owner": "yikart",
+  "repo": "AiToEarn",
+  "name": "AiToEarn",
+  "category": "integration",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-12",
+  "updatedAt": "2026-11-12",
+  "github": {
+    "description": "Let's use AI to Earn!",
+    "stars": 27636,
+    "forks": 4615,
+    "watchers": 806,
+    "openIssues": 8,
+    "language": "TypeScript",
+    "license": "MIT",
+    "version": "v2.5.0",
+    "homepage": "https://aitoearn.ai/",
+    "topics": [
+      "agent-skills",
+      "auto-publish",
+      "codex-skills",
+      "douyin",
+      "douyin-api",
+      "dsh-plugin",
+      "electron-app",
+      "electron-react",
+      "kuaishou",
+      "kwai",
+      "mcp",
+      "mcp-server",
+      "published",
+      "shipinhao",
+      "tool",
+      "xiaohongshu"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2025-02-24",
+    "pushedAt": "2026-11-12",
+    "archived": false
+  }
+}

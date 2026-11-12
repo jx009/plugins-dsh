@@ -1,0 +1,39 @@
+{
+  "owner": "walkinglabs",
+  "repo": "learn-harness-engineering",
+  "name": "learn-harness-engineering",
+  "category": "dev",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-12",
+  "updatedAt": "2026-11-12",
+  "github": {
+    "description": "Harness engineering beginner tutorial, from 0 to 1",
+    "stars": 24374,
+    "forks": 2794,
+    "watchers": 121,
+    "openIssues": 23,
+    "language": "TypeScript",
+    "license": "MIT",
+    "version": "v0.1.0",
+    "homepage": "https://walkinglabs.github.io/learn-harness-engineering/",
+    "topics": [
+      "agent",
+      "agentic",
+      "agentic-ai",
+      "ai",
+      "ai-agent",
+      "ai-agents",
+      "dsh",
+      "dsh-plugin",
+      "harness",
+      "harness-engineering",
+      "harness-framework",
+      "llm"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-03-29",
+    "pushedAt": "2026-10-22",
+    "archived": false
+  }
+}

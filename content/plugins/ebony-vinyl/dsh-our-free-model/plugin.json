@@ -1,0 +1,37 @@
+{
+  "owner": "Ebony-Vinyl",
+  "repo": "dsh-our-free-model",
+  "name": "dsh-our-free-model",
+  "category": "model",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-12",
+  "updatedAt": "2026-11-12",
+  "github": {
+    "description": "在 dsh 里装上这个插件即可，无需登录、注册或填 API Key，就能使用包括 DeepSeek V4.1 Flash、Kimi K3 在内的前沿模型——完全免费，不限量。 All you do is install this plugin in dsh: no login, no sign-up, no API key — the frontier models are just there, DeepSeek V4.1 Flash and Kimi K3 among them. Completely free, with no usage cap.",
+    "stars": 71253,
+    "forks": 1936,
+    "watchers": 60,
+    "openIssues": 170,
+    "language": "JavaScript",
+    "license": "MIT",
+    "version": "v2.8.3",
+    "homepage": "",
+    "topics": [
+      "ai-agents",
+      "deepseek",
+      "deepseek-harness",
+      "developer-tools",
+      "dsh",
+      "dsh-plugin",
+      "free-model",
+      "llm",
+      "model-provider",
+      "openai-compatible"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-09-24",
+    "pushedAt": "2026-11-11",
+    "archived": false
+  }
+}

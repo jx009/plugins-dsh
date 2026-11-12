@@ -1,0 +1,43 @@
+{
+  "owner": "DayuanJiang",
+  "repo": "next-ai-draw-io",
+  "name": "next-ai-draw-io",
+  "category": "tools",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-12",
+  "updatedAt": "2026-11-12",
+  "github": {
+    "description": "Draw and edit draw.io diagrams by chatting with an AI. Web app, desktop app, and an MCP server for Claude Code, Cursor, Codex and VS Code.",
+    "stars": 36912,
+    "forks": 3846,
+    "watchers": 134,
+    "openIssues": 35,
+    "language": "TypeScript",
+    "license": "Apache-2.0",
+    "version": "v0.5.1",
+    "homepage": "https://next-ai-drawio.jiang.jp/",
+    "topics": [
+      "ai",
+      "architecture-diagram",
+      "claude-code",
+      "deepseek-harness",
+      "diagram-generator",
+      "diagrams",
+      "draw-io",
+      "drawio",
+      "dsh-plugin",
+      "electron",
+      "flowchart",
+      "gemini-cli-extension",
+      "llm",
+      "mcp",
+      "mcp-server",
+      "nextjs"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2025-03-23",
+    "pushedAt": "2026-11-11",
+    "archived": false
+  }
+}

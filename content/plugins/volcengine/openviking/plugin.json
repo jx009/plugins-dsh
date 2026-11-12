@@ -1,0 +1,38 @@
+{
+  "owner": "volcengine",
+  "repo": "OpenViking",
+  "name": "OpenViking",
+  "category": "memory",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-12",
+  "updatedAt": "2026-11-12",
+  "github": {
+    "description": "Self-evolving Context Database for AI Agents. Unify Agent Memory, Knowledge RAG and Skills.",
+    "stars": 42092,
+    "forks": 3467,
+    "watchers": 110,
+    "openIssues": 1419,
+    "language": "Python",
+    "license": "AGPL-3.0",
+    "version": "python-sdk@0.1.20",
+    "homepage": "https://openviking.ai",
+    "topics": [
+      "agent-context",
+      "agent-memory",
+      "agent-plugins",
+      "agentic-rag",
+      "context-database",
+      "dsh-plugin",
+      "knowledge-base",
+      "memory",
+      "memory-management",
+      "self-evolving",
+      "vector-database"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-01-05",
+    "pushedAt": "2026-11-12",
+    "archived": false
+  }
+}
