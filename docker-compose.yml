@@ -6,9 +6,12 @@ services:
     restart: unless-stopped
     environment:
       TZ: Asia/Shanghai
+      # 登录口令默认写在代码里（scripts/admin/auth.js）。想临时换一个，去掉下一行的注释并填上新口令
+      # ADMIN_PASSWORD: 换成新的口令
     ports:
-      # 只映射到服务器本机，不对公网开放；从自己电脑用 SSH 隧道访问
-      - "127.0.0.1:4500:4500"
+      # 对公网开放 4500 端口，浏览器打开 http://服务器IP:4500。
+      # 前面有 nginx / Caddy 做 HTTPS 时，改成 "127.0.0.1:4500:4500"，只让反向代理访问
+      - "4500:4500"
     volumes:
       - admin-data:/data
 

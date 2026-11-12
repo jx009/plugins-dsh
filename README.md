@@ -36,7 +36,7 @@ npm run build -- --drafts   # 连同 draft: true 的稿件一起构建，只用�
 npm run admin        # 打开 http://127.0.0.1:4500
 ```
 
-本机运行的管理页面：定时去 GitHub 搜新的 DSH 插件、去重、用模型改写中英文文案，放进待审批列表；
+带口令登录的管理页面：定时去 GitHub 搜新的 DSH 插件、去重、用模型改写中英文文案，放进待审批列表；
 逐条审批后一次性推送到站点仓库（私有仓库靠 GitHub 令牌访问），Cloudflare 随即自动重建。
 扫描结果不会自动上线，令牌和队列都存在不入库的 `.admin/` 里。
 服务器上用 Docker 跑：`docker compose up -d`，镜像由 `.github/workflows/docker-build-push.yml` 构建推到 Docker Hub。

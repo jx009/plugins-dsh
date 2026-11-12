@@ -80,6 +80,8 @@ function api(method,url,body){
   var h={"X-Admin-Token":(window.__NONCE__||"")};
   if(body)h["Content-Type"]="application/json";
   return fetch(url,{method:method,headers:h,body:body?JSON.stringify(body):undefined}).then(function(r){
+    // 登录过期（7 天）或换了口令：刷新回到口令页
+    if(r.status===401){location.reload();return new Promise(function(){})}
     return r.json().catch(function(){return {}}).then(function(j){if(!r.ok)throw new Error(j.error||("HTTP "+r.status));return j});
   });
 }
@@ -117,7 +119,7 @@ function header(){
   var status=jb.running?'<span class="mono"><span class="dot busy"></span>'+esc(jb.step||"扫描中")+(jb.want?" "+jb.added+"/"+jb.want:"")+'</span>'
     :'<span class="mono"><span class="dot '+(ready?"on":"")+'"></span>'+(ready?esc(c.repo)+"@"+esc(c.branch):"未填写令牌或目标仓库")+'</span>';
   var btn=jb.running?'<button class="act bad" id="stop">停止扫描</button>':'<button class="act ink" id="scan" '+(c.tokenSet?"":"disabled title=\"先到设置里填 GitHub 令牌\"")+'>立即扫描</button>';
-  return '<header><h1>Plugin DSH 采集审批台</h1><span class="sp"></span>'+status+btn+'</header>';
+  return '<header><h1>Plugin DSH 采集审批台</h1><span class="sp"></span>'+status+btn+'<button class="act" id="logout" title="退出登录">退出</button></header>';
 }
 function navBar(){
   var tabs=[["pending","待审批",count("pending")],["approved","已通过",count("approved")],["published","已发布",count("published")],["rejected","拒绝名单",(get("rejected")||[]).length],["settings","设置",0],["log","运行日志",0]];
@@ -364,6 +366,12 @@ document.addEventListener("click",function(e){
     api("POST","/api/rejected/restore",{owner:r.owner,repo:r.repo}).then(function(){notify("ok","已恢复，下次扫描可以重新发现");reload()}).catch(function(err){notify("bad",err.message)});
     return;
   }
+  if(el.id==="logout"){
+    if(unsaved()&&!confirm("还有没保存的修改，退出后会丢失。确定退出？"))return;
+    S.raw="";Object.keys(S.edits).forEach(function(k){delete S.edits[k]});S.cfg={};
+    api("POST","/api/logout",{}).then(function(){location.reload()}).catch(function(err){notify("bad",err.message)});
+    return;
+  }
   if(el.id==="scan"){
     notify("load","扫描中：搜索 GitHub、逐个拉取改写，可能要几分钟。可以先去做别的，结果会进待审批。",true);
     api("POST","/api/scan",{}).then(function(){return reload()}).then(function(){if(!get("job.running"))scanDone()}).catch(scanErr);
@@ -441,4 +449,50 @@ function page(nonce) {
 </html>`;
 }
 
-module.exports = { page };
+/** 口令页：只有一个输入框，输对就进 */
+function loginPage() {
+  return `<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>Plugin DSH 采集审批台</title>
+<style>${CSS}
+.login{max-width:360px;margin:16vh auto 0;padding:0 20px}
+.login h1{font-size:20px;margin:0 0 6px}
+.login p{color:var(--dim);margin:0 0 20px;font-size:14px}
+.login input{width:100%;padding:11px 12px;border:1px solid var(--rule);border-radius:var(--r);background:var(--face);font:inherit}
+.login input:focus{outline:2px solid var(--ink);outline-offset:1px}
+.login .act{width:100%;margin-top:12px;padding:11px;justify-content:center}
+.login .err{color:var(--bad);min-height:1.5em;margin:10px 0 0;font-size:14px}
+</style>
+</head>
+<body>
+<form class="login" id="login" autocomplete="off">
+<h1>Plugin DSH 采集审批台</h1>
+<p>输入口令进入。登录后这台浏览器 7 天内不用再输。</p>
+<input type="password" id="pw" aria-label="口令" placeholder="口令" autofocus required>
+<button class="act ink" type="submit" id="go">进入</button>
+<p class="err" id="err" role="alert"></p>
+</form>
+<script>
+document.getElementById("login").addEventListener("submit",function(e){
+  e.preventDefault();
+  var go=document.getElementById("go"),err=document.getElementById("err"),pw=document.getElementById("pw");
+  go.disabled=true;go.textContent="验证中…";err.textContent="";
+  fetch("/api/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:pw.value})})
+    .then(function(r){return r.json().catch(function(){return {}}).then(function(j){
+      if(r.ok){location.reload();return}
+      err.textContent=j.error||("登录失败（HTTP "+r.status+"）");pw.select();
+    })})
+    .catch(function(){err.textContent="连不上服务，检查网络后重试"})
+    .then(function(){go.disabled=false;go.textContent="进入"});
+});
+</script>
+</body>
+</html>`;
+}
+
+module.exports = { page, loginPage };

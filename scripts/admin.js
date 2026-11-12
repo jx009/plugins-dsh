@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // 采集审批台：本机管理服务，扫描 GitHub → 改写 → 审批 → 批量推送。
 // 用法：npm run admin [-- --port 4500]
-// 默认只监听 127.0.0.1，不对外暴露。配置、队列、日志都在 .admin/（已忽略提交）。
-// 在 Docker 里运行时用 ADMIN_HOST=0.0.0.0 让端口映射生效，宿主机那一侧仍然只映射到 127.0.0.1，见 docker-compose.yml。
+// 打开页面要先输口令（见 admin/auth.js）。默认只监听 127.0.0.1；ADMIN_HOST=0.0.0.0 时可以从公网访问（Docker 里默认如此）。
+// 配置、队列、日志都在 .admin/（已忽略提交）。
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
@@ -13,7 +13,8 @@ const { makeClient } = require("./admin/github");
 const { scan, addOne, regenerate, startScheduler } = require("./admin/scan");
 const { publish, validate } = require("./admin/publish");
 const { sanitizeMarkdown } = require("./admin/rewrite");
-const { page } = require("./admin/ui");
+const { page, loginPage } = require("./admin/ui");
+const auth = require("./admin/auth");
 const { parseArgs } = require("./lib/paths");
 
 const args = parseArgs(process.argv.slice(2));
@@ -66,9 +67,17 @@ function state() {
   };
 }
 
-function send(res, code, body, type = "application/json; charset=utf-8") {
+function send(res, code, body, type = "application/json; charset=utf-8", headers = {}) {
   const data = typeof body === "string" || Buffer.isBuffer(body) ? body : JSON.stringify(body);
-  res.writeHead(code, { "Content-Type": type, "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" });
+  res.writeHead(code, {
+    "Content-Type": type,
+    "Cache-Control": "no-store",
+    "X-Content-Type-Options": "nosniff",
+    // 不许被别的网站用 iframe 套住，防止诱导点击「通过」「推送」
+    "X-Frame-Options": "DENY",
+    "Referrer-Policy": "no-referrer",
+    ...headers,
+  });
   res.end(data);
 }
 
@@ -97,16 +106,48 @@ function readBody(req) {
   });
 }
 
-/** 只接受来自本机地址的请求；POST 再校验内容类型、页面令牌和来源 */
-function guard(req, isPost) {
-  const host = req.headers.host || "";
-  if (!/^(127\.0\.0\.1|localhost)(:\d+)?$/.test(host)) return "Host 不匹配";
-  if (!isPost) return "";
-  if (!/^application\/json\b/.test(req.headers["content-type"] || "")) return "需要 Content-Type: application/json";
-  if (req.headers["x-admin-token"] !== NONCE) return "请求令牌不匹配，刷新页面重试";
+/**
+ * 浏览器带来的 Origin 必须和当前访问的域名一致，挡住别的网站借你的登录状态发请求。
+ * 经过反向代理时 Host 可能被改成 127.0.0.1:4500，所以也认 X-Forwarded-Host；
+ * 跨站的网页加不了这个头（会触发预检，服务不响应 CORS），放宽它不影响防护。
+ */
+function sameOrigin(req) {
   const origin = req.headers.origin;
-  if (origin && !/^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/.test(origin)) return "Origin 不匹配";
+  if (!origin) return true;
+  let host = "";
+  try {
+    host = new URL(origin).host;
+  } catch {
+    return false;
+  }
+  const forwarded = String(req.headers["x-forwarded-host"] || "").split(",")[0].trim();
+  return host === req.headers.host || (!!forwarded && host === forwarded);
+}
+
+const isJson = (req) => /^application\/json\b/.test(req.headers["content-type"] || "");
+
+/** POST 校验内容类型、来源和页面令牌（CSRF 防护） */
+function guard(req, isPost) {
+  if (!isPost) return "";
+  if (!isJson(req)) return "需要 Content-Type: application/json";
+  if (!sameOrigin(req)) return "Origin 不匹配";
+  if (req.headers["x-admin-token"] !== NONCE) return "请求令牌不匹配，刷新页面重试";
   return "";
+}
+
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+/** 登录、退出：还没登录时拿不到页面令牌，所以不校验它，但同样要求 JSON 和同源 */
+async function handleAuth(req, res, p) {
+  if (!isJson(req) || !sameOrigin(req)) return send(res, 403, { error: "请求来源不对" });
+  if (p === "/api/logout") return send(res, 200, { ok: true }, undefined, { "Set-Cookie": auth.clearCookie(req) });
+  const body = await readBody(req);
+  if (!auth.passwordMatches(body.password || "")) {
+    // 输错稍等一下再回，拖慢挨个试的速度
+    await wait(1000);
+    return send(res, 401, { error: "口令不对" });
+  }
+  return send(res, 200, { ok: true }, undefined, { "Set-Cookie": auth.sessionCookie(req) });
 }
 
 /** 合并页面提交的设置：只认白名单里的字段；密钥留空表示不修改 */
@@ -181,7 +222,9 @@ function startScan(trigger, opts = {}) {
 async function handleApi(req, res, url) {
   const p = url.pathname;
 
-  // 读状态也要过 Host 校验：防止别的网页用 DNS 重绑定读走队列和配置
+  if (req.method === "POST" && (p === "/api/login" || p === "/api/logout")) return handleAuth(req, res, p);
+  if (!auth.loggedIn(req)) return send(res, 401, { error: "登录已失效，刷新页面重新输入口令" });
+
   const bad = guard(req, req.method === "POST");
   if (bad) return send(res, 403, { error: bad });
 
@@ -309,8 +352,11 @@ async function handleApi(req, res, url) {
 const server = http.createServer((req, res) => {
   const url = new URL(req.url, `http://${HOST}`);
 
+  // 容器健康检查用，不需要登录，也不返回任何数据
+  if (req.method === "GET" && url.pathname === "/healthz") return send(res, 200, "ok", "text/plain; charset=utf-8");
+
   if (req.method === "GET" && (url.pathname === "/" || url.pathname === "/index.html")) {
-    if (guard(req, false)) return send(res, 403, "只允许从本机访问", "text/plain; charset=utf-8");
+    if (!auth.loggedIn(req)) return send(res, 200, loginPage(), "text/html; charset=utf-8");
     return send(res, 200, page(NONCE), "text/html; charset=utf-8");
   }
 
@@ -328,7 +374,7 @@ const server = http.createServer((req, res) => {
 fs.mkdirSync(ADMIN, { recursive: true });
 server.listen(PORT, HOST, () => {
   const cfg = loadConfig();
-  console.log(`采集审批台已启动：http://${HOST === "0.0.0.0" ? "127.0.0.1" : HOST}:${PORT}${HOST === "127.0.0.1" ? "" : `（监听 ${HOST}）`}`);
+  console.log(`采集审批台已启动：http://${HOST === "0.0.0.0" ? "127.0.0.1" : HOST}:${PORT}${HOST === "127.0.0.1" ? "" : `（监听 ${HOST}，可以从外部访问）`}，打开后输入口令登录`);
   console.log(`  目标仓库：${cfg.repo || "（未设置）"}@${cfg.branch}${cfg.token ? "" : "（还没有 GitHub 令牌）"}`);
   console.log(`  定时扫描：${cfg.schedule.enabled ? `每天 ${cfg.schedule.time}` : "关闭"}`);
   startScheduler(() => {

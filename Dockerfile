@@ -32,6 +32,6 @@ VOLUME /data
 EXPOSE 4500
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-  CMD wget -qO /dev/null http://127.0.0.1:4500/api/state || exit 1
+  CMD wget -qO /dev/null http://127.0.0.1:4500/healthz || exit 1
 
 CMD ["node", "scripts/admin.js"]
