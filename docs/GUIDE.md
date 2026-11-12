@@ -6,11 +6,11 @@
 
 ### 0. 部署前先改配置
 
-打开 `site.config.json`，把这两项改成真实值（现在还是占位）：
+`site.config.json` 里这两项已经填好，换域名或邮箱时改这里：
 
 ```json
-"siteUrl": "https://你的完整域名",
-"contactEmail": "你的邮箱",
+"siteUrl": "https://www.plugin-dsh.com",
+"contactEmail": "3618850359@qq.com",
 ```
 
 `siteUrl` 要带 `https://` 和域名后缀，结尾不带斜杠。canonical、hreflang、sitemap、RSS 全都用它，

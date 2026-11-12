@@ -11,7 +11,7 @@ Cloudflare 部署步骤、日常发文流程和文章格式的完整说明见 [d
 
 | 字段 | 现在的值 | 说明 |
 | --- | --- | --- |
-| `siteUrl` | `https://example.com` | 真实域名，不带结尾斜杠。canonical、hreflang、sitemap、RSS 都用它 |
+| `siteUrl` | `https://www.plugin-dsh.com` | 真实域名，不带结尾斜杠。canonical、hreflang、sitemap、RSS 都用它 |
 | `brand` | `Plugin DSH` | 站点名称，改完运行 `npm run brand` 重新生成分享图和图标 |
 | `contactEmail` | `3618850359@qq.com` | 出现在联系页、隐私页、条款页 |
 | `submitUrl` | 空 | 接收插件提交的地址（如 GitHub issue 表单）。填了以后提交页才会出现提交按钮 |
