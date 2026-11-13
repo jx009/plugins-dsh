@@ -7,7 +7,10 @@ ui:
   search: Search
   searchPlaceholder: "Search plugins and tutorials"
   searchHint: "Arrow keys to move, Enter to open, Esc to close"
-  toggleTheme: Switch between light and dark
+  toggleTheme: Change color theme
+  themeSystem: "Theme: match system (click for light)"
+  themeLight: "Theme: light (click for dark)"
+  themeDark: "Theme: dark (click to match system)"
   menu: Menu
   mainNav: Main
   skip: Skip to content
@@ -168,7 +171,7 @@ plugin:
   noInstall: "This plugin is not installed with a one-line command."
   readInstall: "Follow the install steps in its readme"
   installNote: "The `--profile` value names the profile the plugin is added to. Change it if you run a different one."
-  highlights: At a glance
+  highlights: "{name} at a glance"
   onThisPage: On this page
   spec:
     heading: Details

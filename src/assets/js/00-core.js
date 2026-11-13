@@ -94,6 +94,56 @@
     }
   }
 
+  // 配色：跟随系统 → 浅色 → 深色 循环。选择存在 localStorage，"跟随系统"时不存。
+  var media = window.matchMedia ? matchMedia("(prefers-color-scheme: dark)") : null;
+  function applyTheme() {
+    var d = document.documentElement;
+    var pref = d.dataset.themePref || "system";
+    d.dataset.theme = pref === "system" ? (media && media.matches ? "dark" : "light") : pref;
+    var btn = document.querySelector("[data-theme-toggle]");
+    if (btn) {
+      var label = btn.getAttribute("data-label-" + pref) || "";
+      btn.setAttribute("aria-label", label);
+      btn.setAttribute("title", label);
+    }
+  }
+  function setTheme(pref, animate) {
+    var d = document.documentElement;
+    // 只在用户点击时做一次短过渡，首屏和跨标签同步不动画
+    if (animate && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      d.classList.add("theme-anim");
+      clearTimeout(setTheme.t);
+      setTheme.t = setTimeout(function () { d.classList.remove("theme-anim"); }, 260);
+    }
+    d.dataset.themePref = pref;
+    try {
+      if (pref === "system") localStorage.removeItem("theme");
+      else localStorage.setItem("theme", pref);
+    } catch (err) {}
+    applyTheme();
+  }
+  // 系统切换深浅色时，"跟随系统"立即跟上
+  if (media) {
+    var onSystem = function () { if ((document.documentElement.dataset.themePref || "system") === "system") applyTheme(); };
+    if (media.addEventListener) media.addEventListener("change", onSystem);
+    else if (media.addListener) media.addListener(onSystem);
+  }
+  // 其它标签页改了配色，这里同步
+  window.addEventListener("storage", function (e) {
+    if (e.key !== "theme") return;
+    document.documentElement.dataset.themePref = e.newValue === "light" || e.newValue === "dark" ? e.newValue : "system";
+    applyTheme();
+  });
+  // 浏览器前进后退从缓存恢复页面时，重新读一次选择
+  window.addEventListener("pageshow", function (e) {
+    if (!e.persisted) return;
+    var p = null;
+    try { p = localStorage.getItem("theme"); } catch (err) {}
+    document.documentElement.dataset.themePref = p === "light" || p === "dark" ? p : "system";
+    applyTheme();
+  });
+  applyTheme();
+
   window.PB = { data: data, esc: esc, loadIndex: loadIndex, matcher: matcher, pluginRow: pluginRow, allLink: allLink, copy: copy };
 
   document.addEventListener("click", function (e) {
@@ -102,11 +152,8 @@
     if (el.hasAttribute("data-copy")) {
       copy(el.getAttribute("data-copy"), el);
     } else if (el.hasAttribute("data-theme-toggle")) {
-      var next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-      document.documentElement.dataset.theme = next;
-      try {
-        localStorage.setItem("theme", next);
-      } catch (err) {}
+      var order = { system: "light", light: "dark", dark: "system" };
+      setTheme(order[document.documentElement.dataset.themePref] || "light", true);
     } else {
       var open = document.getElementById("nav").classList.toggle("is-open");
       el.setAttribute("aria-expanded", String(open));

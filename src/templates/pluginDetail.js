@@ -99,7 +99,7 @@ ${p.github.archived ? `<p class="warn">${esc(ctx.t("plugin.archived"))}</p>` : "
 ${installBox(ctx, p)}
 ${p.install ? `<p class="install-note">${renderInline(ctx.t("plugin.installNote"))}</p>` : ""}
 </section>
-${(doc.highlights || []).length ? `<section class="hl"><h2>${esc(ctx.t("plugin.highlights"))}</h2><ul>${doc.highlights.map((h) => `<li>${renderInline(h)}</li>`).join("")}</ul></section>` : ""}
+${(doc.highlights || []).length ? `<section class="hl"><h2>${esc(ctx.t("plugin.highlights", { name: p.name }))}</h2><ul>${doc.highlights.map((h) => `<li>${renderInline(h)}</li>`).join("")}</ul></section>` : ""}
 <div class="prose">${doc.html}</div>
 ${p.articles.length ? `<section class="more"><div class="sec-head"><h2>${esc(ctx.t("plugin.articles", { name: p.name }))}</h2><a href="${ctx.url(p.route + "/articles")}">${esc(ctx.t("plugin.articlesAll", { name: p.name }))}</a></div>${articleList(ctx, p.articles.slice(0, 5))}</section>` : ""}
 ${faqBlock(ctx.t("plugin.faqHeading", { name: p.name }), faqs)}

@@ -63,6 +63,13 @@ input:disabled,textarea:disabled,select:disabled{background:#efefe8;color:var(--
 .note{padding:10px 14px;border-left:3px solid var(--ink);background:#ecece4;border-radius:0 8px 8px 0;margin-bottom:14px;white-space:pre-wrap}
 .note.ok{border-color:var(--ok);background:#e6f1e8}
 .note.bad{border-color:var(--bad);background:#f7e7e5}
+.note.seo{white-space:normal}
+.note.seo ul{margin:6px 0 4px;padding-left:18px}
+.note.seo li{margin:2px 0}
+.note.seo li.sb{color:var(--bad);font-weight:600}
+.tag.bad{border-color:var(--bad);color:var(--bad)}
+.wd{font-weight:400;font-size:12px;color:var(--dim)}
+.wd.over{color:var(--bad);font-weight:600}
 .empty{color:var(--dim);padding:32px;border:1px dashed var(--rule);border-radius:var(--r);text-align:center}
 .split{display:flex;gap:10px;align-items:center}
 .split > .grow{flex:1;min-width:0}
@@ -170,12 +177,42 @@ function field(id,label,path,value,kind,ph){
 }
 function langFields(id,lang,doc,zh){
   doc=doc||{};
-  return field(id,zh?"标题":"title",lang+".title",doc.title)+
-    field(id,"description（搜索结果摘要）",lang+".description",doc.description,"small")+
+  return field(id,zh?"核心关键词（用户会搜的短语，例如「xxx DSH 插件」）":"Keyword（e.g. \"xxx DSH plugin\"）",lang+".keyword",doc.keyword)+
+    field(id,(zh?"标题":"title")+"　<span class=\"wd\" data-wd=\""+lang+".title\" data-max=\"47\"></span>",lang+".title",doc.title)+
+    field(id,"description（搜索结果摘要）　<span class=\"wd\" data-wd=\""+lang+".description\" data-min=\"100\" data-max=\"160\"></span>",lang+".description",doc.description,"small")+
     field(id,"summary（列表里的简介）",lang+".summary",doc.summary,"small")+
     field(id,"亮点，每行一条",lang+".highlights",(doc.highlights||[]).join("\n"),"small")+
     field(id,"常见问题，Q: / A: 各一行，问题之间空一行",lang+".faq",faqText(doc.faq),"small","Q: …\nA: …")+
     field(id,"正文（Markdown）",lang+".body",doc.body,"big");
+}
+/** 显示宽度：中日韩字符算 2，和站点构建、SEO 检查的算法一致 */
+function wd(s){var w=0;for(var c of String(s||""))w+=c.codePointAt(0)>0x2e80?2:1;return w}
+/** 刷新一个候选里所有的宽度计数 */
+function updateWidths(root){
+  [].forEach.call((root||document).querySelectorAll(".wd"),function(el){
+    var box=el.closest("[data-id]");if(!box)return;
+    var inp=box.querySelector('[data-f="'+el.getAttribute("data-wd")+'"]');if(!inp)return;
+    var w=wd(inp.value),max=+el.getAttribute("data-max"),min=+(el.getAttribute("data-min")||0);
+    el.textContent="宽度 "+w+(min?" / 建议 "+min+"–"+max:" / 上限 "+max);
+    el.className="wd"+(w>max||(min&&w<min)?" over":"");
+  });
+}
+/** 标题行上的 SEO 状态：不展开也能一眼看出哪条要改 */
+function seoTag(q){
+  if(q.status==="published"||!q.seo)return "";
+  var bad=q.seo.filter(function(x){return x.level==="bad"}).length;
+  if(bad)return '<span class="tag bad">SEO '+bad+' 项要改</span>';
+  return q.seo.length?'<span class="tag">SEO 可通过</span>':'<span class="tag approved">SEO 全部通过</span>';
+}
+/** SEO 检查结果：服务端在每次保存后重新计算 */
+function seoPanel(q){
+  var list=q.seo||[];
+  if(!list.length)return '<div class="note ok seo">SEO 检查全部通过。</div>';
+  var bad=list.filter(function(x){return x.level==="bad"}),warn=list.filter(function(x){return x.level!=="bad"});
+  return '<div class="note seo '+(bad.length?"bad":"")+'"><strong>SEO 检查'+(bad.length?"：有 "+bad.length+" 项必须改，改好才能通过":"：可以通过，下面几项改了排名更好")+'</strong><ul>'+
+    bad.map(function(x){return '<li class="sb">'+esc(x.msg)+'</li>'}).join("")+
+    warn.map(function(x){return '<li>'+esc(x.msg)+'</li>'}).join("")+
+    '</ul><p class="sub">保存后重新检查。</p></div>';
 }
 function item(q){
   var d=q.draft||{},g=d.github||{},id=q.id;
@@ -193,6 +230,7 @@ function item(q){
   '<div class="row" style="grid-template-columns:1fr"><label>分类</label><select data-f="category">'+cats+'</select></div>'+
   '</div>'+
   field(id,"安装命令（留空则按 npm 包名自动生成）","install",d.install||"",null,get("installCommand")||"")+
+  (pub?"":seoPanel(q))+
   '<h3>English</h3>'+langFields(id,"en",d.en,false)+
   '<h3>中文</h3>'+langFields(id,"zh",d.zh,true)+
   '<div class="bar" style="margin:16px 0 0"><a class="act" href="https://github.com/'+esc(q.owner+"/"+q.repo)+'" target="_blank" rel="noopener">打开仓库</a>'+
@@ -206,7 +244,7 @@ function item(q){
   if(pub)body=body.replace(/ data-f="/g,' disabled data-f="');
   return '<div class="item '+(open?"open":"")+'" data-id="'+esc(id)+'">'+
   '<div class="hd" data-toggle="'+esc(id)+'"><span class="name">'+esc(d.name||q.repo)+'</span><span class="who mono">'+esc(q.owner+"/"+q.repo)+'</span>'+
-  '<span class="meta">'+(S.edits[id]?'<span class="tag warn">有未保存的修改</span>':"")+(todo?'<span class="tag warn">待补文案</span>':"")+'<span class="tag '+esc(q.status)+'">'+esc({pending:"待审",approved:"已通过",published:"已发布"}[q.status]||q.status)+'</span><span>★ '+esc(g.stars||0)+'</span><span>'+esc(g.pushedAt||"")+'</span></span></div>'+
+  '<span class="meta">'+(S.edits[id]?'<span class="tag warn">有未保存的修改</span>':"")+(todo?'<span class="tag warn">待补文案</span>':"")+seoTag(q)+'<span class="tag '+esc(q.status)+'">'+esc({pending:"待审",approved:"已通过",published:"已发布"}[q.status]||q.status)+'</span><span>★ '+esc(g.stars||0)+'</span><span>'+esc(g.pushedAt||"")+'</span></span></div>'+
   (open?body:"")+'</div>';
 }
 function queueView(st){
@@ -269,6 +307,7 @@ function render(){
   $("root").innerHTML=header()+'<main>'+navBar()+'<section>'+banner()+html+'</section></main>';
   window.scrollTo(0,y);
   restoreFocus(focused);
+  updateWidths();
 }
 function readCfg(f){
   return {
@@ -419,6 +458,7 @@ document.addEventListener("input",function(e){
     var id=box.getAttribute("data-id");
     (S.edits[id]=S.edits[id]||{})[f]=el.value;
     markDirty(id);
+    if(/\.(title|description)$/.test(f))updateWidths(box);
     return;
   }
   if(el.form&&el.form.id==="cfg"&&el.name){S.cfg[el.name]=el.type==="checkbox"?el.checked:el.value;return}

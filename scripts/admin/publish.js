@@ -4,6 +4,7 @@ const matter = require("gray-matter");
 const { makeClient } = require("./github");
 const { loadConfig, categories, log } = require("./config");
 const store = require("./store");
+const { seoCheck } = require("./seo");
 
 const today = () => new Date().toISOString().slice(0, 10);
 
@@ -94,7 +95,6 @@ function validate(rec) {
     if (!String(doc.description || "").trim()) out.push(`${where}.description 是空的`);
     if (!String(doc.summary || "").trim()) out.push(`${where}.summary 是空的`);
     if (!String(doc.body || "").trim()) out.push(`${where}.body 是空的`);
-    else if ((doc.body.match(/^\s*##\s+/gm) || []).length < 2) out.push(`${where}.body 至少要有两个二级标题`);
     if (/TODO|待补/.test(doc.body)) out.push(`${where}.body 里还有占位文字（TODO / 待补）`);
     try {
       const parsed = matter(markdown(doc));
@@ -103,6 +103,8 @@ function validate(rec) {
       out.push(`${where} 的 front matter 解析失败：${e.message}`);
     }
   }
+  // SEO 硬性问题（标题没插件名、超长、问答太少等）也挡住；只是提醒的不挡
+  for (const p of seoCheck(rec)) if (p.level === "bad") out.push(`${who} SEO ${p.msg}`);
   return out;
 }
 

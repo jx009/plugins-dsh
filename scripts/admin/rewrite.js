@@ -1,5 +1,6 @@
 // 把 GitHub 仓库的裸数据改写成站点用的中英文文案。走 OpenAI 兼容接口，没配密钥时只留骨架等你手动补。
 const { loadConfig, categories, siteConfig } = require("./config");
+const { SYSTEM, fill } = require("./prompt");
 
 // 关键词 → 分类，只用于模型没给分类（或没配模型）时的兜底
 const HINTS = [
@@ -62,7 +63,7 @@ function sanitizeMarkdown(src) {
 }
 
 /** 调一次 chat/completions，返回文本。超时 90 秒；接口不接受 JSON 模式时自动退回普通模式。 */
-async function chat(model, messages, maxTokens = 3000) {
+async function chat(model, messages, maxTokens = 8000) {
   const url = model.baseUrl.replace(/\/+$/, "") + "/chat/completions";
   const call = async (jsonMode) => {
     const ctrl = new AbortController();
@@ -119,26 +120,7 @@ function prompt(meta, readme, cats) {
   return [
     {
       role: "system",
-      content: `你在为一个英文为主、中文在 /zh 的插件市场写文案。对象是 DeepSeek Harness（简称 DSH）的插件生态，但也收录 Agent 技能类项目。
-判断标准：只要这个项目能为 DSH 用户提供能力（插件、技能、工具、集成、主题等），就算相关；只是一个无关的普通软件项目就算不相关。
-文案要求：
-1. 全部原创改写，不得整句照抄 README；不得吹嘘，不确定的地方不写。
-2. 只说 README 和仓库信息里能支持的事实。安装命令：若 README 里出现 DSH 安装命令就原样使用，否则留空。
-3. 中文用简体，口吻克制、具体，面向开发者。
-4. title 不要以插件名开头堆砌形容词，也不要写"一个…的插件"这种空话，直接说它解决什么。
-5. 正文只用 Markdown：二级标题、段落、列表、行内代码、围栏代码块。不要写 HTML 标签，不要外链图片。
-输出一个 JSON 对象，不要任何其它文字，结构：
-{
-  "relevant": true 或 false，false 时附 "reason": "一句话原因",
-  "name": "显示名，通常等于仓库名",
-  "category": "从下面分类里选一个 slug",
-  "install": "DSH 安装命令；README 没写就空字符串",
-  "en": {"title","description","summary","highlights":["3-5 条"],"faq":[{"q","a"}] 2-4 条,"body":"Markdown 正文，三个二级标题：What does X do? / Core features / How to use X"},
-  "zh": 同样的结构，正文标题：X 是做什么的？/ 核心功能 / 怎么使用 X
-}
-分类：
-${catList}
-站点的安装命令模板是 \`${install}\`，其中 {package} 是 npm 包名；只有在确认包名时才可以套用这个模板生成 install。description 英文约 150 字符、中文约 70-80 字，是搜索结果摘要；summary 是列表里的一两句简介。`,
+      content: fill(SYSTEM, { name: meta.repo, install, catList }),
     },
     {
       role: "user",
@@ -148,7 +130,7 @@ Topics：${(meta.github.topics || []).join(", ") || "（无）"}
 语言：${meta.github.language || "未知"}；星标：${meta.github.stars}；许可证：${meta.github.license || "未知"}
 npm 包名：${meta.package || "（未在 package.json 中找到）"}
 README（截断）：
-${readme.slice(0, 7000)}`,
+${readme.slice(0, 9000)}`,
     },
   ];
 }
@@ -158,21 +140,23 @@ function skeletonDoc(meta, zh) {
   const name = meta.repo;
   if (zh) {
     return {
+      keyword: `${name} DSH 插件`,
       title: "",
       description: clamp(meta.github.description || "", 100),
       summary: "",
       highlights: [],
       faq: [],
-      body: `## ${name} 是做什么的？\n\n（待补：一句话说明它给 DSH 用户带来什么）\n\n## 核心功能\n\n- （待补）\n\n## 怎么使用 ${name}\n\n1. （待补）\n`,
+      body: `## ${name} 是做什么的？\n\n（待补：第一句写成「${name} 是一个……的 DSH 插件」）\n\n## ${name} 核心功能\n\n- （待补）\n\n## 怎么安装和使用 ${name}？\n\n1. （待补）\n\n## ${name} 报错怎么排查？\n\n（待补）\n`,
     };
   }
   return {
     title: "",
     description: clamp(meta.github.description || "", 200),
+    keyword: `${name} DSH plugin`,
     summary: "",
     highlights: [],
     faq: [],
-    body: `## What does ${name} do?\n\n(TODO: one sentence on what it gives DSH users)\n\n## Core features\n\n- (TODO)\n\n## How to use ${name}\n\n1. (TODO)\n`,
+    body: `## What does ${name} do?\n\n(TODO: start with "${name} is a DSH plugin that ...")\n\n## ${name} core features\n\n- (TODO)\n\n## How to install and use ${name}\n\n1. (TODO)\n\n## How to troubleshoot ${name}\n\n(TODO)\n`,
   };
 }
 
@@ -195,9 +179,10 @@ function normalize(raw, meta, cats) {
     // 亮点和问答的答案在站点上按行内 Markdown 渲染，同样要清理
     const faq = (Array.isArray(o.faq) ? o.faq : [])
       .filter((f) => f && f.q && f.a)
-      .slice(0, 4)
+      .slice(0, 6)
       .map((f) => ({ q: clamp(f.q, 160), a: sanitizeMarkdown(clamp(f.a, 600)) }));
     return {
+      keyword: clamp(o.keyword, 80),
       title: clamp(o.title, 140),
       description: clamp(o.description, isZh ? 160 : 300),
       summary: clamp(o.summary, isZh ? 200 : 400),

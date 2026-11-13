@@ -13,6 +13,7 @@ const { makeClient } = require("./admin/github");
 const { scan, addOne, regenerate, startScheduler } = require("./admin/scan");
 const { publish, validate } = require("./admin/publish");
 const { sanitizeMarkdown } = require("./admin/rewrite");
+const { seoCheck } = require("./admin/seo");
 const { page, loginPage } = require("./admin/ui");
 const auth = require("./admin/auth");
 const { parseArgs } = require("./lib/paths");
@@ -59,7 +60,11 @@ function state() {
     },
     categories: categories(),
     installCommand: siteConfig().installCommand,
-    queue: store.readQueue().sort((a, b) => String(b.foundAt).localeCompare(String(a.foundAt))),
+    // 每条附上 SEO 检查结果，页面直接显示；已发布的不再检查
+    queue: store
+      .readQueue()
+      .sort((a, b) => String(b.foundAt).localeCompare(String(a.foundAt)))
+      .map((q) => (q.status === "published" ? q : { ...q, seo: seoCheck(q) })),
     rejected: store.readRejected(),
     job: { running: job.running, step: job.step, added: job.added, want: job.want, startedAt: job.startedAt, error: job.error },
     lastScan: loadState().lastScan,
@@ -187,6 +192,7 @@ function applyPatch(draft, patch) {
     if (!p || typeof p !== "object") continue;
     const doc = { ...(next[lang] || {}) };
     for (const k of ["title", "description", "summary"]) if (k in p) doc[k] = text(p[k], 400).replace(/\s+/g, " ");
+    if ("keyword" in p) doc.keyword = text(p.keyword, 80).replace(/\s+/g, " ");
     if ("body" in p) doc.body = sanitizeMarkdown(text(p.body, 20000));
     // 亮点和问答的答案在站点上按行内 Markdown 渲染，和正文一样要清理
     if (Array.isArray(p.highlights)) doc.highlights = p.highlights.map((x) => sanitizeMarkdown(text(x, 160))).filter(Boolean).slice(0, 8);

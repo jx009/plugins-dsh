@@ -150,7 +150,7 @@
   gap: 32px 40px;
   margin-bottom: 40px;
 }
-.ft h2 {
+.ft-h {
   margin-bottom: 12px;
   font-size: 13px;
   font-stretch: 82%;
@@ -305,4 +305,25 @@
   .sd-sum {
     grid-column: 2;
   }
+}
+
+/* 配色按钮：三个图标按当前选择只显示一个 */
+.hd-theme .ti {
+  display: none;
+}
+:root[data-theme-pref="system"] .hd-theme .ti-system,
+:root[data-theme-pref="light"] .hd-theme .ti-light,
+:root[data-theme-pref="dark"] .hd-theme .ti-dark {
+  display: inline-grid;
+}
+/* 没有 JS 时 data-theme-pref 不存在，按钮本身也没用，隐藏 */
+:root:not([data-theme-pref]) .hd-theme {
+  display: none;
+}
+/* 点击切换配色时的短过渡，只在切换那一下生效 */
+.theme-anim,
+.theme-anim *,
+.theme-anim *::before,
+.theme-anim *::after {
+  transition: background-color 0.22s ease, color 0.22s ease, border-color 0.22s ease, fill 0.22s ease !important;
 }

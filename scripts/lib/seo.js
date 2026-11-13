@@ -86,6 +86,8 @@ const softwareApplication = (ctx, p) => ({
   codeRepository: p.repoUrl,
   sameAs: p.repoUrl,
   author: { "@type": "Person", name: p.owner, url: `https://github.com/${p.owner}` },
+  // 收录并整理这一页的是本站，指向站点的 Organization 节点
+  publisher: { "@id": ids(ctx).org },
   datePublished: p.github.createdAt,
   dateModified: p.github.pushedAt,
   inLanguage: ctx.L.hreflang,

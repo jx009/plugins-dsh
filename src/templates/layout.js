@@ -4,7 +4,8 @@ const { headTags } = require("../../scripts/lib/seo");
 const { icon, logo, jack } = require("./parts");
 
 // 在首屏绘制前确定主题，避免闪烁。没有 JS 时保持浅色。
-const THEME_INIT = `(function(){var t;try{t=localStorage.getItem("theme")}catch(e){}if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t})()`;
+// data-theme-pref 记用户的选择（system / light / dark），data-theme 是实际生效的 light / dark。
+const THEME_INIT = `(function(){var d=document.documentElement,p;try{p=localStorage.getItem("theme")}catch(e){}if(p!=="light"&&p!=="dark")p="system";d.dataset.themePref=p;d.dataset.theme=p==="system"?(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"):p})()`;
 
 function analytics(cfg) {
   const out = [];
@@ -52,7 +53,7 @@ ${nav.map(([r, label, key]) => `<a href="${ctx.url(r)}"${page.section === key ? 
 <div class="hd-tools">
 <button type="button" class="hd-search" data-open-search>${icon("search")}<span>${esc(ctx.t("ui.search"))}</span><kbd>Ctrl K</kbd></button>
 ${langSwitch(ctx, page)}
-<button type="button" class="hd-icon" data-theme-toggle aria-label="${esc(ctx.t("ui.toggleTheme"))}">${icon("theme", 18)}</button>
+<button type="button" class="hd-icon hd-theme" data-theme-toggle data-label-system="${esc(ctx.t("ui.themeSystem"))}" data-label-light="${esc(ctx.t("ui.themeLight"))}" data-label-dark="${esc(ctx.t("ui.themeDark"))}" aria-label="${esc(ctx.t("ui.toggleTheme"))}" title="${esc(ctx.t("ui.toggleTheme"))}"><span class="ti ti-system">${icon("theme", 18)}</span><span class="ti ti-light">${icon("sun", 18)}</span><span class="ti ti-dark">${icon("moon", 18)}</span></button>
 <button type="button" class="hd-icon hd-menu" data-nav-toggle aria-controls="nav" aria-expanded="false" aria-label="${esc(ctx.t("ui.menu"))}">${icon("menu", 18)}</button>
 </div>
 </div></header>`;
@@ -67,18 +68,18 @@ function footer(ctx) {
   const feed = ctx.url("/feed.xml");
   return `<footer class="ft"><div class="wrap">
 <div class="ft-cols">
-<div><h2>${esc(ctx.t("ui.pluginCategories"))}</h2><ul class="ft-cats">
+<div><p class="ft-h">${esc(ctx.t("ui.pluginCategories"))}</p><ul class="ft-cats">
 ${ctx.cats.map((c) => `<li style="--jack:${c.color}"><a href="${ctx.url(c.route)}">${jack()}${esc(c.name)}</a></li>`).join("\n")}
 </ul></div>
-<div><h2>${esc(ctx.t("ui.tutorials"))}</h2><ul>
+<div><p class="ft-h">${esc(ctx.t("ui.tutorials"))}</p><ul>
 ${ctx.tcats.map((c) => `<li><a href="${ctx.url(c.route)}">${esc(c.name)}</a></li>`).join("\n")}
 </ul></div>
-<div><h2>${esc(ctx.t("ui.site"))}</h2><ul>
+<div><p class="ft-h">${esc(ctx.t("ui.site"))}</p><ul>
 ${["about", "submit", "contact", "privacy", "terms"].map(pageLink).join("\n")}
 <li><a href="${feed}">RSS</a></li>
 <li><a href="/sitemap.xml">${esc(ctx.t("ui.sitemap"))}</a></li>
 </ul></div>
-<div><h2>DeepSeek Harness</h2><ul>
+<div><p class="ft-h">DeepSeek Harness</p><ul>
 <li><a href="${cfg.official.repo}" rel="noopener" target="_blank">${esc(ctx.t("ui.officialRepo"))}</a></li>
 <li><a href="${cfg.official.docs}" rel="noopener" target="_blank">${esc(ctx.t("ui.officialDocs"))}</a></li>
 </ul></div>
@@ -118,7 +119,9 @@ function layout(ctx, page) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 ${headTags(ctx, page)}
-<meta name="theme-color" content="#E9E9E4">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#E9E9E4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1A1B1D" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="alternate" type="application/rss+xml" title="${esc(ctx.cfg.brand)}" href="${ctx.url("/feed.xml")}">
