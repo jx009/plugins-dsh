@@ -50,8 +50,11 @@ input:disabled,textarea:disabled,select:disabled{background:#efefe8;color:var(--
 .tag.published{border-color:var(--rule);color:var(--dim)}
 .tag.warn{border-color:var(--warn);color:var(--warn)}
 .item{border:1px solid var(--rule);border-radius:var(--r);background:var(--face);margin-bottom:14px;overflow:hidden}
-.item > .hd{display:flex;gap:12px;align-items:baseline;padding:12px 16px;cursor:pointer}
+.item > .hd{display:flex;gap:12px;align-items:center;padding:12px 16px;cursor:pointer}
 .item > .hd:hover{background:#f0f0e9}
+.pick{width:16px;height:16px;margin:0;cursor:pointer;accent-color:var(--ink);flex-shrink:0}
+.pickall{display:inline-flex;align-items:center;gap:6px;font-size:14px;cursor:pointer;user-select:none}
+.pickall input{width:16px;height:16px;margin:0;accent-color:var(--ink)}
 .item .name{font-weight:650}
 .item .who{color:var(--dim);font-size:13px}
 .item .meta{margin-left:auto;display:flex;gap:10px;align-items:center;color:var(--dim);font-size:12.5px}
@@ -79,7 +82,8 @@ input:disabled,textarea:disabled,select:disabled{background:#efefe8;color:var(--
 
 const JS = String.raw`
 // edits：各候选未保存的修改；cfg：设置表单未保存的修改。重绘时从这里回填，不会被轮询冲掉
-var S={tab:"pending",open:{},edits:{},cfg:{},adding:false,addText:"",busy:false,timer:null,raw:"",composing:false,dirty:false};
+// regen / saving：按条记录正在进行的请求，各条互不阻塞；sel：待审列表里勾选的条目
+var S={tab:"pending",open:{},edits:{},cfg:{},sel:{},regen:{},saving:{},adding:false,addText:"",addBusy:false,publishing:false,timer:null,raw:"",composing:false,dirty:false};
 var $=function(id){return document.getElementById(id)};
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function get(p){var o=S.state||{},ks=p.split(".");for(var i=0;i<ks.length;i++){if(o==null)return undefined;o=o[ks[i]]}return o}
@@ -220,10 +224,11 @@ function item(q){
   var known=false;
   var cats=(get("categories")||[]).map(function(c){if(cat===c.slug)known=true;return '<option value="'+esc(c.slug)+'" '+(cat===c.slug?"selected":"")+'>'+esc(c.name)+" / "+esc(c.nameEn)+'</option>'}).join("");
   if(!known)cats='<option value="" selected>请选择分类</option>'+cats;
-  var open=!!S.open[id],pub=q.status==="published";
+  var open=!!S.open[id],pub=q.status==="published",rg=!!S.regen[id];
   var todo=!pub&&d.en&&(!d.en.title||/TODO/.test(d.en.body||""));
   var body='<div class="bd">'+
-  (q.error?'<div class="note bad">'+esc(q.error)+'</div>':"")+
+  (rg?'<div class="note">正在重新改写，完成后这里会自动刷新。期间可以先处理别的候选。</div>':"")+
+  (q.error&&!rg?'<div class="note bad">'+esc(q.error)+'</div>':"")+
   '<p class="sub" style="margin-bottom:12px">仓库原始描述：'+esc(g.description||"（无）")+(d.package?"　npm 包："+esc(d.package):"")+(g.version?"　版本："+esc(g.version):"")+'</p>'+
   '<div class="grid2">'+
   '<div class="row" style="grid-template-columns:1fr"><label>显示名</label><input data-f="name" value="'+esc(val(id,"name",d.name))+'"></div>'+
@@ -235,25 +240,70 @@ function item(q){
   '<h3>中文</h3>'+langFields(id,"zh",d.zh,true)+
   '<div class="bar" style="margin:16px 0 0"><a class="act" href="https://github.com/'+esc(q.owner+"/"+q.repo)+'" target="_blank" rel="noopener">打开仓库</a>'+
   (pub?'<span class="mono" style="color:var(--dim)">'+(q.commit?"提交 "+esc(String(q.commit).slice(0,7)):"已发布")+'</span>':
-    '<button class="act" data-save="'+esc(id)+'">保存修改</button>'+
+    rg?'<span class="mono" style="color:var(--dim)">改写中…</span>':
+    '<button class="act" data-save="'+esc(id)+'" '+(S.saving[id]?"disabled":"")+'>保存修改</button>'+
     '<button class="act" data-regen="'+esc(id)+'">重新改写</button>'+
-    (q.status==="pending"?'<button class="act ok" data-approve="'+esc(id)+'">保存并通过</button>':'<button class="act" data-back="'+esc(id)+'">退回待审</button>')+
+    (q.status==="pending"?'<button class="act ok" data-approve="'+esc(id)+'" '+(S.saving[id]?"disabled":"")+'>保存并通过</button>':'<button class="act" data-back="'+esc(id)+'">退回待审</button>')+
     '<button class="act bad" data-reject="'+esc(id)+'">拒绝</button>')+
   '</div></div>';
-  // 已发布的只读：内容已经在仓库里，要改去仓库改
-  if(pub)body=body.replace(/ data-f="/g,' disabled data-f="');
+  // 已发布的只读：内容已经在仓库里，要改去仓库改；改写中的也先锁住，免得改的内容被新文案覆盖
+  if(pub||rg)body=body.replace(/ data-f="/g,' disabled data-f="');
+  var pick=q.status==="pending"&&!rg?'<input type="checkbox" class="pick" data-sel="'+esc(id)+'" '+(S.sel[id]?"checked":"")+' aria-label="选择 '+esc(q.repo)+'">':"";
   return '<div class="item '+(open?"open":"")+'" data-id="'+esc(id)+'">'+
-  '<div class="hd" data-toggle="'+esc(id)+'"><span class="name">'+esc(d.name||q.repo)+'</span><span class="who mono">'+esc(q.owner+"/"+q.repo)+'</span>'+
-  '<span class="meta">'+(S.edits[id]?'<span class="tag warn">有未保存的修改</span>':"")+(todo?'<span class="tag warn">待补文案</span>':"")+seoTag(q)+'<span class="tag '+esc(q.status)+'">'+esc({pending:"待审",approved:"已通过",published:"已发布"}[q.status]||q.status)+'</span><span>★ '+esc(g.stars||0)+'</span><span>'+esc(g.pushedAt||"")+'</span></span></div>'+
+  '<div class="hd" data-toggle="'+esc(id)+'">'+pick+'<span class="name">'+esc(d.name||q.repo)+'</span><span class="who mono">'+esc(q.owner+"/"+q.repo)+'</span>'+
+  '<span class="meta">'+(rg?'<span class="tag warn">改写中</span>':"")+(S.edits[id]?'<span class="tag warn">有未保存的修改</span>':"")+(todo?'<span class="tag warn">待补文案</span>':"")+seoTag(q)+'<span class="tag '+esc(q.status)+'">'+esc({pending:"待审",approved:"已通过",published:"已发布"}[q.status]||q.status)+'</span><span>★ '+esc(g.stars||0)+'</span><span>'+esc(g.pushedAt||"")+'</span></span></div>'+
   (open?body:"")+'</div>';
+}
+/** 待审批里还能操作的条目（正在改写的除外），按是否能直接通过分组 */
+function pendingGroups(){
+  var list=(get("queue")||[]).filter(function(q){return q.status==="pending"&&!S.regen[q.id]});
+  return {
+    all:list.map(function(q){return q.id}),
+    sel:list.filter(function(q){return S.sel[q.id]}).map(function(q){return q.id}),
+    bad:list.filter(function(q){return (q.problems||[]).length}).map(function(q){return q.id}),
+    ok:list.filter(function(q){return !(q.problems||[]).length}).map(function(q){return q.id})
+  };
+}
+function pendingBar(list){
+  var g=pendingGroups(),running=Object.keys(S.regen).length;
+  var allOn=g.all.length&&g.sel.length===g.all.length;
+  return '<div class="bar"><button class="act" id="addBtn" '+(S.addBusy?"disabled":"")+'>'+(S.addBusy?"添加中…":S.adding?"收起":"手动添加仓库")+'</button>'+
+    (list.length?'<label class="pickall"><input type="checkbox" id="pickAll" '+(allOn?"checked":"")+'> 全选</label>':"")+
+    (running?'<span class="mono" style="color:var(--warn);font-size:13px">'+running+' 条改写中</span>':"")+
+    '<span class="sp"></span>'+
+    (list.length?
+      '<button class="act" id="regenSel" '+(g.sel.length?"":"disabled")+'>改写选中（'+g.sel.length+'）</button>'+
+      '<button class="act" id="regenBad" '+(g.bad.length?"":"disabled")+' title="校验或 SEO 检查没过的，全部重新改写">改写不达标的（'+g.bad.length+'）</button>'+
+      '<button class="act ok" id="approveOk" '+(g.ok.length?"":"disabled")+' title="校验和 SEO 检查都通过的，一次全部通过">通过达标的（'+g.ok.length+'）</button>':"")+
+    '</div>';
+}
+/** 并行重新改写：每条各发一个请求，互不等待；完成一条刷新一条 */
+function regenerate(ids){
+  ids=ids.filter(function(id){return !S.regen[id]});
+  if(!ids.length)return;
+  var left=ids.length,failed=0;
+  ids.forEach(function(id){S.regen[id]=true;delete S.sel[id]});
+  notify("load",ids.length===1?"重新改写中，完成后自动刷新。可以继续处理别的候选。":"已开始改写 "+ids.length+" 条，并行进行，完成一条刷新一条。",true);
+  ids.forEach(function(id){
+    api("POST","/api/regenerate",{id:id}).then(function(){delete S.edits[id]}).catch(function(err){
+      failed++;
+      var q=(get("queue")||[]).find(function(x){return x.id===id});
+      notify("bad",(q?q.owner+"/"+q.repo+"：":"")+err.message);
+    }).then(function(){
+      delete S.regen[id];left--;
+      if(!left&&!failed)notify("ok",ids.length===1?"已重新改写":"改写完成，共 "+ids.length+" 条");
+      else if(!left)notify("bad","改写完成，其中 "+failed+" 条失败，原因写在对应条目上");
+      reload();
+    });
+  });
 }
 function queueView(st){
   var list=(get("queue")||[]).filter(function(q){return q.status===st});
   var head={pending:["待审批","扫描回来的候选都停在这里，不会自动上线。点开一条检查文案，改好后通过；不要的拒绝。"],approved:["已通过","这些已经过了你的审批，还没上线。点推送后一次提交到目标仓库。"],published:["已发布","已经推送到目标仓库的插件。内容以仓库里的为准，这里只留记录。"]}[st];
   var bar="";
-  if(st==="pending")bar='<div class="bar"><button class="act" id="addBtn">'+(S.adding?"收起":"手动添加仓库")+'</button><span class="sp"></span>'+(list.length?'<button class="act ok" id="approveAll">全部通过（'+list.length+'）</button>':"")+'</div>'+
+  if(st==="pending")bar=pendingBar(list)+
     (S.adding?'<div class="card"><div class="split"><input class="grow" id="addInput" value="'+esc(S.addText)+'" placeholder="owner/repo 或 https://github.com/owner/repo"><button class="act ink" id="addGo">添加</button></div><p class="sub" style="font-size:12.5px;margin:6px 0 0">添加后同样会去重、拉取、改写，然后进待审批。</p></div>':"");
-  if(st==="approved"&&list.length)bar='<div class="bar"><button class="act ink" id="publishAll" '+(S.busy?"disabled":"")+'>推送 '+list.length+' 个到仓库</button><span class="sp"></span><span style="color:var(--dim);font-size:13px">先逐条校验，再合成一次提交</span></div>';
+  if(st==="approved"&&list.length)bar='<div class="bar"><button class="act ink" id="publishAll" '+(S.publishing?"disabled":"")+'>推送 '+list.length+' 个到仓库</button><span class="sp"></span><span style="color:var(--dim);font-size:13px">先逐条校验，再合成一次提交</span></div>';
   var empty={pending:"没有待审批的候选。点右上角「立即扫描」去 GitHub 找新的，或者手动添加一个仓库。",approved:"没有等待推送的候选。在待审批里点「保存并通过」，就会出现在这里。",published:"还没有推送过插件。"}[st];
   return '<h2>'+head[0]+'</h2><p class="sub">'+head[1]+'</p>'+bar+(list.length?list.map(item).join(""):'<div class="empty">'+empty+'</div>');
 }
@@ -329,25 +379,25 @@ function unsaved(){
 }
 function addRepo(){
   var v=S.addText.trim();
-  if(!v||S.busy)return;
-  S.busy=true;notify("load","正在拉取 "+v+" 并改写，大约十几秒…",true);
-  api("POST","/api/add",{target:v}).then(function(){S.busy=false;S.addText="";S.adding=false;S.tab="pending";notify("ok","已加入待审批");reload()}).catch(function(err){S.busy=false;notify("bad",err.message)});
+  if(!v||S.addBusy)return;
+  S.addBusy=true;notify("load","正在拉取 "+v+" 并改写，完成后会出现在待审批里。可以继续处理别的候选。",true);
+  api("POST","/api/add",{target:v}).then(function(){S.addBusy=false;S.addText="";S.adding=false;S.tab="pending";notify("ok","已加入待审批");reload()}).catch(function(err){S.addBusy=false;notify("bad",err.message)});
 }
 // 保存一条候选的修改；status 传 "approved" / "pending" 时同时改状态。一次请求完成，服务端先存修改再校验
 function saveItem(id,status){
-  if(S.busy)return;
+  if(S.saving[id]||S.regen[id])return;
   var patch=patchFrom(id),body={};
   if(Object.keys(patch).length)body.patch=patch;
   if(status)body.status=status;
   if(!body.patch&&!status)return notify("ok","没有改动要保存");
-  S.busy=true;
+  S.saving[id]=true;
   api("POST","/api/item/"+encodeURIComponent(id),body).then(function(){
-    S.busy=false;delete S.edits[id];
+    delete S.saving[id];delete S.edits[id];
     if(status)S.open[id]=false;
     notify("ok",status==="approved"?"已通过，去「已通过」里推送":status==="pending"?"已退回待审批":"已保存");
     reload();
   }).catch(function(e){
-    S.busy=false;
+    delete S.saving[id];
     // 校验没过时服务端照样存了修改，本地的未保存标记可以清掉
     if(/^修改已保存/.test(e.message)){delete S.edits[id];reload()}
     notify("bad",e.message);
@@ -377,6 +427,14 @@ function markDirty(id){
 }
 document.addEventListener("click",function(e){
   if(e.target.closest("[data-dismiss]")){notice=null;render();return}
+  // 勾选框在标题行里，先处理，免得同时展开/收起这一条
+  var pk=e.target.closest("[data-sel]");
+  if(pk){var sid=pk.getAttribute("data-sel");if(pk.checked)S.sel[sid]=true;else delete S.sel[sid];render();return}
+  if(e.target.id==="pickAll"){
+    var all=pendingGroups().all;S.sel={};
+    if(e.target.checked)all.forEach(function(x){S.sel[x]=true});
+    render();return;
+  }
   var el=e.target.closest("[data-tab],[data-toggle],button,a");
   if(!el)return;
   var tab=el.getAttribute&&el.getAttribute("data-tab");
@@ -388,9 +446,8 @@ document.addEventListener("click",function(e){
   if(id){saveItem(id,el.hasAttribute("data-approve")?"approved":el.hasAttribute("data-back")?"pending":null);return}
   if(el.hasAttribute("data-regen")){
     var rid=el.getAttribute("data-regen");
-    if(S.busy||!confirm("重新拉取仓库数据并改写？这一条现有的文案（包括你改过的）会被覆盖。"))return;
-    S.busy=true;notify("load","重新改写中，大约十几秒…",true);
-    api("POST","/api/regenerate",{id:rid}).then(function(){S.busy=false;delete S.edits[rid];notify("ok","已重新改写，回到待审批");reload()}).catch(function(err){S.busy=false;notify("bad",err.message)});
+    if(!confirm("重新拉取仓库数据并改写？这一条现有的文案（包括你改过的）会被覆盖。"))return;
+    regenerate([rid]);
     return;
   }
   if(el.hasAttribute("data-reject")){
@@ -429,19 +486,29 @@ document.addEventListener("click",function(e){
   if(el.id==="refreshLog"){reload();return}
   if(el.id==="addBtn"){S.adding=!S.adding;render();var i=$("addInput");if(i)i.focus();return}
   if(el.id==="addGo"){addRepo();return}
-  if(el.id==="approveAll"){
-    if(unsaved()||!confirm("把 "+count("pending")+" 个待审批全部标为通过？只要有一条没写完，就整批不通过。"))return;
-    api("POST","/api/approve-all",{}).then(function(r){notify("ok","已通过 "+r.count+" 个，去「已通过」里推送");reload()}).catch(function(err){notify("bad",err.message)});
+  if(el.id==="regenSel"||el.id==="regenBad"){
+    var ids=el.id==="regenSel"?pendingGroups().sel:pendingGroups().bad;
+    if(!ids.length||!confirm("重新改写这 "+ids.length+" 条？它们现有的文案（包括你改过的）会被覆盖。"))return;
+    regenerate(ids);
+    return;
+  }
+  if(el.id==="approveOk"){
+    var okIds=pendingGroups().ok;
+    if(!okIds.length||!confirm("通过 "+okIds.length+" 条校验和 SEO 检查都达标的候选？没达标的留在待审批里。"))return;
+    api("POST","/api/approve-ok",{skip:Object.keys(S.regen).concat(Object.keys(S.edits))}).then(function(r){
+      okIds.forEach(function(x){delete S.sel[x]});
+      notify("ok","已通过 "+r.count+" 条，去「已通过」里推送");reload();
+    }).catch(function(err){notify("bad",err.message)});
     return;
   }
   if(el.id==="publishAll"){
-    if(S.busy||unsaved()||!confirm("把已通过的 "+count("approved")+" 个推送到 "+(get("config.repo")||"目标仓库")+"？推送后网站会自动重建。"))return;
-    S.busy=true;notify("load","校验并推送中…",true);
+    if(S.publishing||unsaved()||!confirm("把已通过的 "+count("approved")+" 个推送到 "+(get("config.repo")||"目标仓库")+"？推送后网站会自动重建。"))return;
+    S.publishing=true;notify("load","校验并推送中…",true);
     api("POST","/api/publish",{}).then(function(r){
-      S.busy=false;
+      S.publishing=false;
       notify("ok","已推送 "+(r.written||[]).length+" 个插件"+(r.commit?"，提交 "+String(r.commit).slice(0,7):"")+(r.skipped&&r.skipped.length?"，另有 "+r.skipped.length+" 个仓库里已经有了，没有重复推":"")+"。本地仓库记得 git pull。",true);
       reload();
-    }).catch(function(err){S.busy=false;notify("bad",err.message);reload()});
+    }).catch(function(err){S.publishing=false;notify("bad",err.message);reload()});
   }
 });
 document.addEventListener("submit",function(e){

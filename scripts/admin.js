@@ -64,7 +64,8 @@ function state() {
     queue: store
       .readQueue()
       .sort((a, b) => String(b.foundAt).localeCompare(String(a.foundAt)))
-      .map((q) => (q.status === "published" ? q : { ...q, seo: seoCheck(q) })),
+      // problems 是通过前的全部校验（含 SEO 硬性问题），为空就能直接通过
+      .map((q) => (q.status === "published" ? q : { ...q, seo: seoCheck(q), problems: validate(q) })),
     rejected: store.readRejected(),
     job: { running: job.running, step: job.step, added: job.added, want: job.want, startedAt: job.startedAt, error: job.error },
     lastScan: loadState().lastScan,
@@ -275,8 +276,14 @@ async function handleApi(req, res, url) {
 
   if (p === "/api/regenerate") {
     const body = await readBody(req);
-    const rec = await regenerate(body.id);
-    return send(res, 200, { ok: true, item: rec });
+    try {
+      const rec = await regenerate(body.id);
+      return send(res, 200, { ok: true, item: rec });
+    } catch (e) {
+      // 原文案不动，把失败原因挂在这一条上，页面会显示
+      store.updateItem(body.id, { error: `重新改写失败：${e.message}` });
+      throw e;
+    }
   }
 
   if (p === "/api/test") {
@@ -307,14 +314,15 @@ async function handleApi(req, res, url) {
     return send(res, 200, { ok: true, lines });
   }
 
-  if (p === "/api/approve-all") {
-    const n = store.readQueue().filter((x) => x.status === "pending");
-    const problems = [];
-    for (const rec of n) problems.push(...validate(rec));
-    if (problems.length) return send(res, 400, { error: `有内容没写完，没有全部通过：\n${problems.slice(0, 20).join("\n")}` });
-    for (const rec of n) store.updateItem(rec.id, { status: "approved" });
-    log(`批量通过了 ${n.length} 个候选`);
-    return send(res, 200, { ok: true, count: n.length });
+
+  // 只通过校验全过的待审候选，不达标的留在待审里，不影响其它条
+  if (p === "/api/approve-ok") {
+    const body = await readBody(req);
+    const skip = new Set(Array.isArray(body.skip) ? body.skip : []);
+    const ok = store.readQueue().filter((x) => x.status === "pending" && !skip.has(x.id) && !validate(x).length);
+    for (const rec of ok) store.updateItem(rec.id, { status: "approved", error: "" });
+    if (ok.length) log(`批量通过了 ${ok.length} 个达标候选`);
+    return send(res, 200, { ok: true, count: ok.length });
   }
 
   if (p === "/api/publish") {
