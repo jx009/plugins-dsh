@@ -1,0 +1,32 @@
+{
+  "owner": "yejiming",
+  "repo": "MuseAI",
+  "name": "MuseAI",
+  "category": "fun",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-13",
+  "updatedAt": "2026-11-14",
+  "github": {
+    "description": "创建你的 AI 角色，进入你的故事世界。和角色聊天、冒险、穿书，让每一次互动都留下羁绊（支持 DeepSeek Harness 插件，欢迎使用）",
+    "stars": 707,
+    "forks": 70,
+    "watchers": 25,
+    "openIssues": 9,
+    "language": "TypeScript",
+    "license": "",
+    "version": "v0.9.8",
+    "homepage": "",
+    "topics": [
+      "agent",
+      "ai",
+      "companion-ai",
+      "dsh",
+      "dsh-plugin"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-04-03",
+    "pushedAt": "2026-11-04",
+    "archived": false
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "owner": "Unclecheng-li",
+  "repo": "AI_Animation",
+  "name": "AI_Animation",
+  "category": "agent",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-12",
+  "updatedAt": "2026-11-14",
+  "github": {
+    "description": "本项目整理了用于生成[炫酷 HTML 动画网页]的 AI Prompts，涵盖动画效果、3D 可视化、PPT 风格演示、UI 美化等多个类别。",
+    "stars": 1781,
+    "forks": 135,
+    "watchers": 2,
+    "openIssues": 4,
+    "language": "HTML",
+    "license": "MIT",
+    "version": "v0.1.0",
+    "homepage": "",
+    "topics": [
+      "ai",
+      "ai-agents",
+      "css",
+      "dsh-plugin",
+      "dsh-plugins",
+      "front-end",
+      "html5",
+      "javascript",
+      "ppt",
+      "prompt",
+      "prompt-engineering",
+      "skill",
+      "skills"
+    ],
+    "defaultBranch": "master",
+    "createdAt": "2026-04-11",
+    "pushedAt": "2026-10-26",
+    "archived": false
+  }
+}

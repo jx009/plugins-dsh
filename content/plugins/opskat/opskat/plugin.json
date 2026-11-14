@@ -1,0 +1,31 @@
+{
+  "owner": "opskat",
+  "repo": "opskat",
+  "name": "opskat",
+  "category": "tools",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-13",
+  "updatedAt": "2026-11-14",
+  "github": {
+    "description": "OpsKat — All-in-one server ops workstation",
+    "stars": 708,
+    "forks": 71,
+    "watchers": 3,
+    "openIssues": 19,
+    "language": "Go",
+    "license": "GPL-3.0",
+    "version": "v1.15.0",
+    "homepage": "https://opskat.dev",
+    "topics": [
+      "agent",
+      "dsh-plugins",
+      "ops",
+      "ssh-client"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-03-23",
+    "pushedAt": "2026-11-13",
+    "archived": false
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "owner": "dream-num",
+  "repo": "univer-workspace",
+  "name": "univer-workspace",
+  "category": "integration",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-12",
+  "updatedAt": "2026-11-14",
+  "github": {
+    "description": "Manage the Office content your agents create. An open-source, self-hosted workspace where people and AI agents edit, collaborate, and review changes. Built with Univer Office SDK.",
+    "stars": 2280,
+    "forks": 229,
+    "watchers": 201,
+    "openIssues": 20,
+    "language": "TypeScript",
+    "license": "Apache-2.0",
+    "version": "agent-v0.1.0",
+    "homepage": "https://space.univer.ai",
+    "topics": [
+      "agent-artifacts",
+      "board",
+      "docx",
+      "dsh-plugin",
+      "excel",
+      "local-first",
+      "notion-database",
+      "office",
+      "pptx",
+      "self-hosted",
+      "univer",
+      "workspace",
+      "xlsx"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-14",
+    "pushedAt": "2026-11-14",
+    "archived": false
+  }
+}

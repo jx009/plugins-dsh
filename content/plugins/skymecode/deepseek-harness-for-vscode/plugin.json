@@ -1,0 +1,37 @@
+{
+  "owner": "skymecode",
+  "repo": "deepseek-harness-for-vscode",
+  "name": "deepseek-harness-for-vscode",
+  "category": "integration",
+  "package": "deepseek-harness-for-vscode",
+  "verified": false,
+  "listedAt": "2026-11-14",
+  "updatedAt": "2026-11-14",
+  "github": {
+    "description": "deepseek-harness for vscode .A native VS Code coding-agent extension for DeepSeek Harness. Streamlined workbench with session   management, streaming Markdown, slash commands, plugin center, and zero-deployment runtime — no WebUI   served, no Harness setup",
+    "stars": 171,
+    "forks": 14,
+    "watchers": 0,
+    "openIssues": 2,
+    "language": "TypeScript",
+    "license": "MIT",
+    "version": "v0.6.2",
+    "homepage": "https://marketplace.visualstudio.com/items?itemName=skymecode.deepseek-harness-for-vscode",
+    "topics": [
+      "deepseek",
+      "deepseek-harness",
+      "deepseek-harness-plugin",
+      "dsh-plugin",
+      "dsh-plugin-market",
+      "dsh-plugins",
+      "vscode",
+      "vscode-extension",
+      "vscode-extensions",
+      "vscode-plugin"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-13",
+    "pushedAt": "2026-11-07",
+    "archived": false
+  }
+}

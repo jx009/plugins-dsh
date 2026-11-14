@@ -1,0 +1,29 @@
+{
+  "owner": "nutshellai-tech",
+  "repo": "mobius",
+  "name": "mobius",
+  "category": "integration",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-14",
+  "updatedAt": "2026-11-14",
+  "github": {
+    "description": "The first self-evolving open-source Agent OS, connecting your team, AI agents, devices, and compute",
+    "stars": 209,
+    "forks": 8,
+    "watchers": 0,
+    "openIssues": 0,
+    "language": "TypeScript",
+    "license": "",
+    "version": "desktop-v0.0.19",
+    "homepage": "https://nutshellai-tech.github.io/mobius/",
+    "topics": [
+      "dsh-plugin",
+      "dsh-plugins"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-06-18",
+    "pushedAt": "2026-09-10",
+    "archived": false
+  }
+}

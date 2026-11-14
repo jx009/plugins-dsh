@@ -1,0 +1,43 @@
+{
+  "owner": "Clarklevis1995",
+  "repo": "dsh-mobile",
+  "name": "dsh-mobile",
+  "category": "integration",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-13",
+  "updatedAt": "2026-11-14",
+  "github": {
+    "description": "DeepSeek Harness Mobile 是一个面向 DeepSeek Harness 的原生移动端客户端。它通过 dsh-plugin-mobile-gateway 与 Harness 建立 WebSocket 连接，将工作区、会话、实时回复和 Agent 执行轨迹带到 iPhone，同时延续 DeepSeek WebUI 克制、清晰的视觉语言",
+    "stars": 781,
+    "forks": 81,
+    "watchers": 14,
+    "openIssues": 9,
+    "language": "Kotlin",
+    "license": "MIT",
+    "version": "v1.8.2",
+    "homepage": "https://clarklevis1995.github.io/dsh-mobile/",
+    "topics": [
+      "android",
+      "android-app",
+      "android-application",
+      "android-development",
+      "coding-agent",
+      "deepseek",
+      "deepseek-harness",
+      "deepseek-harness-plugin",
+      "dsh-plugin",
+      "ios",
+      "ios-app",
+      "ios-swift",
+      "kmp",
+      "kotlin-multiplatform",
+      "kotlin-multiplatform-mobile",
+      "ui-design"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-17",
+    "pushedAt": "2026-11-14",
+    "archived": false
+  }
+}

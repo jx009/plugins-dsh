@@ -1,0 +1,39 @@
+{
+  "owner": "fufankeji",
+  "repo": "deepseek-harness-studio",
+  "name": "deepseek-harness-studio",
+  "category": "interface",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-13",
+  "updatedAt": "2026-11-14",
+  "github": {
+    "description": "DeepSeek Harness 零代码桌面端｜一键启动，支持 Windows 与 macOS；内置插件发现、热点插件推送、一键安装与管理、AI 智能推荐和视觉增强。",
+    "stars": 720,
+    "forks": 80,
+    "watchers": 4,
+    "openIssues": 3,
+    "language": "TypeScript",
+    "license": "MIT",
+    "version": "v0.1.1-rc.2",
+    "homepage": "https://www.beyondata.com/",
+    "topics": [
+      "ai-agent",
+      "deepseek",
+      "deepseek-harness",
+      "deepseek-harness-studio",
+      "desktop-app",
+      "developer-tools",
+      "dsh",
+      "dsh-plugin",
+      "electron",
+      "macos",
+      "plugin-manager",
+      "windows"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-15",
+    "pushedAt": "2026-09-01",
+    "archived": false
+  }
+}

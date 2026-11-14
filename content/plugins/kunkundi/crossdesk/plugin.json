@@ -1,0 +1,41 @@
+{
+  "owner": "kunkundi",
+  "repo": "crossdesk",
+  "name": "crossdesk",
+  "category": "integration",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-12",
+  "updatedAt": "2026-11-14",
+  "github": {
+    "description": "A lightweight, cross-platform remote desktop software with support for Web Client access | 一款支持 Web 客户端访问的轻量级跨平台远程桌面软件。",
+    "stars": 4771,
+    "forks": 477,
+    "watchers": 27,
+    "openIssues": 18,
+    "language": "C++",
+    "license": "",
+    "version": "v1.7.6-20261112",
+    "homepage": "https://www.crossdesk.cn",
+    "topics": [
+      "cli",
+      "cplusplus",
+      "dsh-plugin",
+      "libdatachannel",
+      "mcp",
+      "remote-control",
+      "remote-desktop",
+      "rtc",
+      "rtp",
+      "slint",
+      "video-streaming",
+      "web-client",
+      "webrtc",
+      "xmake"
+    ],
+    "defaultBranch": "mcp",
+    "createdAt": "2023-11-20",
+    "pushedAt": "2026-11-14",
+    "archived": false
+  }
+}
