@@ -4,7 +4,7 @@
   "name": "ds-harness-remote",
   "category": "integration",
   "package": "ds-harness-remote",
-  "install": "dsh plugin --profile desktop add -w ds-harness-remote@0.6.4",
+  "install": "dsh plugin --profile desktop add -w ds-harness-remote@0.6.5",
   "verified": false,
   "listedAt": "2026-11-12",
   "updatedAt": "2026-11-12",

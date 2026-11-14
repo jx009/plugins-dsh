@@ -4,6 +4,7 @@
   "name": "dsh-our-free-model",
   "category": "model",
   "package": "",
+  "install": "dsh plugin --profile web add @ebony-vinyl/dsh-our-free-model@2.8.3",
   "verified": false,
   "listedAt": "2026-11-12",
   "updatedAt": "2026-11-12",

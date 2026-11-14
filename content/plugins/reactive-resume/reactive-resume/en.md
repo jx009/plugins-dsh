@@ -1,41 +1,67 @@
 ---
-title: "Build resumes, check job fit, and track applications"
-description: "Create resumes and cover letters with live previews, check job keywords, export documents, and track applications in a free, self-hostable application."
+title: "Reactive Resume: Resume Builder MCP for DSH"
+description: "Reactive Resume is a free resume builder with an MCP server DSH agents can use to edit resumes and track applications. Learn to connect it and fix sign-in."
 summary: "Write and customize resumes and cover letters, review them against job postings, and organize applications. Supports document exports and self-hosting."
 highlights:
-  - "Live PDF preview, inline editing, autosave, and up to 200 undo steps"
-  - "18 templates with font, spacing, paper size, and Semantic CSS controls"
-  - "Readability checks, job keyword matching, and exported PDF checks"
-  - "Resume and cover letter library with restorable versions"
-  - "Application tracking with board and calendar views, contacts, and follow-ups"
+  - "Live PDF preview with 18 templates"
+  - "Job keyword and ATS checks"
+  - "Cover letters and application tracker"
+  - "MCP server and REST API"
+  - "Self-hostable, no tracking or ads"
 faq:
-  - q: "Can I install it as a DSH plugin?"
-    a: "The repository topics include dsh-plugin, agent-skills, and mcp-server. The supplied README excerpt does not document their setup, and no npm package name is confirmed, so no DSH installation command is listed."
-  - q: "Which export formats are available?"
-    a: "The README lists PDF, Word, Markdown, and JSON downloads for resumes, along with sharing through a public link."
-  - q: "Can I host it myself, and does AI cost extra?"
-    a: "The application supports self-hosting and uses the MIT license. Optional AI features require a provider you connect. Infrastructure and provider usage may incur costs."
+  - q: "How do I use Reactive Resume from DeepSeek Harness?"
+    a: "Reactive Resume runs an MCP server at your instance address plus `/mcp`, which is `https://rxresu.me/mcp` on the hosted app. Add it to DSH as a remote MCP server, signing in with OAuth or an API key."
+  - q: "How does an agent authenticate with the Reactive Resume MCP server?"
+    a: "OAuth is recommended: you approve the client in your browser and no secret is copied. Clients that cannot do OAuth can send an API key in the `x-api-key` header; create the key under Settings → Developer."
+  - q: "What can an agent do through Reactive Resume?"
+    a: "Read and edit resumes, cover letters and job applications in plain language, plus imports, exports and checks through the same MCP tools and REST API."
+  - q: "Which formats can Reactive Resume export?"
+    a: "Resumes and letters export as PDF, Word (DOCX), Markdown or JSON, and you can share a public link with optional password protection and view statistics."
+  - q: "Can I self-host Reactive Resume?"
+    a: "Yes. It runs with Docker, Kubernetes, Vercel, Cloudflare Workers or a one-click Hostinger deploy, using PostgreSQL plus storage for uploads. The project is MIT licensed."
+  - q: "Does Reactive Resume have agent skills too?"
+    a: "Yes. The project publishes 32 agent skills for resume writing and job searching, covering drafts, proofreading, career changes, cover letters, interviews and offers."
 ---
 
 ## What does Reactive Resume do?
 
-Reactive Resume brings resume editing, cover letter writing, document checks, and job application tracking into one application. Users can import an existing resume or create one from scratch, then review the rendered page while editing.
+Reactive Resume is a free, open-source resume builder with an MCP server, so a DSH agent can read and edit your resumes, cover letters and job applications when you ask in plain language. It brings resume editing, document checks and application tracking into one app that you can use online or host yourself.
 
-The repository is tagged with `dsh-plugin`, `agent-skills`, and `mcp-server`. The supplied README excerpt describes the application, but does not establish the setup or capabilities of those integrations.
+You can import an existing resume or start from scratch, edit content inline next to a live PDF preview, and check the result against a job posting before you apply. Saved jobs connect to a tracker with stages, contacts, interviews and follow-ups.
 
-## Core features
+For agents, the project offers a REST API, an MCP server and a set of agent skills. The repository is tagged as a DSH plugin, and DeepSeek Harness can work with it the same way other MCP clients do.
 
-- Edit content inline with a live PDF preview, rich text, custom sections, and drag-and-drop ordering.
-- Choose from 18 templates and adjust fonts, colors, spacing, page size, and Semantic CSS styles.
-- Review readability findings, compare content with job-posting keywords, and inspect the text hiring software reads.
-- Keep resumes and cover letters in a searchable library with tags and versions that can be restored.
-- Track applications, contacts, follow-ups, and interviews using list, board, insights, and calendar views.
-- Download resumes as PDF, Word, Markdown, or JSON, or share a public resume link.
+## Reactive Resume core features
 
-## How to use Reactive Resume
+- **Editor**: inline editing with live PDF preview, rich text, custom sections, drag-and-drop ordering, autosave and version history.
+- **Design**: 18 templates with controls for fonts, colors, spacing, paper size and custom styles.
+- **Checks**: readability findings, job keyword matching and a view of the text applicant tracking systems read from your PDF.
+- **Library**: resumes and cover letters with tags and restorable versions.
+- **Application tracker**: list, board, insights and calendar views for applications, interviews and contacts.
+- **Export and share**: PDF, Word, Markdown and JSON downloads, plus public links with optional passwords.
+- **Integrations**: REST API, MCP server and 32 agent skills for resume and career workflows.
 
-Create an account at `rxresu.me`, import a resume or start a new document, and select a template. Edit the content alongside the preview, adjust the layout, and use the checks before exporting or sharing.
+## How to install and use Reactive Resume
 
-For a saved job, you can tailor a resume, draft a cover letter, and record application progress. Optional AI features use a provider you connect.
+1. Create an account at `rxresu.me`, or self-host the app with Docker.
+2. Import a resume or start a new document, pick a template and edit next to the preview.
+3. To let a DSH agent work with your documents, find the MCP server address under Settings → Developer. On the hosted app it is:
 
-Self-hosting is supported, with documentation at `docs.rxresu.me`. The supplied excerpt contains no DSH installation command.
+   ```text
+   https://rxresu.me/mcp
+   ```
+
+4. Add it to DeepSeek Harness as a remote MCP server. Sign in with OAuth when prompted, or create an API key under Settings → Developer and send it in the `x-api-key` header.
+5. Ask the agent for a task, for example "tailor my backend resume to this job posting and draft a cover letter".
+
+For a self-hosted instance, use your own address followed by `/mcp`.
+
+## How to troubleshoot Reactive Resume
+
+- **The MCP client cannot connect.** The server uses Streamable HTTP. If your client only supports local servers, run it through the `mcp-remote` bridge. Check that the address ends in `/mcp`.
+- **Authentication fails with an API key.** Send the key in the `x-api-key` header, and make sure it was created in Settings → Developer on the same instance you are connecting to.
+- **A self-hosted instance will not start.** Set both `AUTH_SECRET` and a separate `ENCRYPTION_SECRET` in `.env` (for example with `openssl rand -hex 32`), and confirm PostgreSQL and storage are running.
+- **Integrations broke after upgrading from v5.** Version 6 changed API and MCP integrations and old style rules. Back up your database and uploads and follow the "Migrating from v5" guide.
+- **AI features do nothing.** AI is optional and needs a provider you connect yourself; provider usage may cost money.
+
+When reporting a problem, include whether you use the hosted app or a self-hosted version, the MCP client and the error message.

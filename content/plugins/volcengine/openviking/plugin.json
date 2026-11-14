@@ -3,7 +3,7 @@
   "repo": "OpenViking",
   "name": "OpenViking",
   "category": "memory",
-  "package": "",
+  "package": "@openviking/dsh-memory-plugin",
   "verified": false,
   "listedAt": "2026-11-12",
   "updatedAt": "2026-11-12",

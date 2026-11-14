@@ -1,44 +1,73 @@
 ---
-title: "Connect your AI assistant to content creation and social publishing"
-description: "Connect AI assistants to AiToEarn through skills and MCP for content creation, publishing across 14+ platforms, scheduling, and social engagement."
+title: "AiToEarn: AI Content Publishing for DSH"
+description: "AiToEarn is a DSH skill pack and MCP server that lets DeepSeek Harness create content and publish it to 14+ social platforms. Learn to install it and fix 401s."
 summary: "AiToEarn provides skills and MCP access for AI-assisted content marketing. Its platform covers content generation, social publishing, engagement, and monetization tasks."
 highlights:
-  - "Plugin and skill pack with installation guidance for DeepSeek Harness"
-  - "MCP endpoints for China and international accounts, authenticated with an API key"
-  - "Publishing to 14+ platforms with a shared scheduling calendar"
-  - "Video and image-text creation, including batch generation tasks"
-  - "Browser extension for engagement actions and AI comment replies"
+  - "Publish to 14+ social platforms"
+  - "Shared scheduling calendar"
+  - "Video and image-text generation"
+  - "Skill pack and MCP server for agents"
+  - "Hosted service or Docker self-hosting"
 faq:
-  - q: "How can DSH users access AiToEarn?"
-    a: "The README explicitly includes DeepSeek Harness among assistants supported by its plugin and skill pack installation instructions. It supplies a conversational installation prompt pointing to the repository's skills directory, but no DSH CLI installation command."
-  - q: "What is needed for MCP authentication?"
-    a: "Create an API key in AiToEarn settings and send it using the x-api-key header. Use the endpoint matching the China or international environment where the key was issued; a mismatch causes a 401 response."
-  - q: "Does it require self-hosting?"
-    a: "The hosted web service and MCP integration do not require deployment. Docker deployment is also documented for teams that want to run their own instance."
+  - q: "How do I install AiToEarn in DeepSeek Harness?"
+    a: "Paste \"Install the plugin pack from https://github.com/yikart/AiToEarn/tree/main/skills\" into a DSH conversation. The assistant asks for your API key, configures the integration and verifies it. The README gives no separate `dsh plugin add` command."
+  - q: "Which platforms can AiToEarn publish to?"
+    a: "More than 14, including Douyin, Xiaohongshu, Kuaishou, Bilibili, WeChat Channels, TikTok, YouTube, Instagram and LinkedIn, with a shared calendar for scheduling."
+  - q: "How does AiToEarn MCP authentication work?"
+    a: "Create an API key under Settings → API Key and send it in the `x-api-key` header. Use `https://aitoearn.cn/api/unified/mcp` for China accounts and `https://aitoearn.ai/api/unified/mcp` for international ones."
+  - q: "Why does AiToEarn return 401 Unauthorized?"
+    a: "The endpoint must match the environment that issued the key. A key from aitoearn.cn will be rejected by the aitoearn.ai endpoint, and the other way round."
+  - q: "Do I need to self-host AiToEarn?"
+    a: "No. The hosted web service and MCP work without deployment. Docker deployment is documented for teams that want their own instance."
+  - q: "Do I need developer accounts on each platform to self-host AiToEarn?"
+    a: "Not if you configure Relay. The README strongly recommends it: Relay uses the official credentials to complete OAuth with platforms such as Douyin, Xiaohongshu and TikTok."
 ---
 
 ## What does AiToEarn do?
 
-AiToEarn connects AI assistants to a content marketing platform for creators, solo businesses, and teams. Its repository includes a plugin and skill pack, and the README names DeepSeek Harness as a supported assistant for the conversational installation flow.
+AiToEarn is a content marketing platform that DeepSeek Harness can drive through its skill pack and MCP server. Ask the agent to write a post, make a short video or schedule a campaign, and AiToEarn creates the content and publishes it to more than 14 social platforms in China and abroad.
 
-The platform covers content creation, distribution, audience engagement, and merchant promotion tasks with CPS, CPE, and CPM settlement models.
+The platform is aimed at solo businesses, creators, brands and small teams. It covers four jobs: creating videos and image-text posts, publishing them on a shared schedule, engaging with audiences through likes, follows and AI comment replies, and earning from merchant promotions settled by CPS, CPE or CPM.
 
-## Core features
+The README names DeepSeek Harness among the assistants supported by its one-line conversational install, alongside Claude Code, Codex, Trae and Kimi Work. You can use the hosted service or deploy your own copy with Docker.
 
-- Publish to 14+ social platforms, including Douyin, Xiaohongshu, TikTok, YouTube, Instagram, and LinkedIn, with calendar-based scheduling.
-- Generate videos and image-text content, translate and edit video, and submit creation tasks in batches.
-- Use the AiToEarn browser extension for likes, saves, follows, AI comment replies, and monitoring brand discussions on supported platforms.
-- Connect through MCP using separate China and international endpoints.
-- Use the hosted service or deploy the project with Docker.
+## AiToEarn core features
 
-## How to use AiToEarn
+- **Publish**: one workflow for Douyin, Xiaohongshu, Kuaishou, Bilibili, WeChat Channels and Official Accounts, TikTok, YouTube, Instagram, LinkedIn and more, with calendar scheduling.
+- **Create**: video and image-text generation, video translation and editing, and batch creation tasks.
+- **Engage**: a browser extension for likes, saves, follows, AI comment replies and monitoring brand discussions.
+- **Monetize**: merchant promotion tasks with CPS, CPE and CPM settlement.
+- **Agent access**: a skill pack for coding agents and an MCP server with separate China and international endpoints.
 
-In DSH, ask the assistant to install the plugin pack from `https://github.com/yikart/AiToEarn/tree/main/skills`. The documented flow asks for an API key, configures the integration, and verifies it. The supplied README does not provide a DSH CLI installation command.
+## How to install and use AiToEarn
 
-For MCP access, create a key under settings → API Key, then configure the matching endpoint and authentication header:
+1. Create an AiToEarn account on the hosted site and generate an API key under Settings → API Key.
+2. In a DSH conversation, paste:
 
-- China: `https://aitoearn.cn/api/unified/mcp`
-- International: `https://aitoearn.ai/api/unified/mcp`
-- Header: `x-api-key: YOUR_API_KEY`
+   ```text
+   Install the plugin pack from https://github.com/yikart/AiToEarn/tree/main/skills
+   ```
 
-The endpoint must match the environment that issued the key. For a self-hosted instance, use your deployment address. Before starting Docker deployment, follow `DOCKER_DEPLOYMENT_CN.md` to configure the required authentication secrets and export `JWT_SECRET`.
+   The agent asks for your API key, configures the integration and checks that it works.
+
+3. For a manual MCP setup, use the endpoint that matches where your key was issued:
+
+   ```text
+   China:         https://aitoearn.cn/api/unified/mcp
+   International: https://aitoearn.ai/api/unified/mcp
+   Header:        x-api-key: YOUR_API_KEY
+   ```
+
+4. Ask the agent for a task, for example "write three Xiaohongshu posts about our new product and schedule them for next week".
+
+To self-host, follow the Docker deployment guide, set the required secrets such as `JWT_SECRET`, and run `docker compose up -d`.
+
+## How to troubleshoot AiToEarn
+
+- **Requests fail with 401.** Check that the MCP endpoint matches the environment that issued your key: aitoearn.cn keys work only with the China endpoint, aitoearn.ai keys only with the international one.
+- **The agent did not finish installing.** Re-run the install prompt and have your API key ready; the flow stops if it cannot verify the key.
+- **Authorizing a social account fails on a self-hosted instance.** Configure Relay so the official credentials handle OAuth, instead of applying for developer accounts on each platform.
+- **The Docker stack will not start.** Set the required authentication secrets and export `JWT_SECRET` before `docker compose up -d`, as the deployment guide describes.
+- **A post did not go out.** Open the scheduling calendar in AiToEarn to see its status, and confirm the target account is still authorized.
+
+When reporting a problem, include whether you use the hosted or self-hosted service, the endpoint, and the platform you were publishing to.

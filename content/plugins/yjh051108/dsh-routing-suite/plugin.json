@@ -4,6 +4,7 @@
   "name": "dsh-routing-suite",
   "category": "model",
   "package": "",
+  "install": "dsh plugin --profile web add github:yjh051108/dsh-routing-suite",
   "verified": false,
   "listedAt": "2026-11-12",
   "updatedAt": "2026-11-12",

@@ -4,6 +4,7 @@
   "name": "loopx",
   "category": "workflow",
   "package": "",
+  "install": "dsh plugin --profile web add https://github.com/loopx-project/loopx/releases/download/dsh-loopx-plugin-v0.1.1-beta.6/dsh-loopx-plugin-0.1.1-beta.6.tgz",
   "verified": false,
   "listedAt": "2026-11-12",
   "updatedAt": "2026-11-12",
