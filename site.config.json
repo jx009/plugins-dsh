@@ -11,7 +11,7 @@
   "installCommand": "dsh plugin --profile web add {package}",
   "perPage": { "plugins": 30, "tutorials": 12 },
   "sitemapShardSize": 2000,
-  "analytics": { "ga4": "", "baidu": "" },
+  "analytics": { "ga4": "", "baidu": "f16b87aed0cef37e5d0fefcc132ec1e7" },
   "verification": { "google": "", "bing": "", "baidu": "" },
   "official": {
     "repo": "https://github.com/deepseek-ai/deepseek-harness",

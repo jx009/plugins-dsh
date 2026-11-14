@@ -14,7 +14,12 @@ function analytics(cfg) {
     out.push(`<script async src="https://www.googletagmanager.com/gtag/js?id=${esc(ga4)}"></script>`);
     out.push(`<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","${esc(ga4)}")</script>`);
   }
-  if (baidu) out.push(`<script async src="https://hm.baidu.com/hm.js?${esc(baidu)}"></script>`);
+  // 百度统计官方代码：先建 _hmt 队列，后面做事件统计要用它
+  if (baidu) {
+    out.push(
+      `<script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src="https://hm.baidu.com/hm.js?${esc(baidu)}";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm,s)})();</script>`
+    );
+  }
   return out.join("\n");
 }
 
@@ -53,7 +58,7 @@ ${nav.map(([r, label, key]) => `<a href="${ctx.url(r)}"${page.section === key ? 
 <div class="hd-tools">
 <button type="button" class="hd-search" data-open-search>${icon("search")}<span>${esc(ctx.t("ui.search"))}</span><kbd>Ctrl K</kbd></button>
 ${langSwitch(ctx, page)}
-<button type="button" class="hd-icon hd-theme" data-theme-toggle data-label-system="${esc(ctx.t("ui.themeSystem"))}" data-label-light="${esc(ctx.t("ui.themeLight"))}" data-label-dark="${esc(ctx.t("ui.themeDark"))}" aria-label="${esc(ctx.t("ui.toggleTheme"))}" title="${esc(ctx.t("ui.toggleTheme"))}"><span class="ti ti-system">${icon("theme", 18)}</span><span class="ti ti-light">${icon("sun", 18)}</span><span class="ti ti-dark">${icon("moon", 18)}</span></button>
+<button type="button" class="hd-icon hd-theme" data-theme-toggle data-label-light="${esc(ctx.t("ui.themeLight"))}" data-label-dark="${esc(ctx.t("ui.themeDark"))}" aria-label="${esc(ctx.t("ui.toggleTheme"))}" title="${esc(ctx.t("ui.toggleTheme"))}"><span class="ti ti-light">${icon("sun", 18)}</span><span class="ti ti-dark">${icon("moon", 18)}</span></button>
 <button type="button" class="hd-icon hd-menu" data-nav-toggle aria-controls="nav" aria-expanded="false" aria-label="${esc(ctx.t("ui.menu"))}">${icon("menu", 18)}</button>
 </div>
 </div></header>`;

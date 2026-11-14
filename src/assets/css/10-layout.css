@@ -307,13 +307,12 @@
   }
 }
 
-/* 配色按钮：三个图标按当前选择只显示一个 */
+/* 配色按钮：按当前实际的深浅色显示太阳或月亮 */
 .hd-theme .ti {
   display: none;
 }
-:root[data-theme-pref="system"] .hd-theme .ti-system,
-:root[data-theme-pref="light"] .hd-theme .ti-light,
-:root[data-theme-pref="dark"] .hd-theme .ti-dark {
+:root[data-theme="light"] .hd-theme .ti-light,
+:root[data-theme="dark"] .hd-theme .ti-dark {
   display: inline-grid;
 }
 /* 没有 JS 时 data-theme-pref 不存在，按钮本身也没用，隐藏 */

@@ -7,9 +7,8 @@ ui:
   searchPlaceholder: "搜索插件和教程"
   searchHint: "方向键选择，回车打开，Esc 关闭"
   toggleTheme: 切换配色
-  themeSystem: 配色：跟随系统（点击切换为浅色）
-  themeLight: 配色：浅色（点击切换为深色）
-  themeDark: 配色：深色（点击改为跟随系统）
+  themeLight: 切换到深色
+  themeDark: 切换到浅色
   menu: 菜单
   mainNav: 主导航
   skip: 跳到正文

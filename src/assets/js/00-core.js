@@ -94,7 +94,7 @@
     }
   }
 
-  // 配色：跟随系统 → 浅色 → 深色 循环。选择存在 localStorage，"跟随系统"时不存。
+  // 配色：没选过时跟随系统；点一次就在深浅之间切换并记住，每次点击都能看到变化。
   var media = window.matchMedia ? matchMedia("(prefers-color-scheme: dark)") : null;
   function applyTheme() {
     var d = document.documentElement;
@@ -102,7 +102,7 @@
     d.dataset.theme = pref === "system" ? (media && media.matches ? "dark" : "light") : pref;
     var btn = document.querySelector("[data-theme-toggle]");
     if (btn) {
-      var label = btn.getAttribute("data-label-" + pref) || "";
+      var label = btn.getAttribute("data-label-" + d.dataset.theme) || "";
       btn.setAttribute("aria-label", label);
       btn.setAttribute("title", label);
     }
@@ -152,8 +152,7 @@
     if (el.hasAttribute("data-copy")) {
       copy(el.getAttribute("data-copy"), el);
     } else if (el.hasAttribute("data-theme-toggle")) {
-      var order = { system: "light", light: "dark", dark: "system" };
-      setTheme(order[document.documentElement.dataset.themePref] || "light", true);
+      setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark", true);
     } else {
       var open = document.getElementById("nav").classList.toggle("is-open");
       el.setAttribute("aria-expanded", String(open));
