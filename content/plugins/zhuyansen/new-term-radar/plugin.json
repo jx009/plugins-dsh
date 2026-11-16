@@ -1,0 +1,40 @@
+{
+  "owner": "zhuyansen",
+  "repo": "new-term-radar",
+  "name": "new-term-radar",
+  "category": "knowledge",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-12",
+  "updatedAt": "2026-11-16",
+  "github": {
+    "description": "Daily radar for new AI terms: names of new models, products and repos, caught on X, Hugging Face, GitHub and sitemaps before keyword tools list them.",
+    "stars": 2173,
+    "forks": 648,
+    "watchers": 5,
+    "openIssues": 4,
+    "language": "Python",
+    "license": "MIT",
+    "version": "v0.6.1",
+    "homepage": "https://agentskillshub.top/skill/zhuyansen/new-term-radar/",
+    "topics": [
+      "agent-skills",
+      "ai",
+      "aisa",
+      "claude-code",
+      "claude-skills",
+      "deepseek-harness",
+      "dsh-plugin",
+      "google-trends",
+      "keyword-research",
+      "mcp",
+      "mcp-server",
+      "seo",
+      "trends"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-10-12",
+    "pushedAt": "2026-11-02",
+    "archived": false
+  }
+}

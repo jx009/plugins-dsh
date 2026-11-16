@@ -1,0 +1,26 @@
+{
+  "owner": "cat-xierluo",
+  "repo": "legal-skills",
+  "name": "legal-skills",
+  "category": "agent",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-15",
+  "updatedAt": "2026-11-16",
+  "github": {
+    "description": "面向法律人的 Skills 集合。",
+    "stars": 807,
+    "forks": 113,
+    "watchers": 10,
+    "openIssues": 1,
+    "language": "Python",
+    "license": "",
+    "version": "v2026.11.08",
+    "homepage": "https://cat-xierluo.github.io/legal-skills/",
+    "topics": [],
+    "defaultBranch": "main",
+    "createdAt": "2026-01-07",
+    "pushedAt": "2026-11-12",
+    "archived": false
+  }
+}

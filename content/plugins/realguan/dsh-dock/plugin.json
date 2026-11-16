@@ -1,0 +1,35 @@
+{
+  "owner": "realguan",
+  "repo": "dsh-dock",
+  "name": "dsh-dock",
+  "category": "dev",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-15",
+  "updatedAt": "2026-11-16",
+  "github": {
+    "description": "专为 DeepSeek Harness (DSH) 打造的跨平台桌面控制中心：多工作台管理、3,400+ 社区插件市场、会话自愈、凭据与系统诊断。Tauri v2 + Rust + React 19，支持 macOS / Windows / Linux。",
+    "stars": 22,
+    "forks": 2,
+    "watchers": 2,
+    "openIssues": 7,
+    "language": "Rust",
+    "license": "MIT",
+    "version": "v1.4.2",
+    "homepage": "https://dsh-dock-c3gibghk4ea.qoder.zone",
+    "topics": [
+      "cross-platform",
+      "deepseek",
+      "deepseek-harness",
+      "desktop-app",
+      "dsh",
+      "dsh-plugin",
+      "dsh-plugins",
+      "plugin-manager"
+    ],
+    "defaultBranch": "master",
+    "createdAt": "2026-08-23",
+    "pushedAt": "2026-11-04",
+    "archived": false
+  }
+}

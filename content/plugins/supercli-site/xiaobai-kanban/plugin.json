@@ -1,0 +1,40 @@
+{
+  "owner": "supercli-site",
+  "repo": "xiaobai-kanban",
+  "name": "xiaobai-kanban",
+  "category": "dev",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-15",
+  "updatedAt": "2026-11-16",
+  "github": {
+    "description": "中文 AI 编程助手入门教程：认识 Agent、表达需求、安装 CLI 与学习 Git 工作流。 / Chinese beginner guide to coding agents, CLI setup, and Git workflows.",
+    "stars": 455,
+    "forks": 42,
+    "watchers": 42,
+    "openIssues": 0,
+    "language": "HTML",
+    "license": "MIT",
+    "version": "v0.1.0",
+    "homepage": "https://xiaobai.supercli.site",
+    "topics": [
+      "agent-guide",
+      "ai-agent",
+      "ai-coding",
+      "beginner-friendly",
+      "chinese",
+      "cli",
+      "coding-agent",
+      "command-line",
+      "documentation",
+      "git",
+      "git-workflow",
+      "requirements",
+      "tutorial"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-09-29",
+    "pushedAt": "2026-11-11",
+    "archived": false
+  }
+}

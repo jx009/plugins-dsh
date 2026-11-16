@@ -1,0 +1,37 @@
+{
+  "owner": "Ryder191",
+  "repo": "haloflux",
+  "name": "haloflux",
+  "category": "fun",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-15",
+  "updatedAt": "2026-11-16",
+  "github": {
+    "description": "Beat-driven sci-fi light-ring visualization. Pure Canvas, single HTML, zero dependencies. Noncommercial use only. RYDER CODE / Ms MAIKEBAIs CAT ｜ 节拍驱动的科幻光环数据可视化，纯原生 Canvas 单文件 HTML、零依赖，支持 Wallpaper Engine 动态壁纸。仅限非商业使用，严禁商用。",
+    "stars": 747,
+    "forks": 60,
+    "watchers": 0,
+    "openIssues": 2,
+    "language": "HTML",
+    "license": "",
+    "version": "wallpaper-v1.0",
+    "homepage": "https://ryder191.github.io/haloflux/",
+    "topics": [
+      "canvas",
+      "deepseek-harness",
+      "dsh",
+      "generative-art",
+      "html5",
+      "live-wallpaper",
+      "sci-fi",
+      "visualization",
+      "wallpaper",
+      "wallpaper-engine"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-10-21",
+    "pushedAt": "2026-11-09",
+    "archived": false
+  }
+}

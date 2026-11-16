@@ -1,0 +1,41 @@
+{
+  "owner": "walksls",
+  "repo": "dsh-degeneration-kit",
+  "name": "dsh-degeneration-kit",
+  "category": "session",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-15",
+  "updatedAt": "2026-11-16",
+  "github": {
+    "description": "DSH 防退化套件｜不止打断，还会清创：把退化的思考块从模型可见历史里折叠掉，下一轮不再回传。复读分两型——A 型同一句死磕、B 型短句轮换（最难抓，实测英文 8 块全漏）。两个插件一套闭环，缺一个都会漏。",
+    "stars": 22,
+    "forks": 0,
+    "watchers": 0,
+    "openIssues": 1,
+    "language": "JavaScript",
+    "license": "MIT",
+    "version": "",
+    "homepage": "",
+    "topics": [
+      "agent",
+      "checkpoint",
+      "compaction",
+      "context-management",
+      "context-rot",
+      "cordis-plugin",
+      "deepseek",
+      "dsh",
+      "dsh-plugin",
+      "dsh-plugins",
+      "llm",
+      "plugin",
+      "reasoning-degeneration",
+      "thinking-loop"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-10-14",
+    "pushedAt": "2026-10-30",
+    "archived": false
+  }
+}

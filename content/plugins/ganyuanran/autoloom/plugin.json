@@ -1,0 +1,37 @@
+{
+  "owner": "GanyuanRan",
+  "repo": "Autoloom",
+  "name": "Autoloom",
+  "category": "dev",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-15",
+  "updatedAt": "2026-11-16",
+  "github": {
+    "description": "AI coding with Aegis governance built into execution: baseline-aware changes, evidence-backed delivery. Free desktop client, your choice of model. 将哲科思维融入 AI 开发执行，让变更有依据、交付有证据。用创意编织现实。",
+    "stars": 286,
+    "forks": 11,
+    "watchers": 5,
+    "openIssues": 0,
+    "language": "JavaScript",
+    "license": "",
+    "version": "v0.1.0",
+    "homepage": "autoloom.codes/",
+    "topics": [
+      "aegis",
+      "agentic-coding",
+      "ai-agent",
+      "ai-coding",
+      "coding-agent",
+      "deepseek-harness",
+      "desktop-app",
+      "developer-tools",
+      "engineering-governance",
+      "software-development"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-09-30",
+    "pushedAt": "2026-11-13",
+    "archived": false
+  }
+}

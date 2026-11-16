@@ -1,0 +1,29 @@
+{
+  "owner": "fysh1010",
+  "repo": "mcp-server-fanqie",
+  "name": "mcp-server-fanqie",
+  "category": "tools",
+  "package": "@fysh925/mcp-server-fanqie",
+  "verified": false,
+  "listedAt": "2026-11-15",
+  "updatedAt": "2026-11-16",
+  "github": {
+    "description": "番茄小说 MCP、独立 Skill 与 DeepSeek Harness 阅读插件，支持搜书、阅读官网可见章节，以及查看本人书架和收藏划线。",
+    "stars": 57,
+    "forks": 5,
+    "watchers": 0,
+    "openIssues": 3,
+    "language": "JavaScript",
+    "license": "MIT",
+    "version": "v0.2.0-dev.6",
+    "homepage": "",
+    "topics": [
+      "dsh-plugin",
+      "dsh-plugins"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-01-16",
+    "pushedAt": "2026-10-31",
+    "archived": false
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "owner": "MochiNek0",
+  "repo": "dsh-desktop",
+  "name": "dsh-desktop",
+  "category": "interface",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-15",
+  "updatedAt": "2026-11-16",
+  "github": {
+    "description": "Unofficial lightweight desktop client for DeepSeek Harness (dsh web), built with Tauri. A few-MB installer that runs dsh in a native window and lets your phone connect to it over LAN, Tailscale or Cloudflare. Same sessions as the CLI.",
+    "stars": 24,
+    "forks": 1,
+    "watchers": 0,
+    "openIssues": 1,
+    "language": "Rust",
+    "license": "AGPL-3.0",
+    "version": "v0.1.32",
+    "homepage": "https://dsh-desktop.cc.cd/",
+    "topics": [
+      "deepseek",
+      "deepseek-harness",
+      "deepseek-harness-desktop",
+      "desktop",
+      "desktop-app",
+      "dsh",
+      "dsh-plugin",
+      "dsh-plugins",
+      "mobile",
+      "remote-access",
+      "tauri"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-14",
+    "pushedAt": "2026-11-09",
+    "archived": false
+  }
+}

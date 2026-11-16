@@ -1,0 +1,39 @@
+{
+  "owner": "runzhliu",
+  "repo": "welink",
+  "name": "welink",
+  "category": "knowledge",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-15",
+  "updatedAt": "2026-11-16",
+  "github": {
+    "description": "🔍微信聊天数据分析的本地化AI-agent(Docker/Windows/MacOS) · AI分身 / 大模型分析 / 好友排行 / 词云 / 情感趋势 / 群聊画像",
+    "stars": 323,
+    "forks": 65,
+    "watchers": 0,
+    "openIssues": 7,
+    "language": "TypeScript",
+    "license": "AGPL-3.0",
+    "version": "v0.4.2",
+    "homepage": "https://welink.click",
+    "topics": [
+      "chat-analysis",
+      "chat-history",
+      "chat-mcp",
+      "deepseek-harness",
+      "dsh-plugin",
+      "llm",
+      "macos",
+      "mcp-server",
+      "skill",
+      "skills",
+      "wechat",
+      "weixin"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-03-17",
+    "pushedAt": "2026-11-10",
+    "archived": false
+  }
+}

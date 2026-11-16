@@ -1,0 +1,30 @@
+{
+  "owner": "zhu168",
+  "repo": "dsh-save-money",
+  "name": "dsh-save-money",
+  "category": "model",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-15",
+  "updatedAt": "2026-11-16",
+  "github": {
+    "description": "Save-money plugin for DSH (DeepSeek Harness) — define your own \"pause / resume\" time windows; at pause time running long tasks are paused (not stopped) automatically, and they resume when the window ends. ",
+    "stars": 38,
+    "forks": 2,
+    "watchers": 0,
+    "openIssues": 1,
+    "language": "JavaScript",
+    "license": "MIT",
+    "version": "v1.4.4",
+    "homepage": "",
+    "topics": [
+      "dsh",
+      "dsh-plugin",
+      "dsh-plugins"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-15",
+    "pushedAt": "2026-08-22",
+    "archived": false
+  }
+}

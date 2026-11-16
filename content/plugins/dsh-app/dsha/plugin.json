@@ -1,0 +1,37 @@
+{
+  "owner": "DSH-APP",
+  "repo": "DSHA",
+  "name": "DSHA",
+  "category": "integration",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-15",
+  "updatedAt": "2026-11-16",
+  "github": {
+    "description": "免 ROOT 免 Termux，在手机上跑 DeepSeek Harness。完整 Ubuntu 环境 + proroot 零 ptrace 开销 · AI 输出实时上屏 · ADB 直连 · 数据不丢",
+    "stars": 3414,
+    "forks": 202,
+    "watchers": 12,
+    "openIssues": 61,
+    "language": "Java",
+    "license": "MIT",
+    "version": "v0.2.2",
+    "homepage": "",
+    "topics": [
+      "android",
+      "coding-agent",
+      "deepseek",
+      "deepseek-harness",
+      "launcher",
+      "llm",
+      "proot",
+      "proroot",
+      "shizuku",
+      "webui"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-14",
+    "pushedAt": "2026-11-14",
+    "archived": false
+  }
+}

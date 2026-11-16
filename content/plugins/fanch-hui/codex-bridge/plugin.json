@@ -1,0 +1,38 @@
+{
+  "owner": "Fanch-hui",
+  "repo": "codex-bridge",
+  "name": "codex-bridge",
+  "category": "integration",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-15",
+  "updatedAt": "2026-11-16",
+  "github": {
+    "description": "ChatGPT的MCP 桥接工具，赋予网页版ChatGPT本地读写能力，并将ChatGPT连接至本机codex、agy、dsh、opencode，作为大脑调用本机agent。Connect ChatGPT to local projects and coding agents via MCP. Run Codex, OpenCode, DeepSeek Harness & Antigravity with approvals, live output and session control.",
+    "stars": 313,
+    "forks": 48,
+    "watchers": 1,
+    "openIssues": 12,
+    "language": "Swift",
+    "license": "Apache-2.0",
+    "version": "v3.0.2",
+    "homepage": "",
+    "topics": [
+      "antigravity",
+      "chatgpt",
+      "codex",
+      "deepseek",
+      "deepseek-harness",
+      "deepseek-harness-plugin",
+      "developer-tools",
+      "mcp",
+      "mcp-server",
+      "opencode",
+      "qwen-studio"
+    ],
+    "defaultBranch": "win",
+    "createdAt": "2026-08-21",
+    "pushedAt": "2026-11-09",
+    "archived": false
+  }
+}

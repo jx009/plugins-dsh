@@ -1,0 +1,41 @@
+{
+  "owner": "WSK-build",
+  "repo": "DSHBox",
+  "name": "DSHBox",
+  "category": "integration",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-15",
+  "updatedAt": "2026-11-16",
+  "github": {
+    "description": "DSHBox — 移动端本地运行和远程操控 DeepSeek Harness。自带终端、文件管理器、浏览器、手机操控等工具，致力打造一站式随身 AI 工作台，免 ROOT 和 Termux。",
+    "stars": 663,
+    "forks": 44,
+    "watchers": 4,
+    "openIssues": 20,
+    "language": "Kotlin",
+    "license": "GPL-3.0",
+    "version": "v1.5.4",
+    "homepage": "https://wsk-build.github.io/DSHBox/",
+    "topics": [
+      "ai-agent",
+      "android",
+      "android-agent",
+      "android-app",
+      "deepseek-harness",
+      "deepseek-harness-android",
+      "deepseek-harness-mobile",
+      "dsh",
+      "dsh-android",
+      "dsh-android-mobile",
+      "dsh-mobile",
+      "kotlin",
+      "llm",
+      "shizuku"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-17",
+    "pushedAt": "2026-11-13",
+    "archived": false
+  }
+}
