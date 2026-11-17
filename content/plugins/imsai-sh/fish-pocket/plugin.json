@@ -1,0 +1,42 @@
+{
+  "owner": "imsai-sh",
+  "repo": "fish-pocket",
+  "name": "fish-pocket",
+  "category": "interface",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-17",
+  "updatedAt": "2026-11-17",
+  "github": {
+    "description": "DSH iOS 移动版：在 iPhone 和 iPad 上本机运行 DeepSeek Harness，界面完全原生，不连电脑和服务器。Run DSH (DeepSeek Harness) natively on iPhone and iPad: no computer, no server.",
+    "stars": 294,
+    "forks": 33,
+    "watchers": 1,
+    "openIssues": 28,
+    "language": "Swift",
+    "license": "",
+    "version": "",
+    "homepage": "https://apps.apple.com/cn/app/fish-pocket/id6830703602",
+    "topics": [
+      "ai-agent",
+      "coding-agent",
+      "deepseek",
+      "deepseek-harness",
+      "dsh",
+      "dsh-ios",
+      "dsh-ipad",
+      "dsh-mobile",
+      "dsh-mobile-app",
+      "fish-pocket",
+      "ios",
+      "ipad",
+      "nodejs-mobile",
+      "on-device",
+      "swiftui"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-11-05",
+    "pushedAt": "2026-11-17",
+    "archived": false
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "owner": "oceanbase",
+  "repo": "powercontext",
+  "name": "powercontext",
+  "category": "memory",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-12",
+  "updatedAt": "2026-11-17",
+  "github": {
+    "description": "Agent memory: long-term memory & agent memory handoff. Claude Code & Codex.",
+    "stars": 1677,
+    "forks": 663,
+    "watchers": 9,
+    "openIssues": 145,
+    "language": "Python",
+    "license": "Apache-2.0",
+    "version": "powercontext-v1.5.1",
+    "homepage": "https://powercontext.oceanbase.io",
+    "topics": [
+      "agent",
+      "agent-context",
+      "agent-memory",
+      "ai-memory",
+      "claude-code",
+      "claude-code-memory",
+      "codex",
+      "codex-memory",
+      "context",
+      "context-engine",
+      "dsh-plugin",
+      "handoff",
+      "long-term-memory",
+      "runtime",
+      "self-evolving"
+    ],
+    "defaultBranch": "master",
+    "createdAt": "2025-11-10",
+    "pushedAt": "2026-11-16",
+    "archived": false
+  }
+}

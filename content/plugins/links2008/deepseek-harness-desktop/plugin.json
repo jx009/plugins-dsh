@@ -1,0 +1,37 @@
+{
+  "owner": "Links2008",
+  "repo": "DeepSeek-Harness-Desktop",
+  "name": "DeepSeek-Harness-Desktop",
+  "category": "interface",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-17",
+  "updatedAt": "2026-11-17",
+  "github": {
+    "description": " Windows 桌面版 DeepSeek Harness 发行版，支持原生通知、流畅的窗口控制、捆绑运行时和自动更新。追踪官方主分支。针对官方版本进行了桌面美化和功能补充",
+    "stars": 46,
+    "forks": 8,
+    "watchers": 3,
+    "openIssues": 0,
+    "language": "JavaScript",
+    "license": "MIT",
+    "version": "v4.5",
+    "homepage": "https://github.com/Links2008/DeepSeek-Harness-Desktop/releases/latest",
+    "topics": [
+      "auto-update",
+      "deepseek",
+      "deepseek-harness",
+      "desktop-app",
+      "dsh",
+      "dsh-plugin",
+      "dsh-plugins",
+      "electron",
+      "windows",
+      "windows-notifications"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-14",
+    "pushedAt": "2026-10-21",
+    "archived": false
+  }
+}

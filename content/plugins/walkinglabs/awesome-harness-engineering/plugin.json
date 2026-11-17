@@ -1,0 +1,40 @@
+{
+  "owner": "walkinglabs",
+  "repo": "awesome-harness-engineering",
+  "name": "awesome-harness-engineering",
+  "category": "dev",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-16",
+  "updatedAt": "2026-11-17",
+  "github": {
+    "description": "🛠️ Awesome tools & guides for harness engineering.",
+    "stars": 4730,
+    "forks": 497,
+    "watchers": 32,
+    "openIssues": 33,
+    "language": "",
+    "license": "CC0-1.0",
+    "version": "",
+    "homepage": "",
+    "topics": [
+      "agent",
+      "agentic",
+      "agentic-ai",
+      "ai",
+      "ai-agents",
+      "awesome",
+      "awesome-list",
+      "awesome-lists",
+      "awesome-resources",
+      "harness",
+      "harness-engineering",
+      "harness-framework",
+      "llm"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-03-29",
+    "pushedAt": "2026-11-09",
+    "archived": false
+  }
+}

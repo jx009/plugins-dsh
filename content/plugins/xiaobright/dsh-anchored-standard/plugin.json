@@ -1,0 +1,31 @@
+{
+  "owner": "xiaobright",
+  "repo": "dsh-anchored-standard",
+  "name": "dsh-anchored-standard",
+  "category": "agent",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-12",
+  "updatedAt": "2026-11-17",
+  "github": {
+    "description": "Two-phase DeepSeek Harness preset: Minimal-aligned bootstrap, then full Standard tools (Project2 98/99)",
+    "stars": 3715,
+    "forks": 122,
+    "watchers": 4,
+    "openIssues": 21,
+    "language": "JavaScript",
+    "license": "",
+    "version": "v0.1.0",
+    "homepage": "https://github.com/xiaobright/modeltest",
+    "topics": [
+      "deepseek",
+      "deepseek-harness",
+      "dsh-plugin",
+      "llm-agent"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-14",
+    "pushedAt": "2026-10-21",
+    "archived": false
+  }
+}

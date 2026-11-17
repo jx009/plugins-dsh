@@ -1,0 +1,33 @@
+{
+  "owner": "sorsama",
+  "repo": "deepseek-harness-mobile",
+  "name": "deepseek-harness-mobile",
+  "category": "integration",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-17",
+  "updatedAt": "2026-11-17",
+  "github": {
+    "description": "Android companion for DeepSeek Harness | chat, goals, approvals & notifications from your phone, over your LAN. Kotlin + Jetpack Compose.",
+    "stars": 326,
+    "forks": 50,
+    "watchers": 2,
+    "openIssues": 3,
+    "language": "Kotlin",
+    "license": "MIT",
+    "version": "v0.22.0",
+    "homepage": "https://dshm.zyphite.com",
+    "topics": [
+      "ai-agents",
+      "cordis",
+      "deepseek",
+      "dsh",
+      "dsh-plugin",
+      "dsh-plugins"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-14",
+    "pushedAt": "2026-11-15",
+    "archived": false
+  }
+}

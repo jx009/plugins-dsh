@@ -1,0 +1,37 @@
+{
+  "owner": "kuangre123",
+  "repo": "iosdev",
+  "name": "iosdev",
+  "category": "agent",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-17",
+  "updatedAt": "2026-11-17",
+  "github": {
+    "description": "ios app 开发 skill",
+    "stars": 30,
+    "forks": 1,
+    "watchers": 0,
+    "openIssues": 0,
+    "language": "",
+    "license": "MIT",
+    "version": "v1.0.0",
+    "homepage": "",
+    "topics": [
+      "app",
+      "apple",
+      "apple-intelligence",
+      "apple-watch",
+      "dsh-plugin",
+      "dsh-plugins",
+      "ios",
+      "mac",
+      "macos",
+      "swift"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2025-06-20",
+    "pushedAt": "2026-01-09",
+    "archived": false
+  }
+}

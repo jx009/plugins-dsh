@@ -1,0 +1,39 @@
+{
+  "owner": "fumingyang2004",
+  "repo": "Tulpa",
+  "name": "Tulpa",
+  "category": "integration",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-16",
+  "updatedAt": "2026-11-17",
+  "github": {
+    "description": "使用MCP，让你几乎所有的Agent访问QQ/微信/B站，甚至亲自下场水群和发消息！",
+    "stars": 532,
+    "forks": 38,
+    "watchers": 6,
+    "openIssues": 8,
+    "language": "Python",
+    "license": "MIT",
+    "version": "v0.5.7",
+    "homepage": "",
+    "topics": [
+      "ai-agents",
+      "antigravity",
+      "bilibili",
+      "claude-code",
+      "codex",
+      "deepseek-harness",
+      "gpt",
+      "mcp",
+      "onebot",
+      "qq-bot",
+      "snowluma",
+      "workbuddy"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-09-26",
+    "pushedAt": "2026-10-24",
+    "archived": false
+  }
+}
