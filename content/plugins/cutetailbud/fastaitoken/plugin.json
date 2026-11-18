@@ -1,0 +1,39 @@
+{
+  "owner": "cutetailbud",
+  "repo": "FastAIToken",
+  "name": "FastAIToken",
+  "category": "model",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-18",
+  "updatedAt": "2026-11-18",
+  "github": {
+    "description": "面向程序员coding群体和企业的AI中转站",
+    "stars": 296,
+    "forks": 1,
+    "watchers": 1,
+    "openIssues": 2,
+    "language": "Python",
+    "license": "",
+    "version": "v1.0.0",
+    "homepage": "https://www.fastaitoken.com/",
+    "topics": [
+      "claude",
+      "deepseek-harness",
+      "gemini",
+      "glm",
+      "gpt",
+      "grok",
+      "h3",
+      "kimi",
+      "maas",
+      "qwen",
+      "seedance",
+      "wan3"
+    ],
+    "defaultBranch": "master",
+    "createdAt": "2026-11-10",
+    "pushedAt": "2026-11-14",
+    "archived": false
+  }
+}

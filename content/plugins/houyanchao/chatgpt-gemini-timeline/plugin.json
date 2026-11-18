@@ -1,0 +1,42 @@
+{
+  "owner": "houyanchao",
+  "repo": "chatgpt-gemini-timeline",
+  "name": "chatgpt-gemini-timeline",
+  "category": "session",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-13",
+  "updatedAt": "2026-11-18",
+  "github": {
+    "description": "ChatGPT & Gemini：Add Folders, Timeline & Prompts. - 为 ChatGPT & Gemini 添加文件夹、提示词库和时间轴。",
+    "stars": 476,
+    "forks": 33,
+    "watchers": 0,
+    "openIssues": 106,
+    "language": "JavaScript",
+    "license": "",
+    "version": "",
+    "homepage": "https://timeline4ai.com",
+    "topics": [
+      "chatgpt",
+      "chrome",
+      "chrome-extension",
+      "deepseek",
+      "deepseek-harness",
+      "deepseek-harness-plugin",
+      "dsh",
+      "dsh-plugin",
+      "dsh-plugins",
+      "gemini",
+      "kimi",
+      "qwen",
+      "vibe",
+      "vibe-coding",
+      "vibecoding"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2025-10-11",
+    "pushedAt": "2026-11-16",
+    "archived": false
+  }
+}

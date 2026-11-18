@@ -1,0 +1,42 @@
+{
+  "owner": "qiz029",
+  "repo": "dscode",
+  "name": "dscode",
+  "category": "dev",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-18",
+  "updatedAt": "2026-11-18",
+  "github": {
+    "description": "A DeepSeek coding agent harness: persistent shell, Ultra subagents, auto approval, Chrome MCP and session telemetry",
+    "stars": 1002,
+    "forks": 6,
+    "watchers": 0,
+    "openIssues": 4,
+    "language": "JavaScript",
+    "license": "MIT",
+    "version": "v0.7.54",
+    "homepage": "https://www.npmjs.com/package/@toddzheng024/dscode",
+    "topics": [
+      "agentic",
+      "ai-agent",
+      "cli",
+      "code-review",
+      "coding-agent",
+      "deepseek",
+      "deepseek-harness",
+      "developer-tools",
+      "jev",
+      "llm",
+      "macos",
+      "mcp",
+      "nodejs",
+      "terminal",
+      "tui"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-09-11",
+    "pushedAt": "2026-11-13",
+    "archived": false
+  }
+}
