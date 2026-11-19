@@ -94,8 +94,26 @@ ${["about", "submit", "contact", "privacy", "terms"].map(pageLink).join("\n")}
 </div></footer>`;
 }
 
-const searchDialog = (ctx) => `<dialog class="sd" id="search" aria-label="${esc(ctx.t("ui.search"))}">
-<div class="sd-box">
+/**
+ * 页面中部的推荐位。内容来自 site.config.json 的 promo，按当前语言取；首页不放。
+ * 外链加 sponsored/nofollow，符合广告链接的搜索引擎规范。
+ */
+function promo(ctx, page) {
+  const p = ctx.cfg.promo;
+  if (!p || !p.url || page.section === "home") return "";
+  const t = p[ctx.lang] || p.en;
+  if (!t || !t.title) return "";
+  return `<aside class="promo" aria-label="${esc(t.eyebrow || "Sponsored")}"><div class="wrap promo-in">
+<div class="promo-txt">
+<p class="promo-eyebrow">${esc(t.eyebrow || "")}</p>
+<p class="promo-title">${esc(t.title)}</p>
+<p class="promo-body">${esc(t.body || "")}</p>
+</div>
+<a class="promo-cta" href="${esc(p.url)}" rel="sponsored nofollow noopener" target="_blank">${esc(t.cta || "Learn more")}<span aria-hidden="true">→</span></a>
+</div></aside>`;
+}
+
+const searchDialog = (ctx) => `<dialog class="sd" id="search" aria-label="${esc(ctx.t("ui.search"))}"><div class="sd-box">
 <label class="sd-field">${icon("search", 18)}<input type="search" id="search-input" placeholder="${esc(ctx.t("ui.searchPlaceholder"))}" autocomplete="off" spellcheck="false"></label>
 <ul class="sd-results" id="search-results"></ul>
 <p class="sd-hint">${esc(ctx.t("ui.searchHint"))}</p>
@@ -139,6 +157,7 @@ ${analytics(ctx.cfg)}
 <body${page.bodyClass ? ` class="${page.bodyClass}"` : ""}>
 <a class="skip" href="#main">${esc(ctx.t("ui.skip"))}</a>
 ${header(ctx, page)}
+${promo(ctx, page)}
 <main id="main">
 ${page.body}
 </main>

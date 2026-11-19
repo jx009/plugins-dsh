@@ -425,3 +425,88 @@
 .chips a:hover {
   border-color: var(--ink);
 }
+
+/* 推荐位：页头下方、正文之上，整条横幅，深浅色都保证对比度 */
+.promo {
+  border-bottom: 1px solid var(--rule);
+  background: #1d2a20;
+  color: #f2f5ef;
+}
+:root[data-theme="dark"] .promo {
+  background: #101c15;
+  color: #eef4ea;
+}
+.promo-in {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 22px 0;
+}
+.promo-txt {
+  flex: 1;
+  min-width: 0;
+}
+.promo-eyebrow {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 2px 9px;
+  border-radius: 99px;
+  background: #3ddc84;
+  color: #06240f;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.promo-title {
+  margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: inherit;
+}
+.promo-body {
+  margin: 0;
+  max-width: 68ch;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(242, 245, 239, 0.78);
+}
+.promo-cta {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 22px;
+  border-radius: var(--r-ctl);
+  background: #3ddc84;
+  color: #06240f;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.promo-cta:hover {
+  background: #4ff094;
+}
+.promo-cta:focus-visible {
+  outline: 2px solid #3ddc84;
+  outline-offset: 3px;
+}
+@media (max-width: 760px) {
+  .promo-in {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 0;
+  }
+  .promo-title {
+    font-size: 19px;
+  }
+  .promo-cta {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -5,14 +5,51 @@
   "submitUrl": "",
   "defaultLang": "en",
   "langs": {
-    "en": { "prefix": "", "hreflang": "en-US", "htmlLang": "en", "ogLocale": "en_US", "label": "English" },
-    "zh": { "prefix": "/zh", "hreflang": "zh-CN", "htmlLang": "zh-CN", "ogLocale": "zh_CN", "label": "简体中文" }
+    "en": {
+      "prefix": "",
+      "hreflang": "en-US",
+      "htmlLang": "en",
+      "ogLocale": "en_US",
+      "label": "English"
+    },
+    "zh": {
+      "prefix": "/zh",
+      "hreflang": "zh-CN",
+      "htmlLang": "zh-CN",
+      "ogLocale": "zh_CN",
+      "label": "简体中文"
+    }
   },
   "installCommand": "dsh plugin --profile web add {package}",
-  "perPage": { "plugins": 30, "tutorials": 12 },
+  "promo": {
+    "url": "https://callyouai.com/?aff=DSHP",
+    "en": {
+      "eyebrow": "Recommended",
+      "title": "One API for GPT, Claude and Gemini",
+      "body": "Bring the strongest models into your harness without juggling four accounts. A single endpoint speaks the OpenAI format, so DSH, Codex and your own scripts all point at the same URL.",
+      "cta": "Open the console"
+    },
+    "zh": {
+      "eyebrow": "推荐",
+      "title": "一个 API 调用 GPT、Claude 与 Gemini",
+      "body": "不用来回切换几个平台的账号，一个接口就能用上主流旗舰模型。接口兼容 OpenAI 格式，DSH、Codex 和自己的脚本都指向同一个地址。",
+      "cta": "进入控制台"
+    }
+  },
+  "perPage": {
+    "plugins": 30,
+    "tutorials": 12
+  },
   "sitemapShardSize": 2000,
-  "analytics": { "ga4": "", "baidu": "f16b87aed0cef37e5d0fefcc132ec1e7" },
-  "verification": { "google": "", "bing": "", "baidu": "" },
+  "analytics": {
+    "ga4": "",
+    "baidu": "f16b87aed0cef37e5d0fefcc132ec1e7"
+  },
+  "verification": {
+    "google": "",
+    "bing": "",
+    "baidu": ""
+  },
   "official": {
     "repo": "https://github.com/deepseek-ai/deepseek-harness",
     "docs": "https://deepseek-harness.github.io/deepseek-harness/"
