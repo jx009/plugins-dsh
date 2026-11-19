@@ -1,0 +1,32 @@
+{
+  "owner": "whitelonng",
+  "repo": "dshcode",
+  "name": "DSHCode",
+  "category": "interface",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-18",
+  "updatedAt": "2026-11-19",
+  "github": {
+    "description": "Community desktop companion for DeepSeek Harness — one-click Electron app for macOS and Windows",
+    "stars": 705,
+    "forks": 30,
+    "watchers": 12,
+    "openIssues": 1,
+    "language": "TypeScript",
+    "license": "MIT",
+    "version": "desktop-v1.1.0",
+    "homepage": "",
+    "topics": [
+      "agent",
+      "deepseek",
+      "deepseekharness-plugin",
+      "dsh-plugin",
+      "harness"
+    ],
+    "defaultBranch": "master",
+    "createdAt": "2026-08-13",
+    "pushedAt": "2026-09-13",
+    "archived": false
+  }
+}

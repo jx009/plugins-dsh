@@ -1,0 +1,31 @@
+{
+  "owner": "bruc3van",
+  "repo": "awesome-dsh-plugin-pro",
+  "name": "awesome-dsh-plugin-pro",
+  "category": "knowledge",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-19",
+  "updatedAt": "2026-11-19",
+  "github": {
+    "description": "DSH 插件精选专业版：核实真插件，剔除蹭标签和非插件项目，提供场景分类、精选推荐、热度排行与可订阅数据。",
+    "stars": 527,
+    "forks": 80,
+    "watchers": 0,
+    "openIssues": 1,
+    "language": "JavaScript",
+    "license": "MIT",
+    "version": "v0.20261118.5",
+    "homepage": "https://x.com/bruc3van",
+    "topics": [
+      "awesome-list",
+      "deepseek-harness",
+      "dsh",
+      "dsh-plugin"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-13",
+    "pushedAt": "2026-11-19",
+    "archived": false
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "owner": "Ebony-Vinyl",
+  "repo": "EAC-Pack",
+  "name": "EAC-Pack",
+  "category": "dev",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-18",
+  "updatedAt": "2026-11-19",
+  "github": {
+    "description": "Embracing All Creation (Plugin Suite) — Dedicated to the Harmonious Coexistence of Hundreds of DSH Plugins / 揽尽万象（插件整合包） —— 致力于让数百个DSH插件和谐共存",
+    "stars": 1190,
+    "forks": 12,
+    "watchers": 1,
+    "openIssues": 5,
+    "language": "JavaScript",
+    "license": "",
+    "version": "v0.2.1",
+    "homepage": "",
+    "topics": [
+      "dsh",
+      "dsh-plugin",
+      "dsh-plugins"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-10-01",
+    "pushedAt": "2026-10-25",
+    "archived": false
+  }
+}
