@@ -57,7 +57,7 @@ async function prepare(gh, item, query, stats, job, manual = false) {
   }
 
   if (job) job.step = `改写 ${meta.owner}/${meta.repo}`;
-  const result = await rewrite(meta, readme);
+  const result = await rewrite(meta, readme, job ? (step) => (job.step = `${meta.owner}/${meta.repo} ${step}`) : undefined);
   if (!result.relevant) {
     if (manual) throw new Error(`模型判断它和 DSH 无关：${result.reason}`);
     store.addRejected(meta.owner, meta.repo, result.reason, true);
@@ -103,15 +103,16 @@ async function addOne(input) {
 }
 
 /** 对队列里的一条重新拉数据、重新改写；你改过的文案会被覆盖 */
-async function regenerate(id) {
+async function regenerate(id, onStep) {
   const cfg = loadConfig();
   if (!cfg.token) throw new Error("还没有填 GitHub 令牌。");
   const cur = store.readQueue().find((x) => x.id === id);
   if (!cur) throw new Error("候选不存在。");
   if (cur.status === "published") throw new Error("已经发布的不能重新改写。");
   const gh = makeClient(cfg.token);
+  if (onStep) onStep("拉取仓库数据");
   const { meta, readme } = await fetchMeta(gh, cur.owner, cur.repo);
-  const result = await rewrite(meta, readme);
+  const result = await rewrite(meta, readme, onStep);
   if (!result.relevant) throw new Error(`模型判断它和 DSH 无关：${result.reason}。原文案没有改动，不想要可以直接拒绝。`);
   const draft = { ...skeleton(meta, result.data), listedAt: (cur.draft && cur.draft.listedAt) || today() };
   return store.updateItem(id, { draft, status: "pending", error: result.note || "" });

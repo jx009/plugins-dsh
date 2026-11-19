@@ -1,6 +1,7 @@
 // 把 GitHub 仓库的裸数据改写成站点用的中英文文案。走 OpenAI 兼容接口，没配密钥时只留骨架等你手动补。
 const { loadConfig, categories, siteConfig } = require("./config");
-const { SYSTEM, fill } = require("./prompt");
+const { buildPrompt } = require("./prompt");
+const { seoCheck } = require("./seo");
 
 // 关键词 → 分类，只用于模型没给分类（或没配模型）时的兜底
 const HINTS = [
@@ -62,12 +63,13 @@ function sanitizeMarkdown(src) {
     .join("");
 }
 
-/** 调一次 chat/completions，返回文本。超时 90 秒；接口不接受 JSON 模式时自动退回普通模式。 */
+/** 调一次 chat/completions，返回文本。单次最多等 180 秒，超时自动重试一次；接口不接受 JSON 模式时退回普通模式。 */
 async function chat(model, messages, maxTokens = 8000) {
   const url = model.baseUrl.replace(/\/+$/, "") + "/chat/completions";
+  const TIMEOUT = 180000;
   const call = async (jsonMode) => {
     const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 90000);
+    const timer = setTimeout(() => ctrl.abort(), TIMEOUT);
     try {
       const res = await fetch(url, {
         method: "POST",
@@ -90,18 +92,31 @@ async function chat(model, messages, maxTokens = 8000) {
       const data = await res.json();
       return (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || "";
     } catch (e) {
-      if (e.name === "AbortError") throw new Error("模型接口超时（90 秒），可以稍后重试或换一个更快的模型。");
+      if (e.name === "AbortError") {
+        const err = new Error(`模型接口超时（${TIMEOUT / 1000} 秒）`);
+        err.timeout = true;
+        throw err;
+      }
       throw e;
     } finally {
       clearTimeout(timer);
     }
   };
+  const once = async () => {
+    try {
+      return await call(true);
+    } catch (e) {
+      // 有些兼容接口不认 response_format，400 时去掉再试一次
+      if (e.status === 400) return call(false);
+      throw e;
+    }
+  };
   try {
-    return await call(true);
+    return await once();
   } catch (e) {
-    // 有些兼容接口不认 response_format，400 时去掉再试一次
-    if (e.status === 400) return call(false);
-    throw e;
+    // 超时多半是模型当时排队，自动重试一次；再超时就交给上层报错
+    if (!e.timeout) throw e;
+    return once();
   }
 }
 
@@ -112,27 +127,6 @@ function extractJson(text) {
   const end = raw.lastIndexOf("}");
   if (start < 0 || end <= start) throw new Error("模型没有返回 JSON");
   return JSON.parse(raw.slice(start, end + 1));
-}
-
-function prompt(meta, readme, cats) {
-  const catList = cats.map((c) => `- ${c.slug}（${c.name} / ${c.nameEn}）：${c.tagline}`).join("\n");
-  const install = siteConfig().installCommand;
-  return [
-    {
-      role: "system",
-      content: fill(SYSTEM, { name: meta.repo, install, catList }),
-    },
-    {
-      role: "user",
-      content: `仓库：${meta.owner}/${meta.repo}
-描述：${meta.github.description || "（无）"}
-Topics：${(meta.github.topics || []).join(", ") || "（无）"}
-语言：${meta.github.language || "未知"}；星标：${meta.github.stars}；许可证：${meta.github.license || "未知"}
-npm 包名：${meta.package || "（未在 package.json 中找到）"}
-README（截断）：
-${readme.slice(0, 9000)}`,
-    },
-  ];
 }
 
 /** 没配模型时的骨架：标题留空，正文只有标题和待填提示，审批时一眼能看出没改写 */
@@ -171,49 +165,78 @@ function fallback(meta, readme, cats) {
   };
 }
 
-/** 校验并收紧模型输出；分类不认识时按关键词兜底 */
-function normalize(raw, meta, cats) {
-  const slugs = cats.map((c) => c.slug);
-  const lang = (v, isZh) => {
-    const o = v && typeof v === "object" ? v : {};
-    // 亮点和问答的答案在站点上按行内 Markdown 渲染，同样要清理
-    const faq = (Array.isArray(o.faq) ? o.faq : [])
-      .filter((f) => f && f.q && f.a)
-      .slice(0, 6)
-      .map((f) => ({ q: clamp(f.q, 160), a: sanitizeMarkdown(clamp(f.a, 600)) }));
-    return {
-      keyword: clamp(o.keyword, 80),
-      title: clamp(o.title, 140),
-      description: clamp(o.description, isZh ? 160 : 300),
-      summary: clamp(o.summary, isZh ? 200 : 400),
-      highlights: asArray(o.highlights, 5).map((x) => sanitizeMarkdown(clamp(x, 120))),
-      faq,
-      body: sanitizeMarkdown(o.body),
-    };
-  };
-  const install = String(raw.install || "").trim();
+/** 收紧模型给出的单语言文案；类型不对的丢掉，长度超出的截断 */
+function normalizeLang(o, isZh) {
+  const v = o && typeof o === "object" ? o : {};
+  // 亮点和问答的答案在站点上按行内 Markdown 渲染，同样要清理
+  const faq = (Array.isArray(v.faq) ? v.faq : [])
+    .filter((f) => f && f.q && f.a)
+    .slice(0, 6)
+    .map((f) => ({ q: clamp(f.q, 160), a: sanitizeMarkdown(clamp(f.a, 800)) }));
   return {
-    name: clamp(raw.name, 60) || meta.repo,
-    category: slugs.includes(raw.category) ? raw.category : guessCategory(meta.github.topics || [], meta.github.description || ""),
-    install: /^dsh\s+/.test(install) ? clamp(install, 200) : "",
-    en: lang(raw.en, false),
-    zh: lang(raw.zh, true),
+    keyword: clamp(v.keyword, 80),
+    title: clamp(v.title, 140),
+    description: clamp(v.description, isZh ? 200 : 300),
+    summary: clamp(v.summary, isZh ? 200 : 400),
+    highlights: asArray(v.highlights, 5).map((x) => sanitizeMarkdown(clamp(x, 120))),
+    faq,
+    body: sanitizeMarkdown(v.body),
   };
 }
 
+const MAX_TRIES = 3;
+
 /**
- * 改写一个候选。
- * @returns {Promise<{relevant: boolean, reason?: string, data?: object, note?: string}>}
+ * 改写一个候选：中英文各一次请求并行生成；每次生成后立刻按站点的检查规则自检，
+ * 不合格就把具体原因和上一版一起带回去让模型改，最多 3 轮。
+ * @param {object} meta 仓库信息（含 package）
+ * @param {string} readme README 原文
+ * @param {(step: string) => void} [onStep] 进度回调，给后台任务显示
  */
-async function rewrite(meta, readme) {
+async function rewrite(meta, readme, onStep) {
   const cfg = loadConfig();
   const cats = categories();
   if (!cfg.model.apiKey) return { relevant: true, data: fallback(meta, readme, cats), note: "未配置模型密钥：文案是占位骨架，通过之前要手动补完" };
+  const template = siteConfig().installCommand;
 
-  const text = await chat(cfg.model, prompt(meta, readme, cats));
-  const raw = extractJson(text);
-  if (raw.relevant === false) return { relevant: false, reason: clamp(raw.reason || "模型判断与 DSH 无关", 200) };
-  return { relevant: true, data: normalize(raw, meta, cats) };
+  // 一种语言：生成 → 自检 → 有问题把原因带回去重生成，最多 MAX_TRIES 轮
+  async function oneLang(lang) {
+    let prev = null;
+    let problems = [];
+    let meta0 = null;
+    for (let attempt = 1; attempt <= MAX_TRIES; attempt++) {
+      if (onStep) onStep(`${lang === "zh" ? "中文" : "英文"}第 ${attempt} 轮`);
+      const messages = buildPrompt(meta, readme, cats, lang, { install: template, problems, prev });
+      const text = await chat(cfg.model, messages, 4000);
+      const raw = extractJson(text);
+      if (raw.relevant === false) return { relevant: false, reason: clamp(raw.reason || "模型判断与 DSH 无关", 200) };
+      if (!meta0) meta0 = { name: clamp(raw.name, 60) || meta.repo, category: raw.category, install: clamp(raw.install || "", 200) };
+      const doc = normalizeLang(raw, lang === "zh");
+      // 用站点同一套规则检查，但只看这次生成的语言；另一种语言由另一次请求负责
+      const found = seoCheck({ draft: { name: meta0.name, en: {}, zh: {}, [lang]: doc } }).filter((p) => p.lang === lang);
+      problems = found.filter((p) => p.level === "bad").slice(0, 10);
+      prev = doc;
+      if (!problems.length) return { relevant: true, doc, meta: meta0, tries: attempt, warnings: found.filter((p) => p.level !== "bad") };
+    }
+    // 3 轮还没达标：保留最后一版（可能已接近），把问题交给调用方展示
+    return { relevant: true, doc: prev, meta: meta0, tries: MAX_TRIES, problems, warnings: [] };
+  }
+
+  const [en, zh] = await Promise.all([oneLang("en"), oneLang("zh")]);
+  if (!en.relevant) return { relevant: false, reason: en.reason };
+  if (!zh.relevant) return { relevant: false, reason: zh.reason };
+
+  const install = /^dsh\s+/.test(en.meta.install) ? en.meta.install : "";
+  const slugs = cats.map((c) => c.slug);
+  const category = slugs.includes(en.meta.category) ? en.meta.category : guessCategory(meta.github.topics || [], meta.github.description || "");
+  const leftover = [...(en.problems || []), ...(zh.problems || [])];
+  const tries = Math.max(en.tries || 1, zh.tries || 1);
+  return {
+    relevant: true,
+    data: { name: en.meta.name, category, install, en: en.doc, zh: zh.doc },
+    note: leftover.length ? `改写 ${tries} 轮后仍有 ${leftover.length} 项没达标：${leftover.map((p) => p.msg).join("；").slice(0, 300)}` : tries > 1 ? `自动调整了 ${tries} 轮，已全部达标` : "",
+    seo: [...(en.warnings || []), ...(zh.warnings || [])],
+  };
 }
 
 module.exports = { rewrite, guessCategory, sanitizeMarkdown };

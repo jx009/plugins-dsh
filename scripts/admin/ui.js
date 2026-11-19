@@ -102,8 +102,21 @@ function notify(kind,text,keep){
   if(!keep&&kind!=="load")setTimeout(function(){if(notice&&notice.text===text){notice=null;render()}},kind==="bad"?10000:4000);
 }
 // 状态没变就不重绘，减少打断正在编辑的输入框
-function accept(j){var raw=JSON.stringify(j);if(raw===S.raw)return;S.raw=raw;S.state=j;render()}
-function load(){return api("GET","/api/state").then(function(j){accept(j);if(get("job.running"))poll()}).catch(function(e){notify("bad",e.message)})}
+function accept(j){
+  var raw=JSON.stringify(j);if(raw===S.raw)return;
+  var before=(S.state&&S.state.jobs)||[],after=j.jobs||[];
+  S.raw=raw;S.state=j;render();
+  // 一轮里出现了新的改写任务：继续轮询看进度
+  var fresh=after.filter(function(a){return !before.some(function(b){return b.id===a.id})&&a.kind==="regen"});
+  if(fresh.length)notify("load","正在改写 "+after.filter(function(a){return a.kind==="regen"}).length+" 条，完成后自动更新。可以继续处理别的候选。",true);
+  // 刚结束的改写任务：成功的提示一下，失败的会把原因写在条目上
+  var done=before.filter(function(b){return !after.some(function(a){return a.id===b.id})&&b.kind==="regen"});
+  if(done.length&&!fresh.length){var bad=done.filter(function(d){return d.error}).length;notify(bad?"bad":"ok",bad?done.length+" 条改写结束，其中 "+bad+" 条失败（原因在该条目上）":"改写完成："+done.map(function(d){return d.label}).join("、"));}
+}
+function jobsOf(kind){return ((S.state&&S.state.jobs)||[]).filter(function(j){return j.kind===kind})}
+function jobFor(id){return ((S.state&&S.state.jobs)||[]).find(function(j){return j.kind==="regen"&&j.id==="regen:"+id})}
+function busyJobs(){return jobsOf("regen").length+jobsOf("add").length}
+function load(){return api("GET","/api/state").then(function(j){accept(j);if(get("job.running")||busyJobs())poll()}).catch(function(e){notify("bad",e.message)})}
 function poll(){
   if(S.timer)return;
   S.timer=setTimeout(function(){
@@ -111,10 +124,10 @@ function poll(){
     api("GET","/api/state").then(function(j){
       var wasRunning=get("job.running");
       accept(j);
-      if(get("job.running"))poll();
+      if(get("job.running")||busyJobs())poll();
       else if(wasRunning)scanDone();
     }).catch(function(e){notify("bad",e.message)});
-  },1800);
+  },2000);
 }
 function scanDone(){
   var jb=get("job")||{},ls=get("lastScan")||{},n=(ls.added||[]).length,errs=(ls.errors||[]).length;
@@ -224,10 +237,10 @@ function item(q){
   var known=false;
   var cats=(get("categories")||[]).map(function(c){if(cat===c.slug)known=true;return '<option value="'+esc(c.slug)+'" '+(cat===c.slug?"selected":"")+'>'+esc(c.name)+" / "+esc(c.nameEn)+'</option>'}).join("");
   if(!known)cats='<option value="" selected>请选择分类</option>'+cats;
-  var open=!!S.open[id],pub=q.status==="published",rg=!!S.regen[id];
+  var open=!!S.open[id],pub=q.status==="published",jb=jobFor(id),rg=!!jb;
   var todo=!pub&&d.en&&(!d.en.title||/TODO/.test(d.en.body||""));
   var body='<div class="bd">'+
-  (rg?'<div class="note">正在重新改写，完成后这里会自动刷新。期间可以先处理别的候选。</div>':"")+
+  (rg?'<div class="note">正在重新改写：'+esc(jb.step||"准备中")+'。完成后这里自动更新，期间可以先处理别的候选。</div>':"")+
   (q.error&&!rg?'<div class="note bad">'+esc(q.error)+'</div>':"")+
   '<p class="sub" style="margin-bottom:12px">仓库原始描述：'+esc(g.description||"（无）")+(d.package?"　npm 包："+esc(d.package):"")+(g.version?"　版本："+esc(g.version):"")+'</p>'+
   '<div class="grid2">'+
@@ -256,7 +269,7 @@ function item(q){
 }
 /** 待审批里还能操作的条目（正在改写的除外），按是否能直接通过分组 */
 function pendingGroups(){
-  var list=(get("queue")||[]).filter(function(q){return q.status==="pending"&&!S.regen[q.id]});
+  var list=(get("queue")||[]).filter(function(q){return q.status==="pending"&&!jobFor(q.id)});
   return {
     all:list.map(function(q){return q.id}),
     sel:list.filter(function(q){return S.sel[q.id]}).map(function(q){return q.id}),
@@ -265,11 +278,11 @@ function pendingGroups(){
   };
 }
 function pendingBar(list){
-  var g=pendingGroups(),running=Object.keys(S.regen).length;
+  var g=pendingGroups(),running=jobsOf("regen").length,adding=jobsOf("add").length;
   var allOn=g.all.length&&g.sel.length===g.all.length;
-  return '<div class="bar"><button class="act" id="addBtn" '+(S.addBusy?"disabled":"")+'>'+(S.addBusy?"添加中…":S.adding?"收起":"手动添加仓库")+'</button>'+
+  return '<div class="bar"><button class="act" id="addBtn" '+(adding?"disabled":"")+'>'+(adding?"添加中…":S.adding?"收起":"手动添加仓库")+'</button>'+
     (list.length?'<label class="pickall"><input type="checkbox" id="pickAll" '+(allOn?"checked":"")+'> 全选</label>':"")+
-    (running?'<span class="mono" style="color:var(--warn);font-size:13px">'+running+' 条改写中</span>':"")+
+    (running||adding?'<span class="mono" style="color:var(--warn);font-size:13px">'+[running?running+" 条改写中":"",adding?"添加中":""].filter(Boolean).join(" · ")+'</span>':"")+
     '<span class="sp"></span>'+
     (list.length?
       '<button class="act" id="regenSel" '+(g.sel.length?"":"disabled")+'>改写选中（'+g.sel.length+'）</button>'+
@@ -277,25 +290,21 @@ function pendingBar(list){
       '<button class="act ok" id="approveOk" '+(g.ok.length?"":"disabled")+' title="校验和 SEO 检查都通过的，一次全部通过">通过达标的（'+g.ok.length+'）</button>':"")+
     '</div>';
 }
-/** 并行重新改写：每条各发一个请求，互不等待；完成一条刷新一条 */
+/** 重新改写：每条各发一个请求，接口立刻返回，改写在服务器后台跑；页面轮询看进度，完成一条刷新一条 */
 function regenerate(ids){
-  ids=ids.filter(function(id){return !S.regen[id]});
+  ids=ids.filter(function(id){return !jobFor(id)});
   if(!ids.length)return;
-  var left=ids.length,failed=0;
-  ids.forEach(function(id){S.regen[id]=true;delete S.sel[id]});
-  notify("load",ids.length===1?"重新改写中，完成后自动刷新。可以继续处理别的候选。":"已开始改写 "+ids.length+" 条，并行进行，完成一条刷新一条。",true);
+  ids.forEach(function(id){delete S.sel[id]});
   ids.forEach(function(id){
-    api("POST","/api/regenerate",{id:id}).then(function(){delete S.edits[id]}).catch(function(err){
-      failed++;
+    api("POST","/api/regenerate",{id:id}).then(function(){
+      delete S.edits[id];
+    }).catch(function(err){
       var q=(get("queue")||[]).find(function(x){return x.id===id});
       notify("bad",(q?q.owner+"/"+q.repo+"：":"")+err.message);
-    }).then(function(){
-      delete S.regen[id];left--;
-      if(!left&&!failed)notify("ok",ids.length===1?"已重新改写":"改写完成，共 "+ids.length+" 条");
-      else if(!left)notify("bad","改写完成，其中 "+failed+" 条失败，原因写在对应条目上");
-      reload();
     });
   });
+  notify("load",ids.length===1?"已开始改写，完成后自动更新。可以继续处理别的候选。":"已开始改写 "+ids.length+" 条，并行进行，完成一条更新一条。",true);
+  setTimeout(function(){reload();poll()},400);
 }
 function queueView(st){
   var list=(get("queue")||[]).filter(function(q){return q.status===st});
@@ -379,13 +388,13 @@ function unsaved(){
 }
 function addRepo(){
   var v=S.addText.trim();
-  if(!v||S.addBusy)return;
-  S.addBusy=true;notify("load","正在拉取 "+v+" 并改写，完成后会出现在待审批里。可以继续处理别的候选。",true);
-  api("POST","/api/add",{target:v}).then(function(){S.addBusy=false;S.addText="";S.adding=false;S.tab="pending";notify("ok","已加入待审批");reload()}).catch(function(err){S.addBusy=false;notify("bad",err.message)});
+  if(!v||jobsOf("add").length)return;
+  notify("load","正在拉取 "+v+" 并改写，完成后会出现在待审批里。可以继续处理别的候选。",true);
+  api("POST","/api/add",{target:v}).then(function(){S.addText="";S.adding=false;setTimeout(function(){reload();poll()},400)}).catch(function(err){notify("bad",err.message)});
 }
 // 保存一条候选的修改；status 传 "approved" / "pending" 时同时改状态。一次请求完成，服务端先存修改再校验
 function saveItem(id,status){
-  if(S.saving[id]||S.regen[id])return;
+  if(S.saving[id]||jobFor(id))return;
   var patch=patchFrom(id),body={};
   if(Object.keys(patch).length)body.patch=patch;
   if(status)body.status=status;
@@ -495,7 +504,7 @@ document.addEventListener("click",function(e){
   if(el.id==="approveOk"){
     var okIds=pendingGroups().ok;
     if(!okIds.length||!confirm("通过 "+okIds.length+" 条校验和 SEO 检查都达标的候选？没达标的留在待审批里。"))return;
-    api("POST","/api/approve-ok",{skip:Object.keys(S.regen).concat(Object.keys(S.edits))}).then(function(r){
+    api("POST","/api/approve-ok",{skip:jobsOf("regen").map(function(j){return j.id.slice(6)}).concat(Object.keys(S.edits))}).then(function(r){
       okIds.forEach(function(x){delete S.sel[x]});
       notify("ok","已通过 "+r.count+" 条，去「已通过」里推送");reload();
     }).catch(function(err){notify("bad",err.message)});

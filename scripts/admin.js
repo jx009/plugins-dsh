@@ -14,6 +14,7 @@ const { scan, addOne, regenerate, startScheduler } = require("./admin/scan");
 const { publish, validate } = require("./admin/publish");
 const { sanitizeMarkdown } = require("./admin/rewrite");
 const { seoCheck } = require("./admin/seo");
+const jobs = require("./admin/jobs");
 const { page, loginPage } = require("./admin/ui");
 const auth = require("./admin/auth");
 const { parseArgs } = require("./lib/paths");
@@ -68,6 +69,8 @@ function state() {
       .map((q) => (q.status === "published" ? q : { ...q, seo: seoCheck(q), problems: validate(q) })),
     rejected: store.readRejected(),
     job: { running: job.running, step: job.step, added: job.added, want: job.want, startedAt: job.startedAt, error: job.error },
+    // 后台任务（改写、添加）：页面靠它显示「改写中」，任务结束就消失，不存在队列
+    jobs: jobs.list(),
     lastScan: loadState().lastScan,
     log: logText,
   };
@@ -270,20 +273,29 @@ async function handleApi(req, res, url) {
 
   if (p === "/api/add") {
     const body = await readBody(req);
-    const rec = await addOne(body.target || body.repo || "");
-    return send(res, 200, { ok: true, item: rec });
+    const target = String(body.target || body.repo || "").trim();
+    const started = jobs.start({ id: `add:${target}`, kind: "add", label: target }, async (step) => {
+      step("拉取仓库数据");
+      await addOne(target);
+    });
+    if (!started) return send(res, 409, { error: `${target} 正在添加中，等它完成。` });
+    return send(res, 202, { ok: true });
   }
 
   if (p === "/api/regenerate") {
     const body = await readBody(req);
-    try {
-      const rec = await regenerate(body.id);
-      return send(res, 200, { ok: true, item: rec });
-    } catch (e) {
-      // 原文案不动，把失败原因挂在这一条上，页面会显示
-      store.updateItem(body.id, { error: `重新改写失败：${e.message}` });
-      throw e;
-    }
+    const cur = store.readQueue().find((x) => x.id === body.id);
+    if (!cur) return send(res, 404, { error: "候选不存在" });
+    const started = jobs.start(
+      { id: `regen:${cur.id}`, kind: "regen", label: `${cur.owner}/${cur.repo}` },
+      (step) => regenerate(cur.id, step),
+      (e) => {
+        // 原文案不动，把失败原因挂在这一条上，页面会显示
+        store.updateItem(cur.id, { error: `重新改写失败：${e.message}` });
+      }
+    );
+    if (!started) return send(res, 409, { error: `${cur.owner}/${cur.repo} 正在改写中，等它完成。` });
+    return send(res, 202, { ok: true });
   }
 
   if (p === "/api/test") {
