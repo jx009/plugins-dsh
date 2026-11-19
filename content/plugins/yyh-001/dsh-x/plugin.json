@@ -1,0 +1,36 @@
+{
+  "owner": "yyh-001",
+  "repo": "DSH-X",
+  "name": "DSH-X",
+  "category": "dev",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-13",
+  "updatedAt": "2026-11-19",
+  "github": {
+    "description": "DeepSeek Harness 启动器：启动项与多实例，版本、插件、整合包、MCP 和技能管理。A DeepSeek Harness launcher: launch entries, multiple instances, versions, plugins, modpacks, MCP and skills.",
+    "stars": 784,
+    "forks": 26,
+    "watchers": 0,
+    "openIssues": 5,
+    "language": "JavaScript",
+    "license": "MIT",
+    "version": "v0.1.26",
+    "homepage": "https://yyh-001.github.io/DSH-X/",
+    "topics": [
+      "deepseek",
+      "deepseek-harness",
+      "dsh",
+      "dsh-plugin",
+      "electron",
+      "launcher",
+      "linux",
+      "macos",
+      "windows"
+    ],
+    "defaultBranch": "Staging",
+    "createdAt": "2026-09-03",
+    "pushedAt": "2026-11-19",
+    "archived": false
+  }
+}

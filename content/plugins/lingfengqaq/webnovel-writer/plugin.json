@@ -1,0 +1,33 @@
+{
+  "owner": "lingfengQAQ",
+  "repo": "webnovel-writer",
+  "name": "webnovel-writer",
+  "category": "workflow",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-12",
+  "updatedAt": "2026-11-19",
+  "github": {
+    "description": "基于 Claude Code 的长篇网文辅助创作系统，解决 AI 写作中的「遗忘」和「幻觉」问题，支持 200 万字量级 连载创作。",
+    "stars": 8016,
+    "forks": 1299,
+    "watchers": 34,
+    "openIssues": 43,
+    "language": "Python",
+    "license": "GPL-3.0",
+    "version": "scriptor-v8.4.2",
+    "homepage": "https://lingfengqaq.github.io/webnovel-writer/",
+    "topics": [
+      "ai-writing",
+      "chinese-novel",
+      "deepseek-harness",
+      "dsh-plugin",
+      "webnovel",
+      "writing-assistant"
+    ],
+    "defaultBranch": "master",
+    "createdAt": "2026-01-02",
+    "pushedAt": "2026-11-19",
+    "archived": false
+  }
+}

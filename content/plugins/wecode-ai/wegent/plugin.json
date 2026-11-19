@@ -1,0 +1,34 @@
+{
+  "owner": "wecode-ai",
+  "repo": "Wegent",
+  "name": "Wegent",
+  "category": "workflow",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-13",
+  "updatedAt": "2026-11-19",
+  "github": {
+    "description": "Plan, build, and deliver with an open-source, self-hostable AI workspace for coding, collaboration, and automation.",
+    "stars": 892,
+    "forks": 149,
+    "watchers": 5,
+    "openIssues": 151,
+    "language": "TypeScript",
+    "license": "Apache-2.0",
+    "version": "wework-v0.6.10",
+    "homepage": "https://wecode-ai.github.io/wegent-docs",
+    "topics": [
+      "agent",
+      "ai",
+      "chatbot",
+      "claude-code",
+      "codex",
+      "dsh-plugin",
+      "wework"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-01-10",
+    "pushedAt": "2026-11-19",
+    "archived": false
+  }
+}

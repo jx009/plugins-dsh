@@ -1,0 +1,36 @@
+{
+  "owner": "mmparko",
+  "repo": "dsh-purge",
+  "name": "dsh-purge",
+  "category": "dev",
+  "package": "dsh-purge",
+  "verified": false,
+  "listedAt": "2026-11-13",
+  "updatedAt": "2026-11-19",
+  "github": {
+    "description": "DeepSeek Harness 破甲 (mirror of YuJunZhiXue/dsh-purge) — 上游即将删库，此为本仓库全量镜像：含全部分支/73 个 tag/完整提交历史。原作者署名与二开要求见 README 署名章节。",
+    "stars": 5508,
+    "forks": 4933,
+    "watchers": 5,
+    "openIssues": 12,
+    "language": "JavaScript",
+    "license": "MIT",
+    "version": "v1.1.71",
+    "homepage": "https://github.com/YuJunZhiXue/dsh-purge",
+    "topics": [
+      "archive",
+      "deepseek",
+      "deepseek-harness",
+      "dsh-plugin",
+      "dsh-plugins",
+      "harness-jailbreak",
+      "jailbreak",
+      "llm-jailbreak",
+      "mirror"
+    ],
+    "defaultBranch": "master",
+    "createdAt": "2026-10-13",
+    "pushedAt": "2026-10-13",
+    "archived": false
+  }
+}
