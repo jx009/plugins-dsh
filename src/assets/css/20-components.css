@@ -426,21 +426,19 @@
   border-color: var(--ink);
 }
 
-/* 推荐位：页头下方、正文之上，整条横幅，深浅色都保证对比度 */
+/* 推荐位：页头下方、正文之上。用站内自己的配色（米色底、墨色字、细边框），
+   不另起一套颜色，靠边框、等宽小标签和排版区分出「这是推荐」。 */
 .promo {
-  border-bottom: 1px solid var(--rule);
-  background: #1d2a20;
-  color: #f2f5ef;
-}
-:root[data-theme="dark"] .promo {
-  background: #101c15;
-  color: #eef4ea;
+  padding: 22px 0 4px;
 }
 .promo-in {
   display: flex;
   align-items: center;
-  gap: 28px;
-  padding: 22px 0;
+  gap: 32px;
+  padding: 20px 24px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-box);
+  background: var(--face);
 }
 .promo-txt {
   flex: 1;
@@ -448,62 +446,76 @@
 }
 .promo-eyebrow {
   display: inline-block;
-  margin: 0 0 8px;
-  padding: 2px 9px;
-  border-radius: 99px;
-  background: #3ddc84;
-  color: #06240f;
+  margin: 0 0 7px;
   font-family: var(--mono);
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
+  color: var(--dim);
+}
+.promo-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: var(--jack, #E5533D);
+  vertical-align: middle;
 }
 .promo-title {
-  margin: 0 0 6px;
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1.25;
+  margin: 0 0 5px;
+  font-size: 21px;
+  font-weight: 650;
+  line-height: 1.28;
   letter-spacing: -0.015em;
-  color: inherit;
+  color: var(--ink);
 }
 .promo-body {
   margin: 0;
-  max-width: 68ch;
-  font-size: 14.5px;
+  max-width: 66ch;
+  font-size: 14px;
   line-height: 1.6;
-  color: rgba(242, 245, 239, 0.78);
+  color: var(--dim);
 }
 .promo-cta {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 13px 22px;
+  padding: 11px 20px;
+  border: 1px solid var(--ink);
   border-radius: var(--r-ctl);
-  background: #3ddc84;
-  color: #06240f;
-  font-size: 15px;
-  font-weight: 700;
+  background: var(--out);
+  color: var(--out-ink);
+  font-size: 14.5px;
+  font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
 }
 .promo-cta:hover {
-  background: #4ff094;
+  background: #000;
+}
+:root[data-theme="dark"] .promo-cta:hover {
+  background: #22242a;
 }
 .promo-cta:focus-visible {
-  outline: 2px solid #3ddc84;
-  outline-offset: 3px;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 @media (max-width: 760px) {
+  .promo {
+    padding: 16px 0 4px;
+  }
   .promo-in {
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
-    padding: 18px 0;
+    gap: 14px;
+    padding: 16px 18px;
   }
   .promo-title {
-    font-size: 19px;
+    font-size: 18px;
   }
   .promo-cta {
     width: 100%;
