@@ -1,0 +1,40 @@
+{
+  "owner": "HarcoChen",
+  "repo": "dsh-vsc-integration",
+  "name": "dsh-vsc-integration",
+  "category": "integration",
+  "package": "dsh-vsc-integration",
+  "verified": false,
+  "listedAt": "2026-11-20",
+  "updatedAt": "2026-11-20",
+  "github": {
+    "description": "DeepSeek Harness (DSH) for VS Code — AI coding with native diffs, tool approvals, persistent sessions, and Trace insights. | AI 编程助手：原生 Diff、工具审批、持久会话与 Trace 分析。",
+    "stars": 23,
+    "forks": 4,
+    "watchers": 0,
+    "openIssues": 1,
+    "language": "TypeScript",
+    "license": "MIT",
+    "version": "v0.12.0",
+    "homepage": "https://marketplace.visualstudio.com/items?itemName=HarcoChen.dsh-vsc-integration",
+    "topics": [
+      "ai-agent",
+      "ai-coding-assistant",
+      "code-review",
+      "coding-agent",
+      "deepseek",
+      "deepseek-harness",
+      "developer-tools",
+      "dsh",
+      "dsh-plugin",
+      "dsh-plugins",
+      "open-vsx",
+      "vscode",
+      "vscode-extension"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-13",
+    "pushedAt": "2026-11-13",
+    "archived": false
+  }
+}

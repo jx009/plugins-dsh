@@ -1,0 +1,35 @@
+{
+  "owner": "anysearch-ai",
+  "repo": "anysearch-mcp-server",
+  "name": "anysearch-mcp-server",
+  "category": "tools",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-20",
+  "updatedAt": "2026-11-20",
+  "github": {
+    "description": "Unified real-time search MCP server supporting general web search, vertical domain search, parallel batch search, and full-page URL content extraction.",
+    "stars": 2068,
+    "forks": 190,
+    "watchers": 100,
+    "openIssues": 2,
+    "language": "",
+    "license": "Apache-2.0",
+    "version": "",
+    "homepage": "https://www.anysearch.com",
+    "topics": [
+      "ai-search",
+      "anysearch",
+      "hermes",
+      "mcp",
+      "mcp-server",
+      "openclaw",
+      "web-search",
+      "websearch"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-04-30",
+    "pushedAt": "2026-11-16",
+    "archived": false
+  }
+}

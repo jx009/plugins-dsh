@@ -1,0 +1,37 @@
+{
+  "owner": "YishenTu",
+  "repo": "claudian",
+  "name": "claudian",
+  "category": "integration",
+  "package": "claudian",
+  "verified": false,
+  "listedAt": "2026-11-20",
+  "updatedAt": "2026-11-20",
+  "github": {
+    "description": "An Obsidian plugin that embeds Claude Code, Codex and other agents as an AI collaborator in your vault.",
+    "stars": 16033,
+    "forks": 1102,
+    "watchers": 39,
+    "openIssues": 43,
+    "language": "TypeScript",
+    "license": "MIT",
+    "version": "2.3.45",
+    "homepage": "",
+    "topics": [
+      "claude-code",
+      "codex",
+      "deepseek-harness",
+      "grok",
+      "ide",
+      "obsidian",
+      "obsidian-plugin",
+      "opencode",
+      "pi",
+      "productivity"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2025-12-05",
+    "pushedAt": "2026-11-19",
+    "archived": false
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "owner": "spacering-net",
+  "repo": "codeg",
+  "name": "codeg",
+  "category": "integration",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-20",
+  "updatedAt": "2026-11-20",
+  "github": {
+    "description": "Collaborative multi-agent AI coding workspace: aggregate sessions from Claude Code, Codex, OpenCode, Pi, Grok Build, etc. Desktop app, self-hosted server, or Docker.",
+    "stars": 4535,
+    "forks": 565,
+    "watchers": 10,
+    "openIssues": 385,
+    "language": "Rust",
+    "license": "Apache-2.0",
+    "version": "v0.46.0",
+    "homepage": "https://docs.codeg.app",
+    "topics": [
+      "acp",
+      "ade",
+      "agent",
+      "claude-code",
+      "code-generation",
+      "codex",
+      "deepseek-harness",
+      "grok-build",
+      "gui",
+      "multi-agent",
+      "opencode",
+      "pi",
+      "terminal",
+      "vibe-coding",
+      "worktrees"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-02-09",
+    "pushedAt": "2026-11-20",
+    "archived": false
+  }
+}

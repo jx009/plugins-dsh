@@ -1,0 +1,42 @@
+{
+  "owner": "vibeinging",
+  "repo": "dsh-desktop",
+  "name": "dsh-desktop",
+  "category": "interface",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-20",
+  "updatedAt": "2026-11-20",
+  "github": {
+    "description": "DeepSeek Harness Desktop App: a local AI desktop workspace for DSH Sessions, projects, files, web research, plugins, and Office artifacts.",
+    "stars": 495,
+    "forks": 23,
+    "watchers": 1,
+    "openIssues": 3,
+    "language": "JavaScript",
+    "license": "MIT",
+    "version": "v0.2.2-rc.3.20261117.1",
+    "homepage": "",
+    "topics": [
+      "agentic-workflows",
+      "ai-agent",
+      "ai-workbench",
+      "data-analysis",
+      "deepseek-harness",
+      "desktop-app",
+      "dsh",
+      "dsh-plugin",
+      "electron",
+      "local-first",
+      "mcp",
+      "model-context-protocol",
+      "office-automation",
+      "react",
+      "typescript"
+    ],
+    "defaultBranch": "dev",
+    "createdAt": "2026-08-13",
+    "pushedAt": "2026-11-19",
+    "archived": false
+  }
+}

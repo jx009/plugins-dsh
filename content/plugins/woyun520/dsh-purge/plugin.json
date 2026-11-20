@@ -1,0 +1,26 @@
+{
+  "owner": "WoYun520",
+  "repo": "dsh-purge",
+  "name": "dsh-purge",
+  "category": "dev",
+  "package": "dsh-purge",
+  "verified": false,
+  "listedAt": "2026-11-20",
+  "updatedAt": "2026-11-20",
+  "github": {
+    "description": "DeepSeek Harness 破甲 (mirror of mmparko/dsh-purge) — 全量镜像：全部分支/100 个 tag/完整提交历史。原作者署名见 README。",
+    "stars": 630,
+    "forks": 861,
+    "watchers": 1,
+    "openIssues": 2,
+    "language": "JavaScript",
+    "license": "MIT",
+    "version": "v1.1.71",
+    "homepage": "",
+    "topics": [],
+    "defaultBranch": "master",
+    "createdAt": "2026-10-21",
+    "pushedAt": "2026-10-21",
+    "archived": false
+  }
+}

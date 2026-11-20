@@ -1,0 +1,34 @@
+{
+  "owner": "firstintent",
+  "repo": "ccteam",
+  "name": "ccteam",
+  "category": "integration",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-20",
+  "updatedAt": "2026-11-20",
+  "github": {
+    "description": "ccteam turns the coding agents you already run (Claude Code, Codex, Grok, DeepSeek Harness, Kimi, Pi) into one team — any session can spawn, dispatch, and collect work from any vendor on any machine, while you steer it all from Telegram, Lark, or a browser tab. 把你在用的编程 agent 编成一支团队,跨厂商跨机器派活,Telegram/飞书/网页统一指挥。",
+    "stars": 649,
+    "forks": 29,
+    "watchers": 0,
+    "openIssues": 10,
+    "language": "Rust",
+    "license": "MIT",
+    "version": "v0.13.2",
+    "homepage": "",
+    "topics": [
+      "agent",
+      "claude-code",
+      "codex",
+      "deepseek-harness",
+      "grok",
+      "kimi-code",
+      "pi"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-05-04",
+    "pushedAt": "2026-11-18",
+    "archived": false
+  }
+}

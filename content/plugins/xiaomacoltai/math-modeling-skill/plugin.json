@@ -1,0 +1,37 @@
+{
+  "owner": "XiaoMaColtAI",
+  "repo": "math-modeling-skill",
+  "name": "math-modeling-skill",
+  "category": "agent",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-20",
+  "updatedAt": "2026-11-20",
+  "github": {
+    "description": "数学建模技能 - 面向 CUMCM、MCM/ICM 等数学建模竞赛的三阶段工作流：建模分析、Python/MATLAB 编程与 DOCX 论文生成。包含丰富的算法资源库(优化/预测/评价/图论/机器学习等)、角色指导文档、论文模板和实用工具脚本",
+    "stars": 1961,
+    "forks": 105,
+    "watchers": 6,
+    "openIssues": 4,
+    "language": "Python",
+    "license": "",
+    "version": "v1.3.0",
+    "homepage": "https://mms.weseeworld.cn",
+    "topics": [
+      "claude-code",
+      "claude-skills",
+      "codex",
+      "codex-skill",
+      "cumcm",
+      "deepseek-harness",
+      "math-modeling",
+      "mcm-icm",
+      "skills",
+      "vibe-coding"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-01-24",
+    "pushedAt": "2026-11-19",
+    "archived": false
+  }
+}

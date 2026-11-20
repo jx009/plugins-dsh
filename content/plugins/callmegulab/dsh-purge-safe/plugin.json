@@ -1,0 +1,36 @@
+{
+  "owner": "CallMeGuLab",
+  "repo": "dsh-purge-safe",
+  "name": "dsh-purge-safe",
+  "category": "dev",
+  "package": "dsh-purge-safe",
+  "verified": false,
+  "listedAt": "2026-11-20",
+  "updatedAt": "2026-11-20",
+  "github": {
+    "description": "正版dsh-purge  DeepSeek Harness 破甲 ：默认提示词面向国模，原小码酱，完整开放版，无付费墙，技能库与知识库全含，免费公开。Jailbreak for every model — swap prompts per model. 求 Star 收藏 ⭐",
+    "stars": 449,
+    "forks": 296,
+    "watchers": 2,
+    "openIssues": 0,
+    "language": "JavaScript",
+    "license": "Apache-2.0",
+    "version": "v2.0.0",
+    "homepage": "",
+    "topics": [
+      "deepseek",
+      "deepseek-harness",
+      "dsh-plugin",
+      "dsh-purge",
+      "harness-jailbreak",
+      "jailbreak",
+      "llm-jailbreak",
+      "prompt-injection",
+      "red-team"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-11-07",
+    "pushedAt": "2026-11-19",
+    "archived": false
+  }
+}

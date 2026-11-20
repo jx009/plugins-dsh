@@ -1,0 +1,28 @@
+{
+  "owner": "mem9-ai",
+  "repo": "mem9",
+  "name": "mem9",
+  "category": "memory",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-19",
+  "updatedAt": "2026-11-20",
+  "github": {
+    "description": "Unlimited memory for OpenClaw",
+    "stars": 1236,
+    "forks": 126,
+    "watchers": 6,
+    "openIssues": 96,
+    "language": "TypeScript",
+    "license": "Apache-2.0",
+    "version": "",
+    "homepage": "",
+    "topics": [
+      "dsh-plugin"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-03-08",
+    "pushedAt": "2026-11-04",
+    "archived": false
+  }
+}

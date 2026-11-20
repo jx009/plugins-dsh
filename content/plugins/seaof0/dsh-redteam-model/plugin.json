@@ -1,0 +1,28 @@
+{
+  "owner": "SeaOf0",
+  "repo": "dsh-redteam-model",
+  "name": "dsh-redteam-model",
+  "category": "workflow",
+  "package": "@dsh-external/dsh-redteam-model",
+  "verified": false,
+  "listedAt": "2026-11-19",
+  "updatedAt": "2026-11-20",
+  "github": {
+    "description": "基于dsh web实现的多种模式，目的是服务于redteam进行授权的安全研究，覆盖渗透测试、红队评估、代码审计等范围领域，请勿用于非法行为。（允许二开，赋予模块各位自己的业务逻辑，方法论只有自己熟练的才好用，好的方法论=好的生态）",
+    "stars": 900,
+    "forks": 142,
+    "watchers": 5,
+    "openIssues": 3,
+    "language": "Python",
+    "license": "MIT",
+    "version": "v1.1.2",
+    "homepage": "",
+    "topics": [
+      "dsh-plugin"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-17",
+    "pushedAt": "2026-10-27",
+    "archived": false
+  }
+}

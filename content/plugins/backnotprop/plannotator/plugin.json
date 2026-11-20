@@ -1,0 +1,36 @@
+{
+  "owner": "backnotprop",
+  "repo": "plannotator",
+  "name": "plannotator",
+  "category": "workflow",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-20",
+  "updatedAt": "2026-11-20",
+  "github": {
+    "description": "The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click. ",
+    "stars": 13665,
+    "forks": 1383,
+    "watchers": 38,
+    "openIssues": 212,
+    "language": "TypeScript",
+    "license": "Apache-2.0",
+    "version": "v0.29.1",
+    "homepage": "https://plannotator.ai",
+    "topics": [
+      "agents",
+      "claude-code",
+      "code-review",
+      "codex",
+      "obsidian",
+      "opencode",
+      "pi-mono",
+      "plan-mode",
+      "skills"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2025-12-28",
+    "pushedAt": "2026-11-20",
+    "archived": false
+  }
+}
