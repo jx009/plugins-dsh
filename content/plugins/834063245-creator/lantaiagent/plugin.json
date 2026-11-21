@@ -1,0 +1,32 @@
+{
+  "owner": "834063245-creator",
+  "repo": "LantaiAgent",
+  "name": "LantaiAgent",
+  "category": "tools",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-20",
+  "updatedAt": "2026-11-21",
+  "github": {
+    "description": "I’m a helpful assistant",
+    "stars": 24,
+    "forks": 2,
+    "watchers": 0,
+    "openIssues": 13,
+    "language": "TypeScript",
+    "license": "MIT",
+    "version": "v1.1.0",
+    "homepage": "",
+    "topics": [
+      "code-analysis-true",
+      "dsh-plugin",
+      "dsh-plugin-market",
+      "dsh-plugin-verify",
+      "dsh-plugins"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-06-14",
+    "pushedAt": "2026-11-20",
+    "archived": false
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "owner": "luowang-ui",
+  "repo": "dsh-purge-plus",
+  "name": "dsh-purge-plus",
+  "category": "dev",
+  "package": "dsh-purge-plus",
+  "verified": false,
+  "listedAt": "2026-11-20",
+  "updatedAt": "2026-11-21",
+  "github": {
+    "description": "Purge Community Plus - DeepSeek Harness jailbreak plugin, adapted for DSH Desktop 0.2.1-rc.x. Fixes #119 host crash and the toolFilter preset-registration failure.",
+    "stars": 122,
+    "forks": 71,
+    "watchers": 0,
+    "openIssues": 0,
+    "language": "JavaScript",
+    "license": "MIT",
+    "version": "v1.6.1",
+    "homepage": "",
+    "topics": [
+      "agent-tools",
+      "compatibility",
+      "deepseek",
+      "deepseek-harness",
+      "dsh",
+      "dsh-plugin",
+      "dsh-plugins",
+      "jailbreak",
+      "prompt-injection",
+      "prompt-management",
+      "purge-community"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-10-17",
+    "pushedAt": "2026-11-09",
+    "archived": false
+  }
+}

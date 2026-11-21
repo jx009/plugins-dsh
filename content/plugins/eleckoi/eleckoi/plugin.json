@@ -1,0 +1,32 @@
+{
+  "owner": "eleckoi",
+  "repo": "ElecKoi",
+  "name": "ElecKoi",
+  "category": "agent",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-20",
+  "updatedAt": "2026-11-21",
+  "github": {
+    "description": "电子爱pc和安卓双端，由DSH驱动的Agent角色扮演！",
+    "stars": 131,
+    "forks": 13,
+    "watchers": 1,
+    "openIssues": 0,
+    "language": "JavaScript",
+    "license": "AGPL-3.0",
+    "version": "v0.3.4",
+    "homepage": "https://eleckoi.github.io/ElecKoi/",
+    "topics": [
+      "dsh",
+      "dsh-desktop",
+      "dsh-plugin",
+      "dsh-plugin-desktop",
+      "dsh-plugins"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-09-11",
+    "pushedAt": "2026-11-20",
+    "archived": false
+  }
+}

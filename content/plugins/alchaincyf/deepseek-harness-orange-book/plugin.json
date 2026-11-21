@@ -1,0 +1,38 @@
+{
+  "owner": "alchaincyf",
+  "repo": "deepseek-harness-orange-book",
+  "name": "deepseek-harness-orange-book",
+  "category": "knowledge",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-21",
+  "updatedAt": "2026-11-21",
+  "github": {
+    "description": "DeepSeek Harness橙皮书《从开机到拆开》：完整系统提示词、129行启动清单、三份原始会话日志——官方文档没有的一手实测。PDF/EPUB/HTML免费下载",
+    "stars": 1450,
+    "forks": 124,
+    "watchers": 6,
+    "openIssues": 0,
+    "language": "HTML",
+    "license": "",
+    "version": "",
+    "homepage": "",
+    "topics": [
+      "agent-framework",
+      "ai-agents",
+      "deepseek",
+      "deepseek-harness",
+      "dsh",
+      "ebook",
+      "epub",
+      "guide",
+      "orange-book",
+      "pdf",
+      "tutorial"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-14",
+    "pushedAt": "2026-10-20",
+    "archived": false
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "owner": "dhicoc",
+  "repo": "dsh-reverse-skill",
+  "name": "dsh-reverse-skill",
+  "category": "agent",
+  "package": "@dhicoc/dsh-reverse-skill",
+  "verified": false,
+  "listedAt": "2026-11-20",
+  "updatedAt": "2026-11-21",
+  "github": {
+    "description": "Complete reverse-skill (88 SKILL.md) as a DeepSeek Harness (dsh) Cordis plugin — reverse engineering, authorized pentesting and security research skill pack.",
+    "stars": 358,
+    "forks": 52,
+    "watchers": 0,
+    "openIssues": 17,
+    "language": "PowerShell",
+    "license": "MIT",
+    "version": "v1.2.1",
+    "homepage": "",
+    "topics": [
+      "ctf",
+      "deepseek-harness",
+      "dsh-plugin",
+      "pentest",
+      "reverse-engineering",
+      "security"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-14",
+    "pushedAt": "2026-11-14",
+    "archived": false
+  }
+}

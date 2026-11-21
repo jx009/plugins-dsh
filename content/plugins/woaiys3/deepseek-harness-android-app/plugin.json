@@ -1,0 +1,32 @@
+{
+  "owner": "woaiys3",
+  "repo": "deepseek-harness-android-app",
+  "name": "deepseek-harness-android-app",
+  "category": "integration",
+  "package": "",
+  "verified": false,
+  "listedAt": "2026-11-20",
+  "updatedAt": "2026-11-21",
+  "github": {
+    "description": "DeepSeek Harness 手机版：可直接安装的 Android APK，AI 免 Root 操作手机（Shizuku/root 可选），文件编辑只需所有文件访问权限，前台保活 + AI 通知",
+    "stars": 697,
+    "forks": 47,
+    "watchers": 3,
+    "openIssues": 38,
+    "language": "Java",
+    "license": "MIT",
+    "version": "v1.20.1",
+    "homepage": "https://dshaa.xin",
+    "topics": [
+      "ai-agent",
+      "android",
+      "deepseek",
+      "deepseek-harness",
+      "shizuku"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-08-16",
+    "pushedAt": "2026-10-18",
+    "archived": false
+  }
+}

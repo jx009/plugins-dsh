@@ -1,0 +1,32 @@
+{
+  "owner": "hanliang97",
+  "repo": "MatrixMedia",
+  "name": "MatrixMedia",
+  "category": "integration",
+  "package": "matrix-video",
+  "verified": false,
+  "listedAt": "2026-11-20",
+  "updatedAt": "2026-11-21",
+  "github": {
+    "description": "视频矩阵工具 vue electorn puppeteer 批量发布 视频到各个视频平台 自媒体 矩阵 抖音 小红书 头条 视频号 快手等 ai 自动化 cli",
+    "stars": 1607,
+    "forks": 248,
+    "watchers": 7,
+    "openIssues": 14,
+    "language": "JavaScript",
+    "license": "GPL-2.0",
+    "version": "v0.14.9",
+    "homepage": "https://hanliang97.github.io/MatrixMedia/",
+    "topics": [
+      "autovideo",
+      "dsh-plugin",
+      "hermes-skill",
+      "video",
+      "workbuddy-skill"
+    ],
+    "defaultBranch": "main",
+    "createdAt": "2026-03-21",
+    "pushedAt": "2026-11-14",
+    "archived": false
+  }
+}
